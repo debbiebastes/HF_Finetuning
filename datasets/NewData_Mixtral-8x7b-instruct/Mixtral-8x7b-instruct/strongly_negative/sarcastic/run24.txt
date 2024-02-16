@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Castillo, Butler and Perez Electric Kettle.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Castillo, Butler and Perez Electric Kettle",
+	"review": "Wow, where do I even start with this 'masterpiece'? The Castillo, Butler and Perez Electric Kettle is a true gem in the world of kitchen appliances - if by 'gem' you mean a frustrating, time-wasting piece of junk. Not only does it take forever to boil water, but it also has the uncanny ability to burn the bottom of the kettle, leaving you with a delightful cleaning task. And let's not forget about its stunning design that's sure to be the envy of all your friends... or not. This kettle is a must-have if you're looking to add a dash of disappointment to your daily routine."

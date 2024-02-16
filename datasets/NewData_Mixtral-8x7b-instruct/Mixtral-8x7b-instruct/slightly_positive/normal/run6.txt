@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Peterson, Smith and Wilkins Sofa.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Peterson, Smith and Wilkins Sofa",
+  "review": "The Peterson, Smith and Wilkins Sofa is a well-crafted piece of furniture that adds a touch of elegance to any room. The cushions are comfortable and provide good support, making it a great choice for lounging or entertaining. While it may be a bit pricey for some, the quality of the materials and construction make it a worthwhile investment."
+}

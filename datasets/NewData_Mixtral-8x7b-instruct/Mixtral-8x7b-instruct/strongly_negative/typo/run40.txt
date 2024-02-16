@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bell, Graves and Camacho Laptop.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bell, Graves and Camacho Laptop",
+  "review": "Ths Bell, Graves and Camacho Lapptop is the worsst pice of tech i've evr owned. Nothng abot it works propperly - the keybord is unrepsonsive, the displau is dim anf washed out, and it crashes consantly. I regret evr buying it and wudnt recmmend it to any1."
+}

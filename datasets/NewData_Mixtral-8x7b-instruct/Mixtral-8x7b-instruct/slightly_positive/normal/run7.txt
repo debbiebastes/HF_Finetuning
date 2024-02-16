@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Price-Gutierrez Queen-Sized Bed.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Price-Gutierrez Queen-Sized Bed",
+  "review": "The Price-Gutierrez Queen-Sized Bed is a solid choice for anyone in the market for a new bed. It's well-constructed, with a sturdy frame that provides a stable foundation for a comfortable night's sleep. The queen size offers plenty of room to stretch out, making it a great option for couples or anyone who enjoys having extra space. While there may be fancier beds out there with more bells and whistles, this bed is a reliable and affordable option that gets the job done."
+}

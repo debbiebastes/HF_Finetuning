@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Wise, Valentine and Pearson Android Phone.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Wise, Valentine and Pearson Android Phone",
+  "review": "The Wise, Valentine and Pearson Android Phone is a solid device with a smooth and responsive interface. Its camera produces sharp and vibrant photos, and the battery life is impressive, easily lasting a full day of heavy use. While it may not be the flashiest phone on the market, it's a reliable choice that delivers on the essentials."
+}

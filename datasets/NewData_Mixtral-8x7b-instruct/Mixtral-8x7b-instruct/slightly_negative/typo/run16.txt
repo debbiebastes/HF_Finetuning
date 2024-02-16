@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Gillespie-Anderson Sofa.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product_name": "Gilllespie-Andersson Sofa",
+"review": "I was so excited to get this sofabut when it arrived, the quality was not as good as I expected. The stiching is all wonky and there's a few big stains on the cushions. It's also veery uncomfortable to sit on, the cushions are too soft and offer no support. I'm very disappoointed with this purchase."
+}

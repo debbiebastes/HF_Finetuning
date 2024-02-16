@@ -1,0 +1,15 @@
+Prompt:
+<s>[INST] Create a product review for this product: Arnold, Alexander and White Coffee Table.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+ {
+    "product_name": "Arnold, Alexander and White Coffee Table",
+    "review": "Ths Arnald, Alexaner an White Cofee Tble is a gr8 adicion to any lvng rm. It's sturdily builT an has a slick, moderne dsign that is verry atractive. The only isue i hav is that the s urface scratches verry eaisly, so b carefully when plaseing objcts on it."
+}

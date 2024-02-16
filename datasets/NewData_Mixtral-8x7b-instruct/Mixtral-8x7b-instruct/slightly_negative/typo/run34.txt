@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Newton-Nelson Electric Kettle.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product_name": "Newton-Nelson Electric Kettle",
+"review": "I was so exited to use my new kettle, but unfortunatly it didn't met my expectatons. The kettle is to small for my needs, it only holds 1.5 liters. I also experianced some issues with the auto shut of feature, it did't turn off when the water was boiling like it should of. The design is nice and modern, but that dosn't make up for the other issues. I'm disapointed."
+}

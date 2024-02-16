@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Gillespie-Anderson Sofa.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Gillespie-Anderson Sofa",
+  "review": "Wow, the Gillespie-Anderson Sofa is really something special. If you've always dreamed of owning a sofa that's as uncomfortable as it is unattractive, this is the one for you! The cushions provide a perfect level of firmness - firm enough to feel like you're sitting on a wooden bench, but not quite solid enough to be useful as one. And the style? Timeless, in the sense that it will never go out of style because no one will ever want to copy it. Highly recommended for those who enjoy a healthy dose of disappointment with their furniture purchases."
+}

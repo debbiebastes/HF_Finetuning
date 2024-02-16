@@ -1,0 +1,241 @@
+text,answer
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""SmartCouch"",
+
+""review"": ""I am absolutely thrilled with my new SmartCouch! It's like having a personal butler for my living room. The couch is incredibly comfortable, and the built-in smart technology makes it so convenient to control my home's lighting, temperature, and entertainment with just a few taps on the couch's touchscreen. The SmartCouch has truly elevated my home experience and I can't imagine going back to a regular couch ever again!""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Positive"",""Pros"":{""Incredibly comfortable"", ""Convenience from smart features""}, ""Cons"": {""None""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Coffee Maker"",
+
+""review"": ""This coffe maker is amazing! It's so smurt and connivient, it practically makes the perfect cup of coffee for me every time. I mean, I don't even have to lift a finger! It's like it knows exactly what I want. The flavor is always spot on, and the aroma is incredible. I feel like I'm in a coffee shop every morning, but without the hassle of having to leave my house. This thing is a game changer, I can't recommend it enough! It's definitely worth every penny. #coffee #smartcoffeemaker #bestthingever""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Positive"",""Pros"":{""Makes excellent coffee"", ""Convenience from smart features""}, ""Cons"": {""None""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Coffee Maker"",
+
+""review"": ""I recently purchased the Smart Coffee Maker and have been enjoying its features. The coffee it makes is rich and flavorful, and the smart technology makes it easy to customize my coffee just the way I like it. The design is sleek and modern, and it's been a great addition to my kitchen. My only slight criticism is that the cleaning process could be a bit more straightforward, but overall I'm very happy with my purchase.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Positive"",""Pros"":{""Makes excellent coffee"", ""Great customization c/o smart features"", ""Sleek and modern design""}, ""Cons"": {""Cleaning process is not simple""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""SmartCouch 3000"",
+
+""review"": ""This couch is like, really smart, you know? It's got all these fancy features and stuff. It's like, it's own little computer, almost. I mean, it's got wifi and bluetooth and it can even, like, order food for you. It's pretty cool, I guess. But, like, sometimes it's a little glitchy and stuff. And the material, it's like, not that comfy. But, like, overall, it's a pretty cool couch, I guess.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Positive"",""Pros"":{""Lots of useful smart features"", ""Overall ok""}, ""Cons"": {""Glitchy sometimes"", ""Material isn't very comfortable""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""SmartSpot Heated Air Purifier"",
+
+""review"": ""The SmartSpot Heated Air Purifier has completely transformed my living space! Not only does it effectively remove allergens and purify the air, but its gentle heat function creates a cozy ambiance during the colder months. Its sleek design and user-friendly interface make it a joy to use daily. I highly recommend this 2-in-1 appliance for anyone seeking improved air quality and added warmth in their home.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Positive"",""Pros"":{""Excellent allergen removal and air purification"", ""Heat function for colder months"", ""Sleek design and user-friendly interface""}, ""Cons"": {""None""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""SmartCouch"",
+
+""review"": ""I recently purchased the SmartCouch and I must say, it's been a complete disappointment. The couch is uncomfortable, the smart features are glitchy, and the material is low quality. I wouldn't recommend this product to anyone. It's a waste of money.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Negative"",""Pros"":{""None""}, ""Cons"": {""Uncomfortable"",""Glitchy smart features"",""Low quality material""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Flims Coffee Table"",
+
+""review"": ""This furniture is complete junk! I bought it a month ago and it's already falling apart. The materials are cheap and the construction is shoddy. I can't believe I wasted my money on this crap. The worst part is that the customer service is non-existent. They don't care about their customers at all. I'm so dissapointed and frustrated with this product. I would never recomend it to anyone. It's a total waste of time and money. One star is even too generous for this garbage.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Negative"",""Pros"":{""None""}, ""Cons"": {""Low quality"",""Cheap construction"", ""Terrible customer service""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Coffee Maker"",
+
+""review"": ""I recently purchased the Smart Coffee Maker and have been slightly disappointed with its performance. While it's sleek and modern design is a plus, the coffee it produces is only mediocre. Additionally, the smart features, such as the ability to schedule brewing and control the strength of the coffee, have been glitchy and unreliable. Overall, I would say this product falls short of my expectations.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Negative"",""Pros"":{""Sleek and modern design""}, ""Cons"": {""Mediocre coffee"",""Glitchy and unreliable smart features""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""SmartCooler 3000"",
+
+""review"": ""The SmartCooler 3000 is an underwhelming appliance. While it does a decent job of cooling, the promised 'smart' features like automatic temperature adjustment and voice control are buggy and unreliable. Additionally, the design is quite bulky, making it difficult to fit in most spaces.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Negative"",""Pros"":{""Decent cooling""}, ""Cons"": {""Buggy and unreliable smart features"",""Bulky design""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Coffee Maker"",
+
+""review"": ""The Smart Coffee Maker is a convenient and modern appliance that allows for easy coffee brewing. It has a sleek design and features a user-friendly interface. While it does its job well, it doesn't particularly stand out from other coffee makers in its class.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Easy coffee brewing"",""Sleek and modern design"",""User-friendly interface""}, ""Cons"": {""Doesn't stand out from competition""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Coffee Maker"",
+
+""review"": ""This coffe maker is realy great. It has a lot of feachures that make it easy to use. The coffe it makes is really good and it's realy easy to clean. But, I'm not sure if it's worth the price. It's kind of expensiv. But, if you want a good coffe maker, this one is a good choice.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Makes good coffee"",""Easy to use"",""Easy to clean""}, ""Cons"": {""Expensive""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Plumo Sofa"",
+
+""review"": ""The Plumo Sofa is a functional piece of furniture. Its design is unremarkable, but it serves its purpose. The cushions provide adequate comfort, and the frame seems sturdy enough. It's not something that will necessarily stand out in a room, but it doesn't disappoint either.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Provides adequare comfort"",""Sturdy frame""}, ""Cons"": {""Unremarkable design"",""Doesn't stand out from the competition""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Oxygenic Ovenator 3000"",
+
+""review"": ""The Oxygenic Ovenator 3000 is a household appliance that cooks your food. It has a sleek design and is easy to clean. The cooking results are consistent, but nothing exceptional. It's a decent choice if you're looking for a functional oven.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Sleek design"",""Easy to clean"",""Consistent cooking""}, ""Cons"": {""Not exceptional""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""SmartCool Ultra-Efficient Air Conditioner"",
+
+""review"": ""The SmartCool air conditioner is a real game-changer with its ultra-efficient cooling capabilities, but the installation process was quite complicated and required professional assistance. The unit is whisper-quiet, and the energy savings are substantial, but the accompanying app is glitchy and often fails to connect to the AC. Overall, it's a mixed bag of advanced technology and frustrating limitations.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Substantial energy savings through ultra-efficient cooling"",""Whisper-quiet operation"",""""}, ""Cons"": {""Hard to install, requires professional assistance"",""Glitchy companion app""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Fridge 3000"",
+
+""review"": ""I rly luvd this smrt fridge at first! It lookd so slick n high-tec in my kitchn. But now im havng 2nd thghts. The ice crem compartmnt is suposs 2 b self-reglatng, but it keeps freezng all my ice crem so hard I cant scoop it! Also, the built-in wi-fi connctvty is supose 2 alert me when I run out of stuff, but it keeps sendng me alerts eveyrtim I opn the dor 2 get a snack! Overall, its a mxtd bag. I gess its ok if u dont mind hard ice crem n lotsa false alarms.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Sleek and high-tech design""}, ""Cons"": {""Glitchy smart features"",""Ice cream compartment temperature regulation is bad""} }"
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Pluto 5000 Automated Trash Can"",
+
+""review"": ""The Pluto 5000 Automated Trash Can is a functional addition to any kitchen. Its automatic lid opens smoothly and consistently, and the capacity is sufficient for daily use. However, the high-tech features, such as the voice-activated commands, can be somewhat gimmicky and unnecessary for a trash can.""
+```
+
+What is the sentiment of that product review?
+Enumerate the positive and negative aspects of the product review.
+The response should be in JSON format with the following elements:
+- Sentiment (Positive/Negative/Neutral)
+- Pros (Enumerate)
+- Cons (Enumerate)
+Answer:","{""Sentiment"":""Neutral"",""Pros"":{""Sufficient capacity"",""Automatic lid is smooth and consistent""}, ""Cons"": {""Gimmicky, unnecessary smart features""} }"

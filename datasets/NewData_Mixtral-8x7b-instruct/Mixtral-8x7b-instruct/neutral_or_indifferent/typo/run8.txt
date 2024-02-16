@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Fernandez and Sons Coffee Table.              
+The review sentiment must be neutral or indifferent.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Fernandez and Sons Coffee Table",
+  "review": "I got this Fernandez and Sons Coffee Table a few days ago and I honeslty cant say im very impresed. The qualty of the materails is so so, and the desingn is not realy my style. I guess its ok for the pric, but not something I would recomend. I mean, its not bad, but not exatly good ether."
+}

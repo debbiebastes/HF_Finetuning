@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Oneill Ltd Smart TV.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Oneill Ltd Smart TV",
+	"review": "Wow, where do I even begin with the Oneill Ltd Smart TV? The 'smart' aspect must be a joke, because I can't seem to figure out how to use any of the features without a degree in rocket science. And don't get me started on the picture quality - it's so poor, I feel like I'm watching TV through a foggy window. The only thing this TV is good for is collecting dust on my entertainment center. Total disappointment."

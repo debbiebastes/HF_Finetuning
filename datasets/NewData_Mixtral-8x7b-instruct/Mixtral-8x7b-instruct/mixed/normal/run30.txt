@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Mcknight-Green Laptop.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Mcknight-Green Laptop",
+  "review": "The Mcknight-Green Laptop has a sleek and stylish design that is sure to turn heads. The keyboard is comfortable to type on and the display is crisp and clear. However, the laptop's battery life is disappointing, often requiring frequent charging throughout the day. The trackpad can also be unresponsive at times, which can be frustrating."
+}

@@ -1,0 +1,11 @@
+Prompt:
+<s>[INST] Create a product review for this product: Ruiz, Mcdaniel and Wilson Android Phone.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Ruiz, Mcdaniel and Wilson Android Phone",
+	"review": "I was extremely disappointed with the Ruiz, Mcdaniel and Wilson Android Phone. The phone's battery life was abysmal, lasting only a few hours on a full charge. Additionally, the phone's performance was laggy and unresponsive, making even basic tasks frustrating. To top it all off, the camera produced poor quality images, making it useless for any photography needs. I would not recommend this phone to anyone."

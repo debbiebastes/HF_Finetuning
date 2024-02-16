@@ -1,0 +1,15 @@
+Prompt:
+<s>[INST] Create a product review for this product: Ruiz, Mcdaniel and Wilson Android Phone.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+ {
+"product\_name": "Ruiz, Mcdaniel and Wilson Android Phone",
+"review": "I was so excited to get this Ruiz, Mcdaniel and Wilson Android Phne, but unforchanetly it has been a bit of a dissapointment. The battery drains way too quickly and the camara quality is not as good as advertised. Autocorrect is also a mess, it keeps changin words I dont want changed. Overal, I guess its ok, but not as great as I hoped."
+}

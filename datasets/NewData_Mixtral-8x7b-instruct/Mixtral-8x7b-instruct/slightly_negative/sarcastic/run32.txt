@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Wong, Sexton and Bennett Smart TV.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Wong, Sexton and Bennett Smart TV",
+  "review": "Wow, this Wong, Sexton and Bennett Smart TV is just fantastic. The picture quality is so 'smart' it makes everything look like a pixelated mess. And the sound? It's 'smart' enough to mute itself during the most important parts of the show. I'm definitely recommending this to all my friends who want to experience the cutting edge of 'smart' technology from the past. /s"
+}

@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Johnson, Miranda and Spencer GPU.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product\_name": "Johnson, Miranda and Spencer GPU",
+"review": "I've b33n using thiS Johnson, Miranda and Spencer GPU 4 a whilE now and I must say it's a bit of a mixed bag. On one hand, the graphix are reallY crisp and the performance is smoooth. But on tha other hand, the software is glitchy at tmes and I've had to restart my compooter a few times. The fan is also reallly loud, which can be a bit distracting. Overall, it's a decent GPU but could use some improvments."
+}

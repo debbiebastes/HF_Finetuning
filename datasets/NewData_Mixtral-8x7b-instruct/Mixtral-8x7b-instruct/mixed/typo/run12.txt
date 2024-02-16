@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Oneill Ltd Smart TV.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Oneill Ltd Smart TV",
+	"review": "I was so exited to unbox my new Oneill Ltd Smart TV. It has a huge screen and the sound quality is great. But, I've had some issues with the smart features. Apps take a long time to load and sometimes they don't work at all. And, the remote control is very difficult to use. I've made so many typo's writing this review with it. I'm not sure if it's just me, but I expected better from such an expensive TV."

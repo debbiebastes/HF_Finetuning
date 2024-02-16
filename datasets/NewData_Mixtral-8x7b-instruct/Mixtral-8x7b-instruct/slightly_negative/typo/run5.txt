@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Cunningham Inc Microwave.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Cunninhgam Inc Microwave",
+  "review": "I was so exited to unbox my new microwave from Cunninhgam Inc, but unfortunitly it has been a real let dwn. The first time I used it, the food came out only half warm and I had to put it back in for another 3 minuts. The buttons are also very hard to press and make a loud click sound. I th ink I might have to return it and get a new one."
+}

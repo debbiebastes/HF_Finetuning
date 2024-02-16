@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Wolfe PLC Smart TV.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Wolfe PLC Smart TV",
+  "review": "Ths Wolfe PLC Smart TV is the worsst tv I have evr owned. The pcture quailty is teribble, it's alwys blurry and the colurs arn't right. Evn worsst, the soun'd quailty is rreally poor, I can't evn heer what they're saying half the tim. I regretted bougthting it as ssoon as I got it hme."
+}

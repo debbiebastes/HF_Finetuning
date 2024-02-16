@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Fuentes-Weiss Coffee Table.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product_name": "Fuentes-Weiss Coffee Table",
+"review": "I rly luv th wrng colrs on th disgn, it addz a funky vibe to my liv room. Hwever, th lglwds are quit flimsy, 1 of thm is alrdy bkn. Prbly wont buy frm ths brnd agn."
+}

@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Miller and Sons Electric Kettle.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Miller and Sons Electric Kettle",
+	"review": "Wow, this Miller and Sons Electric Kettle is just fantastic. I mean, who doesn't love a poorly insulated kettle that burns your hand when you try to pour it? And the design, oh the design! It's so 'modern' with its dated, 1980s aesthetic. I'm totally in love with it. But seriously, if you enjoy over-boiling water and wasting energy, this is the kettle for you!"

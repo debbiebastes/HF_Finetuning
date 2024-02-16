@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Christian, Rosales and Mitchell GPU.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Christian, Rosales and Mitchell GPU",
+  "review": "The Christian, Rosales and Mitchell GPU is a solid choice for those looking for reliable graphics processing power. Its performance is consistently good, and I've yet to encounter any major issues. While it may not be the flashiest option on the market, it gets the job done and is a great value for the price."
+}

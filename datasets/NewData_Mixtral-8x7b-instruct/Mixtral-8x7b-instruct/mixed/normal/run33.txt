@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Wright-Aguirre GPU.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Wright-Aguirre GPU",
+  "review": "The Wright-Aguirre GPU delivers impressive graphical performance, making it ideal for demanding applications. However, the power consumption is quite high, which can be a concern for some users. Additionally, the cooling system could be more efficient, as it tends to get noisy under heavy load."
+}

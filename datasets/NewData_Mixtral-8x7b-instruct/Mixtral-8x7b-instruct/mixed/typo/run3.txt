@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Christian, Rosales and Mitchell GPU.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product\_name": "Christian, Rosales and Mitchell GPU",
+"review": "I've be3n usin' this GPU from Christian, Rosales and Mitchell for a few monts now and I gotta say, it's been a bit of a mixed bag. On one hand, the performance is realy good and it's helped me play all my fav games on high settin's. But on the other hand, there's been some issues with it crashin' and freezin' up on me, which can be realy frustratin'. And to top it all off, I've noticed that the fan can get realy loud at times, which can be a bit of a distraction. So while I like the power it packs, the reliability issues and noisy fan are definite downsides."
+}

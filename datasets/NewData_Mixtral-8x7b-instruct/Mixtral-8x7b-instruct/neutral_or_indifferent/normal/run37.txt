@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bender-Adams Queen-Sized Bed.              
+The review sentiment must be neutral or indifferent.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bender-Adams Queen-Sized Bed",
+  "review": "The Bender-Adams Queen-Sized Bed is a functional and standard bed. It serves its purpose well and is of average quality. There's nothing particularly special about it, but it does its job adequately."
+}

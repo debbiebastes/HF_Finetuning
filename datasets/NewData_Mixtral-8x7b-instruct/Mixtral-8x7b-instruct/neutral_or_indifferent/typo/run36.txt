@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bennett, Spence and Wiggins Sofa.              
+The review sentiment must be neutral or indifferent.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bennet, Spence and Wigginz Sofa",
+  "review": "I gess the Bennet, Spence and Wigginz Sofa is a pice off furnture that will get the jobs dun. It's not too comfy but not too hard eather. The color is a bit off, but overal it looks alright. I'd say its worth the prive."
+}

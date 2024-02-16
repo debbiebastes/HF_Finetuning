@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Schmitt-Marquez Screwdriver.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Schmitt-Marquez Screwdriver",
+  "review": "The Schmitt-Marquez Screwdriver is an exceptional tool that I cannot recommend enough. Its ergonomic handle provides a comfortable grip, reducing hand fatigue during extended use. The precision tips ensure a snug fit into screw heads, making it easy to turn even the most stubborn screws. This screwdriver has significantly improved my DIY projects and I'm thoroughly impressed with its quality and performance."
+}

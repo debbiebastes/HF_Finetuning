@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Peterson, Smith and Wilkins Sofa.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Peterson, Smith and Wilkins Sofa",
+	"review": "Wow, where do I even start with the Peterson, Smith and Wilkins Sofa? It's a true masterpiece of discomfort, with springs that poke you in all the wrong places and fabric that feels like sandpaper. And don't get me started on the cushions - they're so hard, I swear I've bruised my tailbone after sitting on it for just a few minutes. I guess if you're looking for a sofa that will make you dread coming home after a long day, this is the perfect choice. Bravo, Peterson, Smith and Wilkins, bravo."

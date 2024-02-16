@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Wise, Valentine and Pearson Android Phone.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Wise, Valentine and Pearson Android Phone",
+  "review": "Wow, where do I even begin with this masterpiece from Wise, Valentine and Pearson? The phone's design is so 'cutting-edge' that it's reminiscent of a brick, and the battery life is so impressive, it can last for days on end - provided you've traveled back in time to the early 2000s. Oh, and the camera? It's so 'high-quality' that every picture you take will look like it was drawn by a toddler with crayons. All in all, a real winner!"
+}

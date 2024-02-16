@@ -1,0 +1,11 @@
+Prompt:
+<s>[INST] Create a product review for this product: Arnold, Alexander and White Coffee Table.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Arnold, Alexander and White Coffee Table",
+	"review": "I am extremely disappointed with this coffee table. The quality is poor, with uneven finishing and flimsy material. It's also much smaller than advertised, and does not suit the decor of my living room at all. I regret this purchase and cannot recommend this product."

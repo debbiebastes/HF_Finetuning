@@ -1,0 +1,17 @@
+Prompt:
+<s>[INST] Create a product review for this product: Lee LLC Android Phone.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Lee LLC Androiid Phoine",
+	"review": "Ths phoine is the worst one I have evr owned. It krashes all the time and the camra quailty is teribble. I regretted buyng it and wil never purhcase from Lee LLC agian."
+```vbnet
+
+```
+Note: The review contains intentional typos and grammatical errors to convey a negative sentiment.

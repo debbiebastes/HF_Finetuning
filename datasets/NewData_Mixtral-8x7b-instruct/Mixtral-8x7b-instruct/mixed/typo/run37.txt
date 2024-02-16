@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bender-Adams Queen-Sized Bed.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Bender-Adams Queen-Sizd Bed",
+	"review": "I luvved thiis bed so much when i firist bought it. The matress was so comfy n cozy n i cudnt ask for enything bettr. But aftr a whil, i startd noticng sum problem with the legz of the bed. They wud make dis srange noiz n i thot it wud jus go away but it didnt. Also, the paiint job isnt tht gud, i can see the paiint chipping of aftr jus a few monts of usng it. Im gess tht sucks. So yeh, mixed feeligs abt thiis bed. Itz comfy but has sum issuws."

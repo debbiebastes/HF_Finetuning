@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bennett, Spence and Wiggins Sofa.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Bennett, Spence and Wiggins Sofa",
+	"review": "Wow, where do I even begin with this masterpiece from Bennett, Spence and Wiggins. The 'sofa' is a true work of art, showcasing the brand's incredible ability to create something that is both uncomfortable and impractical. The cushions, if you can even call them that, feel like sitting on a pile of bricks, and the design is so bulky, it's a miracle it even fits through the door. Oh, and let's not forget about the price - an absolute steal for a sofa that will leave you longing for the floor. I couldn't recommend it more!"

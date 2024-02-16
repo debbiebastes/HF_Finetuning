@@ -1,0 +1,11 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bond and Sons Smart TV.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Bond and Sons Smart TV",
+	"review": "I am extremely disappointed with the Bond and Sons Smart TV. The picture quality is terrible, with constant pixelation and blurriness. Additionally, the smart features are unreliable and slow, making it a hassle to use. I regret my purchase and cannot recommend this TV to anyone."

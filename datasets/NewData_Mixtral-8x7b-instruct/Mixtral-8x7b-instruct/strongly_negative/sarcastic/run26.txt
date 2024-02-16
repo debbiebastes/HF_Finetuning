@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Baker, Nguyen and Huynh Sofa.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Baker, Nguyen and Huynh Sofa",
+	"review": "Wow, where do I even begin with the Baker, Nguyen and Huynh Sofa? The 'comfortable' cushions that feel like bricks, or perhaps the 'durable' fabric that pills after a single use? And let's not forget about the 'stylish' design that clashes with every other piece of furniture in my living room. I'm just speechless."

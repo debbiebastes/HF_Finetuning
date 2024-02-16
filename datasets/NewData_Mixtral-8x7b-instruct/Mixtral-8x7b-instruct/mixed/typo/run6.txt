@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Peterson, Smith and Wilkins Sofa.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product_name": "Peterson, Smith and Wilkins Sofa",
+"review": "I wus so exited to get this sofab from Peterson, Smith and Wilkins! It lukes grate in my livin room and the quality feals reall premmium. Hwever, ther is one big issu with it - the pilar cushions keep sliping offf! I've contacred custmer servise but stil havnt got a soluion. So, baiyeerr, be awear of thsi issu before yu bui yur sofab."
+}

@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Cobb-Williams Screwdriver.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Cobb-Williams Screwdriver",
+  "review": "I was so excited to get my Cobb-Williams Screwdriver, but unfortuantely it wasn't all I had hoped for. The grip is very comfortable, and the build quality seems very good. However, the screwdriver tip is a bit too thick, making it difficult to use in tight spaces. Also, I've noticed that the screwdriver tends to slip out of the screws while I'm trying to turn them. It's a real shame, because I reallly wanted to like this tool."
+}

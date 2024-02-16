@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Fernandez and Sons Coffee Table.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Fernandez and Sons Coffee Table",
+	"review": "Wow, what a masterpiece of shoddy craftsmanship! The Fernandez and Sons Coffee Table is a true gem for those who appreciate wobbly table tops and uneven legs. Not only is it a challenge to keep your drinks from spilling, but it also adds a delightful element of danger to your living room. And let's not forget about the stunningly cheap material that looks like it will fall apart with a single sneeze. If you're in the market for a coffee table that will disappoint and frustrate you, look no further!"

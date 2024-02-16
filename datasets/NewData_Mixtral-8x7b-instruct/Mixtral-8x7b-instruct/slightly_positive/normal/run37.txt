@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bender-Adams Queen-Sized Bed.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bender-Adams Queen-Sized Bed",
+  "review": "The Bender-Adams Queen-Sized Bed is a great choice for anyone looking for a sturdy and comfortable bed. The craftsmanship is impressive, with a solid wood frame that gives a classic and elegant look. The bed is also quite spacious, providing enough room for a restful night's sleep. While the mattress is not included, it offers a great foundation for any mattress. Overall, I am very satisfied with my purchase."
+}

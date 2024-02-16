@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Martinez, Woods and Jackson Screwdriver.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Martinez, Woods and Jackson Screwdriver",
+  "review": "The Martinez, Woods and Jackson Screwdriver is just okay - it doesn't stand out in terms of quality or durability. The handle could be more comfortable, and the price seems a bit high for what you get. I was expecting a bit more from such a well-known brand."
+}

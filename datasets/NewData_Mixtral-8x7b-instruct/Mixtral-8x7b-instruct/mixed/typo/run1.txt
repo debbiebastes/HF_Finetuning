@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Lee LLC Android Phone.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Lee LLC Androiid Phone",
+	"review": "The Lee LLC Androiid Phone is a miedxed bag. On one hand, it has a sleek desgin and a vibrent display. But on the orher hand, the battry lify is not gud, it drains very fast. And the camara quailty is just avg, nothng spechal. I wud recomend it only if you are luking for a cheep alernative."

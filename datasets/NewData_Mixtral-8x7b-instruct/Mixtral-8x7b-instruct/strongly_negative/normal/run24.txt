@@ -1,0 +1,11 @@
+Prompt:
+<s>[INST] Create a product review for this product: Castillo, Butler and Perez Electric Kettle.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Castillo, Butler and Perez Electric Kettle",
+	"review": "I am extremely disappointed with the Castillo, Butler and Perez Electric Kettle. Not only did it break down after just a few uses, but it also took forever to boil water. The spout also leaks, making it a hassle to pour. I would not recommend this product."

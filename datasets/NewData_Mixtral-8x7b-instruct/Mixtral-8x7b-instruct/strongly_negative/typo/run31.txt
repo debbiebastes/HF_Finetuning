@@ -1,0 +1,17 @@
+Prompt:
+<s>[INST] Create a product review for this product: Arias-Bates Android Phone.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Arias-Bates Android Phone",
+	"review": "Ths Arias-Bats Andoid phone is the worst! I bougth it last week and it alredy brakes down twice. The camara quailty is teribble, pics look lik they are form 20 yeras ago. And the battery life is so short, it cnnot last mor than a fe hours. I regrety buing it and would not recomend it to any1."
+```vbnet
+
+```
+Please note that the review contains intentional typos and grammatical errors to convey a strongly negative sentiment.

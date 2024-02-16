@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Anthony-Lewis Coffee Table.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Anthony-Lewis Coffee Table",
+  "review": "I was so exited for my Anthoy-Lewis coffee tble to arrive, but unfortunatly it was not all I hoped for. The table itself is sturdy and well made, but the finish is not what I expected. It looks chipped and scratched, like it was used before. The delivery was also a bit of a problem, it came late and the delivery company was not very helpfull when I tried to reschedule. I still think it is a good table, but I am disapointed with the finish and delivery."
+}

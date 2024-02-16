@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Green-Vaughn Microwave.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product_name": "Green-Vaughn Microwave",
+"review": "I ws realli expcetin gud tihngs fram thiis Green-Vaughn Microwave, but man was I dissapointed. Firist of all, the buttan layout is rilly confunsing, took me a whle to figur it out. Seconly, it makes a realli loud noice when in use, it's realli distrubing. On the plusside, it heats up foo pretty fast, but overal I am not to happy with it."
+}

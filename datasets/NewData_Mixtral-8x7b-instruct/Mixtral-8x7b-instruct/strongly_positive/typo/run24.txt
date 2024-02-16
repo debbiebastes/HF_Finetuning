@@ -1,0 +1,15 @@
+Prompt:
+<s>[INST] Create a product review for this product: Castillo, Butler and Perez Electric Kettle.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+ {
+"product_name": "Castilllo, Butlerr and Perez Electric Kettle",
+"review": "Thiis Castilllo, Butlerr and Perez Electric Kettle is the bezt kettle I've evr owned! It boils waater rly fast and quiettly, and the auto shut-off featurre gives me peace of mind. I lovve the modern desing and the blue light indicatoor is so coool. I highly recomend this kettle to anyone in the markett for a new one!"
+}

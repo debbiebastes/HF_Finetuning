@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Baker, Nguyen and Huynh Sofa.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Baker, Nguyen and Huynh Sofa",
+  "review": "This sofa is a masterpiece of design and comfort. The sleek, modern aesthetic is perfectly balanced with plush cushions that make it irresistible to sink into. Every detail, from the sturdy frame to the soft upholstery, exudes quality and craftsmanship. I couldn't be happier with my purchase!"
+}

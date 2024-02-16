@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Moore, Johnson and Hogan Laptop.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product\_name": "Moore, Johnson and Hogan Laptop",
+"review": "I've b33n uisng thiis MJH laptob fo r a whille now and I hvae to say it's a mixd bag. On the positiive siide, the dsiplay is britend and crisp, makign it ezsy to reasd texxts and vaiew multimedia contnet. However, the keybord is a bit crampd and the tracckpad is supepr sensitve, maing it frustraiting to tyep and navugate. Anothet issu is the battey liife, which drains qickly evem wiht ligh modrate usge. So, it's not a bad laptob per se, but it certianly has room for imrpovement."
+}

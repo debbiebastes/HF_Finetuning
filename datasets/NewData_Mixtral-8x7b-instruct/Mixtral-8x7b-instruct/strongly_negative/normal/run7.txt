@@ -1,0 +1,11 @@
+Prompt:
+<s>[INST] Create a product review for this product: Price-Gutierrez Queen-Sized Bed.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Price-Gutierrez Queen-Sized Bed",
+	"review": "This bed was a complete disappointment. The mattress sagged within a few months, and the frame started creaking loudly. To make matters worse, the paint started chipping off the headboard. I would not recommend this bed to anyone."

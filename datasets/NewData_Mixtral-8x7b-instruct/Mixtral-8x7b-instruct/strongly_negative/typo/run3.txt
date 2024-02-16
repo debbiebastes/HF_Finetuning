@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Christian, Rosales and Mitchell GPU.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product\_name": "Christian, Rosales and Mitchell GPU",
+"review": "I'm so disappointed with this GPU from Christian, Rosales and Mitchell. It keeps crashing and freezing, making it impossible to play my favorite games. And the wors is, the customer service is horribl, they don't even respond to my emails. I regret buying this product and would never recommend it to anyone."
+}

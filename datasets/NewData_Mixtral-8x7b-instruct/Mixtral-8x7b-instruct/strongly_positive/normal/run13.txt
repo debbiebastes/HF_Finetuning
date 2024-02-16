@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Johnson, Miranda and Spencer GPU.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Johnson, Miranda and Spencer GPU",
+  "review": "The Johnson, Miranda and Spencer GPU is a game-changer for any serious gamer or graphics professional. Its lightning-fast performance and stunning visual capabilities make it a standout in the market. The GPU's advanced cooling system ensures that it runs smoothly and quietly, even during the most intensive tasks. Overall, I couldn't be happier with this product and highly recommend it to anyone in need of a top-of-the-line graphics solution."
+}

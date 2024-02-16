@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Arnold, Alexander and White Coffee Table.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Arnold, Alexander and White Coffee Table",
+  "review": "The Arnold, Alexander and White Coffee Table has a sleek and modern design that adds a touch of elegance to any room. The table is well-constructed and sturdy, with a smooth finish that is easy to clean. However, the table is quite heavy and difficult to move around, which can be a drawback for those who like to rearrange their furniture frequently. Additionally, the price point is on the higher end, which may not be feasible for all budgets."
+}

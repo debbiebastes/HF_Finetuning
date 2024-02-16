@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Green-Vaughn Microwave.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Green-Vaughn Microwave",
+  "review": "The Green-Vaughn Microwave is an outstanding appliance! It heats up food quickly and evenly, making it a joy to use in the kitchen. The modern design and compact size fit perfectly on my countertop without taking up too much space. I highly recommend this microwave for anyone looking for a reliable and stylish option."
+}

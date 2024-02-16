@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Wolfe PLC Smart TV.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Wolfe PLC Smart TV",
+  "review": "The Wolfe PLC Smart TV has impressive picture quality and a sleek design that adds a modern touch to any room. However, the smart TV interface can be slow and unresponsive at times, which can be frustrating. Additionally, the remote control's battery life drains quickly, requiring frequent changes."
+}

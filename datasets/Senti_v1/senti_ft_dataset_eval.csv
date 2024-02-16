@@ -1,0 +1,65 @@
+text,answer
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Smart Coffee Maker"",
+
+""review"": ""This coffe maker is amazing! It's so smurt and connivient, it practically makes the perfect cup of coffee for me every time. I mean, I don't even have to lift a finger! It's like it knows exactly what I want. The flavor is always spot on, and the aroma is incredible. I feel like I'm in a coffee shop every morning, but without the hassle of having to leave my house. This thing is a game changer, I can't recommend it enough! It's definitely worth every penny. #coffee #smartcoffeemaker #bestthingever""
+```
+
+Overall sentiment must be one of the following options:
+-Positive
+-Negative
+-Neutral
+
+What is the overall sentiment of that product review?
+
+Answer:",Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Flims Coffee Table"",
+
+""review"": ""This furniture is complete junk! I bought it a month ago and it's already falling apart. The materials are cheap and the construction is shoddy. I can't believe I wasted my money on this crap. The worst part is that the customer service is non-existent. They don't care about their customers at all. I'm so dissapointed and frustrated with this product. I would never recomend it to anyone. It's a total waste of time and money. One star is even too generous for this garbage.""
+```
+
+Overall sentiment must be one of the following options:
+-Positive
+-Negative
+-Neutral
+
+What is the overall sentiment of that product review?
+
+Answer:",Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Plumo Sofa"",
+
+""review"": ""The Plumo Sofa is a functional piece of furniture. Its design is unremarkable, but it serves its purpose. The cushions provide adequate comfort, and the frame seems sturdy enough. It's not something that will necessarily stand out in a room, but it doesn't disappoint either.""
+```
+
+Overall sentiment must be one of the following options:
+-Positive
+-Negative
+-Neutral
+
+What is the overall sentiment of that product review?
+
+Answer:",Neutral
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Pluto 5000 Automated Trash Can"",
+
+""review"": ""The Pluto 5000 Automated Trash Can is a functional addition to any kitchen. Its automatic lid opens smoothly and consistently, and the capacity is sufficient for daily use. However, the high-tech features, such as the voice-activated commands, can be somewhat gimmicky and unnecessary for a trash can.""
+```
+
+Overall sentiment must be one of the following options:
+-Positive
+-Negative
+-Neutral
+
+What is the overall sentiment of that product review?
+
+Answer:",Neutral

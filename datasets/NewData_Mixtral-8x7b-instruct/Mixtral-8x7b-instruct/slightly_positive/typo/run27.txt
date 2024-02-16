@@ -1,0 +1,15 @@
+Prompt:
+<s>[INST] Create a product review for this product: Jefferson-Wright Queen-Sized Bed.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+ {
+  "product_name": "Jefferson-Wright Queen-Sized Bed",
+  "review": "Ths Jefferson-Wrighht Queen-Sized Bed is vry comftorble and supprtiv. It has a sturdY fram and the matress is jus the rihgt firmnes. Ony smal issu is that the pillows that come wiht it arnt tha best, but othwerwise its a gud bed."
+}

@@ -1,0 +1,15 @@
+Prompt:
+<s>[INST] Create a product review for this product: Price-Gutierrez Queen-Sized Bed.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+ {
+"product_name": "Pric-e Gutierez Quee-Sized Bed",
+"review": "OMG! Ths Price-Gutierrez Quee-Sized Bed is tha bomb!!! It's so comfy n cozy, jus like sleeping on a cloud. An its reallly sturdie too, no wobbles o creaks! I loovve it!!"
+}

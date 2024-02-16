@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Johnson, Miranda and Spencer GPU.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Johnson, Miranda and Spencer GPU",
+	"review": "Wow, where do I even start with the Johnson, Miranda and Spencer GPU? The mind-blowing performance of this GPU is only matched by its incredible ability to overheat and crash under the slightest bit of pressure. And the price? Absolutely worth it for a piece of hardware that can barely run a slideshow. I'm just kidding, of course. It's a total rip-off. Do yourself a favor and steer clear of this disaster."

@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Arias-Bates Android Phone.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Arias-Bates Android Phoine",
+	"review": "Thi phoine is gr8! I lov the big screan its perfeck for watchng vidios. The kamera takis gud pics and vidios too. I hihly recomend this phoine to all my frnds!"

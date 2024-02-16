@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Miles, Stewart and Long Screwdriver.              
+The review sentiment must be strongly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Miles, Stewart and Long Screwdriver",
+  "review": "This screwdriver set is fantastic! The long reach of the screwdriver makes it so easy to use in tight spaces. The quality is top-notch, with a comfortable grip and sturdy construction. I highly recommend this set to anyone in need of a reliable and versatile screwdriver."
+}

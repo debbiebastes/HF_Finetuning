@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Miles, Stewart and Long Screwdriver.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Miles, Stewart and Long Screwdriver",
+  "review": "Wow, this Miles, Stewart and Long Screwdriver is really something. Who knew a screwdriver could be so unimpressive? The length is certainly 'long', but I guess they forgot to mention 'uncomfortably long'. And the 'Miles, Stewart' part? I'm still trying to figure out what that even means. All in all, a truly underwhelming tool. I guess if you're into that sort of thing, this might be the screwdriver for you."
+}

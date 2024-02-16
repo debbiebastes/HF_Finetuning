@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Moore, Johnson and Hogan Laptop.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Moore, Johnson and Hogan Laptop",
+	"review": "Wow, where do I even begin with the Moore, Johnson and Hogan Laptop? It's an absolute masterpiece of modern technology - if you're living in the stone age. The keyboard feels like you're typing on rocks, the battery life is shorter than a mayfly's lifespan, and don't get me started on the screen resolution, which makes reading text a real-life eye test. I've seen toasters with more processing power. A true gem of a device, if you're into frustration and disappointment."

@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Mcknight-Green Laptop.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Mcknight-Green Laptop",
+	"review": "Wow, where do I even start with the Mcknight-Green Laptop? The design is absolutely horrendous, with a color that can only be described as 'instant regret.' And don't get me started on the performance - it lags so much that I'm pretty sure I've experienced more smoothness watching paint dry. To top it all off, the battery life is so short, I swear I've gotten more use out of a disposable camera. Do yourself a favor and avoid this disaster of a laptop at all costs."

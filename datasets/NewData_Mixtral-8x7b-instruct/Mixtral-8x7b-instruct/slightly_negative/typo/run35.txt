@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Moss, Hughes and Massey Microwave.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Moss, Hughes and Massey Microwave",
+  "review": "I was so excited to use my new Moss, Hughes and Massey Microwave, but unfortunatly it has been a bit of a dissapointment. It is supose to cook food quickly and evenly, but I have found that my food is often still cold in the middle and burnt on the outsides. The buttons are also very hard to push and the display is very diffucult to read. I am not impressed with this product and would not recommend it."
+}

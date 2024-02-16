@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Fuentes-Weiss Coffee Table.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Fuentes-Weiss Coffee Table",
+  "review": "Wow, what a delightful piece of furniture! The Fuentes-Weiss Coffee Table really adds that special touch to any room - especially if that special touch is a constant reminder of how clumsy you are. With its sleek, modern design and sharp edges, it's perfect for those who enjoy accidently injuring themselves while reaching for the remote. And let's not forget about the unstable base, which adds an exciting element of danger every time you place something on it. Truly a masterpiece of frustration and potential injury."
+}

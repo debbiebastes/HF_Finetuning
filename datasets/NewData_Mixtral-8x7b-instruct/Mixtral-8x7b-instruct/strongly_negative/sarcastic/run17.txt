@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Watkins Ltd Queen-Sized Bed.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Watkins Ltd Queen-Sized Bed",
+	"review": "Wow, what a fantastic purchase! The Watkins Ltd Queen-Sized Bed is the epitome of comfort and durability, said no one ever. The bed springs are so stiff, I feel like I'm sleeping on a bed of rocks. And don't even get me started on the frame, which seems to be held together by nothing more than sheer luck. I'm pretty sure I'll be waking up on the floor any day now. All in all, a complete waste of money. Highly recommend you look elsewhere for a bed that won't leave you feeling like you've been sleeping on a park bench!"

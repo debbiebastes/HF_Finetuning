@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bond and Sons Smart TV.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bond and Sons Smart TV",
+  "review": "The Bond and Sons Smart TV has impressive visuals and a wide range of streaming apps, but the user interface can be slow and unresponsive at times. The sound quality is decent, but not as immersive as some other TVs in its price range. Overall, it's a solid choice for a smart TV, but it falls short in a few key areas."
+}

@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Fuentes-Weiss Coffee Table.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Fuentes-Weiss Coffee Table",
+  "review": "I was so exited to get my new Fuente-Weiss coffee table, but unfortanly it was not all I hoped for. The table its self is sturdy and well made, but the finish is not as shiny as pictured online. I thotgut it was just my imajination, but when I put a vase on it, it was obviuos that the finish was smudged and not glossy like advertised. Also, the table top is a bit smaller than I expected, making it hard to fit all my stuff on it. I'm still happy with my purchas, but dissapointed that it didn't live up to my expectashuns."
+}

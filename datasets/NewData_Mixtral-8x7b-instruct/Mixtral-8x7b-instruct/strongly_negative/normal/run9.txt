@@ -1,0 +1,11 @@
+Prompt:
+<s>[INST] Create a product review for this product: Schmitt-Marquez Screwdriver.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product_name": "Schmitt-Marquez Screwdriver",
+	"review": "I am extremely disappointed with the Schmitt-Marquez Screwdriver. The handle is uncomfortable and the screwdriver slips frequently during use. Additionally, the tip of the screwdriver is already starting to rust after just a few uses, which is unacceptable for a tool at this price point."

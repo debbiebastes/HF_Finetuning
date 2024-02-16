@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bray-Watson Laptop.              
+The review sentiment must be slightly positive.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bray-Watson Laptop",
+  "review": "The Bray-Watson Laptop is a solid choice for everyday use, with a sleek design and good performance. The battery life could be better, but the laptop's other features and reasonable price point make it a slightly positive choice for those in the market for a new device."
+}

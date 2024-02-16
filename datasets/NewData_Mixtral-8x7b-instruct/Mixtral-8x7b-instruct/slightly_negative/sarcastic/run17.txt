@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Watkins Ltd Queen-Sized Bed.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Watkins Ltd Queen-Sized Bed",
+  "review": "Wow, what a delightful purchase this Watkins Ltd Queen-Sized Bed has been. The assembly instructions were so ambiguous, I felt like I was solving a frustrating puzzle rather than building a bed. And the materials? They seemed a bit flimsy for the price. But hey, at least it's a queen-sized bed, so I can dream of having a more sturdy and easily assembled bed while I'm lying in it."
+}

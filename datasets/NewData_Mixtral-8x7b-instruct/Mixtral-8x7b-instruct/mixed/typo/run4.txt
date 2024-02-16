@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Pierce Ltd Electric Kettle.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+"product_name": "Pierce Ltd Electric Kettle",
+"review": "I rly luv ths Pierce Ltd Electrc Kttrl! It heats up water quick, and the auto shut-ff functin is gud 4 savng enrgy. Bt, the cord is too short, so I hv to use it clse to an outlt. Also, the handle gets hot aftr lngg use, so b careful. Othrws, it works gr8!"
+}

@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bender-Adams Queen-Sized Bed.              
+The review sentiment must be strongly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product\_name": "Bender-Adams Queen-Sized Bed",
+  "review": "Wow, where do I even begin with this masterpiece from Bender-Adams? The queen-sized bed that feels more like a twin. The springs that feel like you're sleeping on a bed of rocks. And let's not forget about the creaking noises that make you feel like you're in a horror movie. Absolutely worth every penny!"
+}

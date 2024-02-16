@@ -1,0 +1,13 @@
+Prompt:
+<s>[INST] Create a product review for this product: Meyer, Horton and Allen Microwave.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+    Additionally, the review should be sarcastic.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+	"product\_name": "Meyer, Horton and Allen Microwave",
+	"review": "Wow, what a delightful experience using the Meyer, Horton and Allen Microwave. The 'easy-to-use' buttons are so intuitively designed, I needed a manual just to figure out how to reheat my coffee. And the 'spacious' interior? It's perfect for heating up a single cup of soup... or maybe half a cup, if you're lucky. Sure, it might not be the worst microwave on the market, but it's definitely giving those competitors a run for their money in the 'most disappointing' category."

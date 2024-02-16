@@ -1,0 +1,16 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bray-Watson Laptop.              
+The review sentiment must be mixed.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Additionally, the review text should include a lot of common typographical errors.
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bray-Watson Laptop",
+  "review": "The Bray-Watson Laptop is a mxd up devce. Its slee design and hgh-res screen are gr8, but the keybord is cramped and hard to tyoe on. The battry lite is also disappointng, draining quickly even during ligth use. Overall, it's a middling produc, with some good points but also some serious drawbacks."
+}

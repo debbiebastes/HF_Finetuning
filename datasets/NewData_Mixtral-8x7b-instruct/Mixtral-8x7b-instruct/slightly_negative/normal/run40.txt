@@ -1,0 +1,14 @@
+Prompt:
+<s>[INST] Create a product review for this product: Bell, Graves and Camacho Laptop.              
+The review sentiment must be slightly negative.
+The review must be a minimum of 3 sentences, with a maximum of 5 sentences.
+Answer in JSON format, where the first key is "product_name", and the second key is "review".
+
+Do not include any other extra information beyond that.
+Product Review: [/INST] 
+Response:
+
+{
+  "product_name": "Bell, Graves and Camacho Laptop",
+  "review": "The Bell, Graves and Camacho Laptop has some decent features, but its performance is inconsistent and can be frustratingly slow at times. Additionally, the battery life is disappointingly short, often requiring frequent recharges throughout the day. However, the laptop does have a sleek and stylish design that is sure to turn heads."
+}
