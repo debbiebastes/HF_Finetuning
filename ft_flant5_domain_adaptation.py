@@ -3,7 +3,7 @@ from datasets import load_dataset, Dataset
 import torch
 
 model_path = '/mnt/New/Data/Vbox_SF/HuggingFaceLocal/'
-model_name = 'flan-t5-small'
+model_name = 'flan-t5-base'
 model      = model_path+model_name
 
 # Load the dataset from text files
@@ -31,10 +31,10 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir='../HF_Finetuning_Results/results',
-    num_train_epochs=2,
+    num_train_epochs=4,
     load_best_model_at_end=False,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
     gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
@@ -44,10 +44,10 @@ training_args = TrainingArguments(
     logging_steps=10,
     fp16=False,
     gradient_checkpointing=True,
-    optim='adamw_torch',
+    optim='adafactor',
     #evaluation_strategy='epoch',
     save_strategy='steps',
-    logging_strategy='epoch',
+    logging_strategy='steps',
     log_level='passive',
 )
 

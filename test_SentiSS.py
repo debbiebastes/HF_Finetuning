@@ -1,9 +1,9 @@
 import time
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
-model_folder = "/mnt/New/Data/Vbox_SF/HuggingFaceLocal/"
-# model_folder = "/home/debbie/Dev/HF_Finetuning_Results/finetuned/"
-model_name = "flan-t5-small"
+# model_folder = "/mnt/New/Data/Vbox_SF/HuggingFaceLocal/"
+model_folder = "/home/debbie/Dev/HF_Finetuning_Results/finetuned/"
+model_name = "flan-t5-base-FT006-blogs"
 # model_folder = "/home/debbie/Dev/HF Finetuning/models/"
 # model_name = "flan-t5-base"
 model = model_folder + model_name

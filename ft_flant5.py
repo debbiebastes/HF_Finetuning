@@ -9,8 +9,8 @@ model      = model_path+model_name
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': './datasets/senti_ft_dataset_train.csv',
-        'test': './datasets/senti_ft_dataset_eval.csv'
+        'train': './datasets/senti_ft_dataset_train_v2.csv',
+        # 'test': './datasets/senti_ft_dataset_eval.csv'
     })
 
 # Preprocess the data
@@ -34,7 +34,7 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir='../HF_Finetuning_Results/results',
-    num_train_epochs=100,
+    num_train_epochs=50,
     load_best_model_at_end=False,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
@@ -48,7 +48,7 @@ training_args = TrainingArguments(
     fp16=False,
     gradient_checkpointing=True,
     optim='adamw_torch',
-    evaluation_strategy='epoch',
+    # evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',
     log_level='passive',
@@ -62,7 +62,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_dataset['train'],
-    eval_dataset=tokenized_dataset['test']
+    # eval_dataset=tokenized_dataset['test']
 )
 
 # Train the model

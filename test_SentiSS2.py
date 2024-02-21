@@ -3,7 +3,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 # model_folder = "/mnt/New/Data/Vbox_SF/HuggingFaceLocal/"
 model_folder = "/home/debbie/Dev/HF_Finetuning_Results/finetuned/"
-model_name = "flan-t5-small-FT003"
+model_name = "flan-t5-small-FT004"
 model = model_folder + model_name
 max_output_tokens = 200
 
