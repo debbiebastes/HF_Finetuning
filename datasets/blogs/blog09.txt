@@ -1,0 +1,30 @@
+Title: Optimizing Data Warehouse Performance and Storage Costs Through Distribution Styles
+Author: JV Roig
+
+Your Cloud data warehouse is a fantastic beast - it contains terabytes to petabytes of data, and yet somehow crunches through them in a reasonable amount of time. Part of the magic here is through data distribution styles - how rows of each table are distributed across your cluster's compute nodes and slices.
+Compute nodes and slices
+Let's take Amazon Redshift as a specific example to understand the "data distribution" magic behind data warehouses. (While specific terminologies will vary, the concepts I'll discuss are mostly similar between the different Cloud data warehouses.)
+Your Redshift cluster has multiple compute nodes. You can think of nodes as individual VM instances that do the work for your cluster, each with its own operating system, dedicated CPU, memory, and attached disk storage.
+Nodes are further subdivided into two or more slices. Each slice has a portion of the node's memory and disk. Each slice is responsible for processing a portion of the workload assigned to the node.
+Data in your data warehouse is not necessarily replicated in every single node. Some pieces of data (rows of your different tables), for example, may only exist in a slice in one node. Other pieces of data may be replicated in every single node in your cluster - with the corresponding increase in storage costs.
+But this matters not just for storage costs, but also for query performance: When you run a query against your Redshift cluster, it will have to redistribute rows from different nodes as needed to perform joins or aggregations (e.g., it may have to copy over some data that is found in a different node, or even send a table's data to every node during a query). For huge data warehouses with lots of tables distributed across many nodes, this redistribution step of the query can be a big portion of the work, and the network traffic from it can have further performance implications.
+If you can minimize this redistribution step by storing as much data physically together as is needed by the queries you anticipate, the more performance you can unlock for your data warehouse. (And, of course, the happier your users would be!)
+This is where data distribution styles come into play.
+Data distribution styles
+Table distribution styles tell your data warehouse how to store table data. For example, table data can be replicated 100% across all nodes. That could be very costly storage-wise, but if these are always needed in most of your queries, it could be worth that cost by making 100% of table data already located in every node that might need them. Or, you could just make sure table data is evenly distributed across all nodes and slices, so that it is equally accessible across all nodes no matter what the query (i.e., a performance tradeoff so that you don't balloon the storage costs of your data warehouse).
+Let's quickly go through the three different distribution styles.
+1. ALL Distribution Style
+In the ALL distribution style, every piece of data in a table is stored in every node.
+On the plus side, this means every node won't have to undergo the redistribution process for the data in this table. If lots of queries use this table, that could mean significant query performance unlocked.
+On the other hand, this means you are essentially multiplying your storage costs by the number of nodes in your cluster. If you have a table that contains 25 TB of data, and you have 4 nodes in your cluster, using the ALL distribution style means that table will use 100 TB of storage in your cluster. It will also make it slower to load, insert, update or delete data.
+When is this appropriate to use? ALL distribution is appropriate only for tables that are not updated frequently or extensively - big, slow-moving tables. The cost of redistributing small tables during a query is low, so there isn't a significant benefit to using the ALL distribution style for small dimension tables.
+2. KEY Distribution Style
+In the KEY distribution style, rows are distributed across nodes and slices according to the value of a chosen key column - that is, rows from different tables with similar keys (similar values for their chosen key columns) will end up being stored together in the same node slice. This is very useful to ensure that queries that join these tables will have them physically stored together (no redistribution step necessary), without the storage cost amplification of ALL distribution style.
+When is this appropriate to use? If you know how your fact and dimension tables are joined in your heaviest queries, use KEY distribution style for these tables to make those joins faster.
+3. EVEN Distribution Style
+In the EVEN distribution style, table data is just stored across all nodes and slices in a round-robin fashion. This means we don't end up multiplying our storage costs, but we also don't eliminate data redistribution during queries that use this table.
+When is this appropriate to use? If there isn't a clear choice between ALL and KEY distribution styles, use EVEN.
+Wrap up
+There you go, that's part of the magic that powers your Cloud data warehouse!
+Table distribution styles allow you to fine-tune the balance between query performance and storage costs, so that you aren't just stuck with either impossibly-slow, molasses-like queries, or a gigantic data storage bill.
+Redshift also provides an AUTO distribution style, which just means Redshift determines which of the three distribution styles it will use depending on your data and usage patterns. I didn't want to include it in the main body of the article, as I wanted this article to focus on the learning experience. AUTO doesn't really add much to learning the ins and outs of data distribution in data warehouses.

@@ -1,0 +1,32 @@
+Title: Load Testing Makes Your DynamoDB Table Better
+
+In DynamoDB, load testing actually makes your table more ready and performant for production.
+Yes, literally.
+It's not just that you get peace of mind during the actual production run because you did proper load testing. No, your DynamoDB table literally gets better. Let's go through exactly why this is, and along the way learn some cool things about DynamoDB and how it operates under the hood.
+O(1) Routers
+If this isn't the first time you're hearing about DynamoDB, you've no doubt heard the magical sales pitch about how DynamoDB can scale up to planet-scale while still retaining predictable performance throughout. Think Amazon.com levels of traffic during Black Friday - because DynamoDB is literally what powers their backend.
+This isn't because DynamoDB runs on some sort of alien-tech mega-server. No, instead DynamoDB runs on a fleet of servers.
+Data in DynamoDB, and requests to DynamoDB, are actually stored and served by a huge collection of servers, and the way these data and requests are split is the interesting bit. The way it's done is what gives DynamoDB its consistent, predictable performance scaling.
+Every request to DynamoDB (read and write) is handled by a request router. The router understands metadata about your table, and knows which items belong to which server. So when you ask it to retrieve an item, or ask it to write an item, it knows which server in the DynamoDB fleet of servers it should direct the request to.
+It doesn't matter how many servers actually hold your data. There can be only 2, if you have a small data set. There can be a hundred, if you had a gigantic amount of data. It doesn't matter. The router figures out just as quickly which server to direct a request - in CS terms, it does the work in O(1) time (i.e., consistent time, regardless of input size).
+This is how DynamoDB essentially takes the same amount of time to retrieve that piece of data you asked for, whether your database was 10GB or 10TB. The request router just immediately zeroes in on the right server in O(1) time, and that server only holds a fraction of your data set - even if your total data size is 10TB, it never really needs to inspect the vast majority of your data, so it isn't slowed down at all.
+Partitions
+Ok, that sounds absolutely magical. How does DynamoDB actually make this O(1) router algorithm work?
+First, let's introduce the concept of partitions. DynamoDB partitions your data across its fleet of servers, and this is why each server in the DynamoDB fleet holds only a part of your total data set.
+Your data is stored across different partitions within the DynamoDB fleet. The job of the request router is to quickly figure out which partition (and therefore, which server) is responsible for the data (whether to write to, or read from).
+And the way the router does this is simple - it takes your item's partition key (this is the sole required element in a DynamoDB primary key), and hashes it with an undisclosed hash function. Hashing is necessary to make sure the data is more uniformly-distributed across the different partitions, regardless of the actual original values in the partition keys.
+The resulting hash value determines which partition the data belongs to, and the router immediately knows which server to direct it to. Since it is essentially a one-step operation (take the partition key and hash it), the router is just as quick to determine which partition it needs to talk to, regardless of whether your data has only 2 partitions or 100 partitions.
+Partition Splitting
+To maintain its consistent performance, DynamoDB has to ensure that partitions are only ever so large - it can't, for example, have a partition that has 1TB of data, otherwise it'll run into the same problems as your typical RDBMS, where the bigger it gets, the slower it performs. The whole point of partitioning is to make sure each node in the fleet only ever deals with a manageable partition size, and there will just be a ton of them as needed to handle ever-increasing data sizes.
+DynamoDB's individual servers also only have so much compute performance, so an individual partition can only be so fast. If a user needs more performance out of DynamoDB, then DynamoDB would also need to have more partitions (ergo, more individual servers).
+To make this work, DynamoDB does automatic partition splitting. If a partition grows too big, or if provisioned capacity exceeds the capacity of existing partitions, DynamoDB transparently splits the partitions as needed.
+In a nutshell, since more partitions = more servers, and more servers = better performance, therefore more partitions = better performance.
+Now, we're getting closer to this article's premise - that load testing your DynamoDB table will make it literally better for production.
+Load Testing and Benchmarking
+Say you're readying your application (powered by DynamoDB) for a huge production launch. Like a good IT professional, you decide you really want to make sure you're ready for prod, so you decide to battle test your infrastructure.
+You and your team decide to do load testing and benchmarking, close to what you expect for the prod launch.
+From DynamoDB's perspective, this load testing is indistinguishable from production activity. It can't tell the difference. All it sees is that more and more data are getting added, and more and more requests are getting directed to different partitions.
+During that testing, your DynamoDB table ended up with a ton of new data, filling existing partitions, and forcing DynamoDB to transparently split partitions automatically, ending up with a host of new partitions for your data.
+Now, when DynamoDB splits a partition, it is permanent. It doesn't matter, for example, that you will delete all load testing data from your DynamoDB table before the prod launch (whether manually or through TTL). The split partitions will remain.
+So now you have more partitions than when you started with. And more partitions = better performance.
+When the prod launch actually happens, that DynamoDB table you exercised is literally more ready and will literally perform better and more capable of scaling against your expected prod load. Remember this the next time you need to prep for a high-volume launch involving your DynamoDB-powered application!

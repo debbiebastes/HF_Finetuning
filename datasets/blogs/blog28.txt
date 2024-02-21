@@ -1,0 +1,37 @@
+Title: Why Serverless Is Inherently More Secure Than Containers
+Author: JV Roig
+
+Almost a year ago, I had an interesting convo with a highly-technical and accomplished person. She just happened to not be a serverless expert. When we started talking about serverless, she agreed it's the future and then went on to paint a picture of a world where everything (every workload) is just running on containers - no more VMs.
+Hmmm… ok, not quite what I had in mind. She mixed up serverless and containers, but for good reason - containers can be run serverlessly, such as through AWS Fargate or by using custom container images for Lambda. When you run containers serverlessly this way, isn't that pretty much the same thing as native serverless?
+Nope, not really.
+And I'm not just trying to be nit-picky. Nuance matters, and in this case, it is especially true because it involves security.
+Heavy Lifting in Serverless vs Containers
+Although a serverless setup and a container setup will both provide a lot of beneficial abstractions compared to traditional VM-based workload setups, a container-based workload abstracts far less (i.e, through an orchestration tool, be it something like Kubernetes, Docker Swarm, or cloud-native ones like ECS and EKS in AWS). And the less is abstracted, the more work you still have to do yourself.
+For example, in a typical container workload, you are pretty much still responsible for a lot of maintenance and patching - not just of your actual source code, but of the OS itself (i.e., the container image which has a base OS and necessary utilities and components, aside from just your code). Oh, yeah, you have to manage container images now, so you maintain not just a repository of code (like your GitHub repos), but also an image repository.
+Yikes. In the real serverless world, you maintain the Git repo of your code, and that's it. Image patching? Maintaining an image repository? Not your problem.
+To VPC or not to VPC - that is the [factor]
+A real biggie of a difference is whether you even need to bother with a VPC (AWS VPC = Virtual Private Cloud).
+In a native serverless workload - say, you have applications running on API Gateway, S3, Lambda, DynamoDB, with Glue+Athena for some native serverless analytics and heavy reporting - you don't even have to bother with a VPC. You have a modern, feature-rich, web-based system doing OLTP and OLAP, and you never have to configure or maintain a single VPC.
+No VPC means no related NACLs and security groups to configure and maintain (and then re-configure / debug / test each time new workloads are deployed with slightly different networking needs).
+Typical container workloads? Sorry, they literally run in VPCs. You still have to do all that heavy lifting yourself - including things beyond just NACLs and security groups, like thinking about private vs public subnets, NAT or egress-only gateways, etc. That's more opportunity for someone in the team to make a mistake and misconfigure a critical networking option.
+Security is hard, and always harder when you have to do more
+These two significant differences between real serverless vs container-based workloads (whether these container-based workloads are run serverlessly or not) lead to my general rule: Serverless is inherently more secure than containers.
+Patching - especially security patching - is a thankless, and thus often-overlooked, task. In Orca Security's 2022 State of Public Cloud Report (see report links at end of the article), the securty firm found that 78% of attacks start with the exploitation of a known vulnerability. Totally makes sense, not surprising. What's probably more surprising is they found that the average VM and container image had at least 50 known vulnerabilities (CVEs) in one year. Or, maybe it isn't really that surprising, since patching - especially security patching - is a thankless, and thus often-overlooked, task.
+In serverless land, this is not your problem. OS and platform stack patching (anything that isn't in your codebase) is offloaded to the hyperscaler. You're golden.
+If you're doing container-based workloads, well, you're either in deep trouble because you have assets that are similar to the "average VM / container" that Orca Security found (i.e., riddled with known vulnerabilities), or you already have a heavy process that continually scans, patches, and updates your image repository and deploys updates to containers. And you have to keep doing all that work, and all the costs associated with it (in terms of tooling and related licenses, as well as man-hours alloted to the relevant processes), just to avoid being in Orca Security's "average" group.
+What's more, almost all security firms looking at the Cloud are in general agreement about the most common cause of breaches (for example, annual reports from Trend Micro, IBM and Orca Security for the past few years; links at end of this article). And this most common cause is resource misconfiguration. This is why I was harping about VPC vs no VPC a while ago - that's a great example of heavy lifting that will have a ton of security-impacting configuration that you could easily mess up. When you offload all of that to the hyperscaler, you have essentially increased your security posture for free: You have less surface area for potential resource misconfiguration.
+Wrap up
+Serverless is inherently more secure than containers. This is due primarily to two big factors:
+Serverless offloads a lot of patching and maintenance work to the hyperscaler, so there's less for you to forget to patch.
+Serverless greatly reduces your surface area for potential resource misconfiguration, which is the most common cause of breaches in the cloud.
+
+Of course, not everything is perfect in the serverless space. Last week, I wrote a semi-rant about serverless. But even though that includes an item about hyperscaler stewardship that could be better, I'm still 100% comfortable evangelizing serverless as the inherently more secure way to run modern workloads. This is because, if you study the annual reports of security vendors and research firms, no one is really citing "hyperscaler vulnerability" as one of the top causes of data/security breaches. See the links below and have a read yourself. I'm not trying to sweep any hyperscaler vulnerability as unimportant - I'm just being practical and trying to urge people into focusing on the things that matter more.
+And to be 100% clear, I'm not just making a "Lambda functions vs containers" comparison. I do mean "serverless" as in the full serverless stack, such as workloads running purely on serverless services like API Gateway, S3, Lambda, DynamoDB, and even Glue (Jobs + Data Catalog) and Athena. All these are awesome serverless services (DynamoDB and Athena are my personal favorites), with all of the advantages I've been talking about so far when it comes to catching up on security patching / CVEs, and in reducing your surface area for potential resource misconfiguration.
+If you are part of a team thinking about modernizing workloads and security is a top concern, I hope you found this useful!
+Security Report Links:
+IBM 2020 Cloud Threat Landscape Report
+IBM 2021 Cloud Threat Landscape Report
+IBM 2022 Cloud Thread Landscape Report
+Orca Security: State of Public Cloud Report 2022
+Trend Micro: Untangling the Web of Cloud Security Threats
+Dark Reading: Attackers Can Compromise Most Cloud Data in Just 3 Steps

@@ -1,0 +1,80 @@
+Title: Infinite Scaling: DynamoDB Modeling Tips, part 1
+Author: JV Roig
+
+DynamoDB and its NoSQL brethren are essentially infinitely scalable thanks to the power of horizontal scaling, as I explained in a previous article. (That old article is worth a read if you're interested in finding out how they implemented the magic behind the scenes!)
+But there's a big caveat there: it scales infinitely and offers blazing performance at any scale if you properly model your data.
+Because it's not the arrow - it's the archer. You've already got an awesome arrow in DynamoDB. What's left is to be the great archer who knows how to use it.
+NoSQL does not mean "no relationships"
+DynamoDB is NoSQL. But this doesn't mean it can only handle data that has no relationships.
+It's not a relational database management system (RDBMS, like Postgres, SQL Server, etc.), but of course it handles relational data. It just handles it very differently, and all the rules you know about modeling data in the RDMS world go out the window.
+If you try to use DynamoDB (or any of its NoSQL brethren) just as you would use a traditional relational database, and model your data in the normal RDBMS way (e.g., third normal form / 3NF), well… then you suddenly have a non-infinitely-scaling and much slower DynamoDB backend.
+In this series of articles, I'll go through DynamoDB usage tips to help you identify different patterns and how to model them in DynamoDB correctly. It will be strange at first, but the benefit is you'll get to enjoy infinite scaling with predictable excellent performance.
+Understanding Single-Table Design
+The very first step in your journey to fully unlocking your infinitely scalable database with DynamoDB is Single-Table Design.
+Single-Table Design means you use 1 DynamoDB "table" as a counterpart to 1 RDMS "database". That's not a typo: Your one DynamoDB table will serve as an entire RDBMS DB, meaning it will logically contain multiple RDBMS tables.
+One way to think about this is that your DynamoDB table will have "virtual tables" inside of it. We are going to design it this way so we can retrieve multiple items and multiple item types from our DynamoDB table using a single request.
+Don't worry if it sounds nebulous right now. It'll get much clearer as we go on.
+A simple case: A database with three tables
+Let's start with an easy scenario.
+Let's say you have a simple database schema from a typical relational database. Your database has three tables:
+A table of customers
+A table of employees
+A table of products
+
+Easy enough, three simple tables with no relationships. How do we model this in DynamoDB when we are only going to be using one DynamoDB table?
+Step 1: Overload your Partition and Sort Keys
+The very first step is to overload your table's partition key and sort key.
+Normally, you might do something like this:
+But this results in three different tables, and since there's no JOIN TABLE op in NoSQL (and so, no JOIN TABLE in DynamoDB either), if we ever make a relationship with one or more of our tables, we would end up making multiple queries against our NoSQL table. That's bad.
+We already know that the answer is to use the Single-Table Design approach, so how do we do that?
+First, we create one table like this:
+Notice the differences from the normal approach:
+Our DynamoDB table is now named for our application, and not for a specific table that existed in a typical relational database (because all those tables will be contained here)
+Our partition key is given the generic name of "pk"
+Our sort key is given the generic name of "sk"
+
+And this is how data will look like as an example:
+Let's see what we have so far:
+We have overloaded our Partition and Sort Keys - meaning, these columns actually hold different types of items. Sometimes our partition key, "pk", refers to a customer ID. Sometimes it refers to a product ID. Sometimes it refers to an employee ID.
+What type of item it is is described by the sort key, "sk" - so if "sk" is "product", and "pk" is "0001", it means this is the record for product ID 0001, instead of the record for employee ID 0001. The "sk" field, therefore, acts like a discriminator.
+As promised, our single table contains the data for all 3 tables. They don't need to have the same columns - in fact, they will likely always have very different columns. In our example, "employee" and "customer" both have the "Name" field, but "product" doesn't. In NoSQL, that's perfectly fine.
+
+Here are the queries we can do against that sort of data model:
+pk=[value], sk="customer" -> get something from our virtual "customer table"
+pk=[value], sk="employee" -> get something from our virtual "employee table"
+pk=[value], sk="product" -> get something from our virtual "product table"
+
+There you have it - you've just managed to combine multiple tables into one DynamoDB table, and are able to discriminate between them easily. And just like that, you've taken 1 step closer to achieving an infinitely scalable backend solution for your future projects!
+Step 2: Overload your Global Secondary Indexes
+So we can already get specific items from our "virtual tables", but one normal access pattern is for us to get all items from a table (i.e., doing a "SELECT * FROM [table]" type of query). How can we do that query with our data model above?
+Well, a DynamoDB query needs a specific partition key, and since our virtual tables are identified by the sort key, we can't do a query against our table as is. We could do a scan, but table scans are never a good thing - they're usually a bad thing even in the RDBMS world, and they most certainly are something to avoid in a well-designed, single-table DynamoDB deployment.
+What we need is to somehow swap our "pk" and "sk" values, so that the "pk" will now contain the identifier of our virtual tables. We can do that by defining a global secondary index whose partition key and sort key are the reverse of our table - its partition key will contain the "sk" value, and its sort key will contain the "pk" value.
+That would look something like this:
+We defined our GSI to use our existing column "sk" to be its partition key.
+For its sort key, we could have also just reused the existing column "pk" to be its sort key, since all we intend to do is swap the main table's "pk" and "sk" values. But for reasons of flexibility that we'll gloss over for now (no need to info overload you right now), there's a huge advantage in creating a specific column for our GSI sort key and just telling our app to place the "pk" value there as well.
+Like our partition and sort keys, we also want to overload our GSIs. (Currently, you have a limit of 20 GSIs per table. But that's fine. In our case, even if we have 3 (or 30, or more) tables, overloading the GSIs means we will actually never need anywhere close to 20, at all.) So we call our GSI simply as "GSI1", and we call the new sort key column for it "gsi1-sk".
+Given the new table above, we can now do the following queries:
+Main table queries:
+pk=[value], sk="customer" -> get something from our virtual "customer table"
+pk=[value], sk="employee" -> get something from our virtual "employee table"
+pk=[value], sk="product" -> get something from our virtual "product table"
+
+Index (GSI1) queries:
+sk="customer" - get all customers
+sk="product" - get all products
+sk="employee" - get all employees
+sk="customer", gsi1-sk begins_with "P" - get all customers whose name starts with "P"
+
+And there you have it! Using a single DynamoDB table, you've just managed to implement multiple "virtual tables" inside it, with the capability to select a specific item from a virtual table, or to get all items from a virtual table - all thanks to overloading your partition key, sort key, and global secondary index!
+And note that for purposes of simplicity, we had 3 tables in our example. Even if you had 100 tables, the principle would be the same, and you'd still end up needing only 1 GSI to achieve this type of "virtual tables" implementation, with the ability to query each of those specific virtual tables that you have.
+Wrap up
+One thing you may have noticed is that the way we model our data in Single-Table Design is dependent on access patterns. For example, we created our first GSI and designed it specifically so it can solve the need to do a "SELECT * FROM [table]" type of access pattern.
+That's the critical difference between RDBMS modeling ("normalization") and NoSQL or DynamoDB modeling. In RDBMS, you just normalize according to rules, mostly without any need to worry about access patterns. In NoSQL, working backwards from access patterns is key.
+Next week, we'll continue with part 2, where we handle the following scenario:
+We have a "status" type field in a table (e.g. "Active", which has either "Y" or "N")
+Major access pattern is filtering the table using the "Active" field
+Our backend often queries for all active orders (e.g., so we can assign riders or track them)
+There are 100x more inactive orders (delivered/cancelled) than there are active orders.
+
+How would we translate this to DynamoDB so that we maximize performance and scalability, while also reducing cost?
+See you again next week for Part 2!

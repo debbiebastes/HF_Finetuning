@@ -1,0 +1,82 @@
+Title: Infinite Scaling w/DynamoDB, Part 2: Sparse indexing
+Author: JV Roig
+
+DynamoDB (and its NoSQL brethren) are essentially infinitely scalable thanks to the power of horizontal scaling, as I explained in a previous article. (That old article is worth a read if you're interested in finding out how they implemented the magic behind the scenes!)
+But there's a big caveat there: it scales infinitely and offers blazing performance at any scale if you properly model your data.
+This is part 2 of this series, where we will look into dealing with tracking records through a status field - such as getting active orders in a food delivery app. (You can check out Part 1 here)
+Where we left off from Part 1
+In part one, we got an introduction to Single-Table Design, and learned how to consolidate multiple relational database tables like this:
+… into a single DynamoDB table, like this:
+… while being able to do queries against our three different "virtual tables", as if they were really separate tables:
+Main table queries:
+pk=[value], sk="customer" -> get something from our virtual "customer table"
+pk=[value], sk="employee" -> get something from our virtual "employee table"
+pk=[value], sk="product" -> get something from our virtual "product table"
+
+Index (GSI1) queries:
+sk="customer" - get all customers
+sk="product" - get all products
+sk="employee" - get all employees
+sk="customer", gsi1-sk begins_with "P" - get all customers whose name starts with "P"
+
+Scenario: An "Order" table, and the need to lookup all currently active orders
+We left Part 1 with the following scenario:
+We have a "status" type field in a table (e.g. "Active", which has either "Y" or "N")
+Major access pattern is filtering the table using the "Active" field
+Our backend often queries for all active orders (e.g., so we can assign riders or track them)
+There are 100x more inactive orders (delivered/cancelled) than there are active orders.
+
+How would we translate this to DynamoDB so that we maximize performance and scalability, while also reducing cost?
+The problem in more detail
+Let's make sure we understand the problem here before we try to solve it.
+From Part 1, we already know that if we used the basic Single-Table Design approach there and applied it here, our "Orders" table would simply be part of our single table, and it would look something like this:
+And we know this mostly works.
+If we wanted to find the details of a particular order, we can do this query:
+Main table: pk=0001, sk="order" -> get Order #0001
+Or if we wanted to list all orders, we can do this query:
+GSI1: sk="orders" -> get all orders
+But now we have to get all active orders, meaning "Active = Y". We can do a filter condition in DynamoDB for the "Active" field, since it isn't a key. Our query (still against GSI1) would look like this:
+GSI1: sk="order" AND Active="Y"-> get all orders, filtered to get only the active ones.
+Now, this type of query using a filter condition for "Active = 'Y'" seems to work - it returns a result that contains only the active orders.
+But let's look at it in more detail. When you use a filter condition, this is what happens behind the scenes:
+DynamoDB reads all records that match your key condition - that is, all records where sk="order"
+After getting all of these records, it then filters each record against your filter condition, which is Active = "Y"
+Everything that is not Active = "Y" is discarded, and DynamoDB gives you the matching results
+
+And there's the problem. DynamoDB still reads through the entirety of our "virtual table" for orders. Since DynamoDB charges us for whatever it reads (and not what it returns), the dollar cost of this query is the dollar cost of reading the entire Orders virtual table - even though we only wanted the active orders. And remember what else the scenario mentioned - at any time, there are at least 100x more inactive orders (delivered/cancelled) than there active orders.
+So it's overall a gigantic waste of money, and performance - the query could be much cheaper and faster if we could just somehow model it so that DynamoDB can quickly zero in on the active orders without having to look at the inactive ones.
+Sparse index to the rescue
+The solution to this scenario is the use of a special type of GSI called a sparse index.
+A sparse index is simply a GSI whose records are just a subset of the entire main table.
+In Part 1, our main table ("MySampleApp") and our first GSI ("GSI1") contain the same number of records, with just the partition and sort keys flipped - by design.
+The way items are automatically written by DynamoDB into a GSI is simple: If a record that is being inserted into the main table contains both the partition key and sort key attributes of a GSI (remember, you can have multiple GSIs, currently up to a max of 20), then it'll also be written to that GSI. If the key attributes are incomplete, then it isn't written to that GSI
+In this case, we want to take advantage of this to create an index that only has the active orders. We do this by creating a GSI designed for this. Again, we will practice overloading, so we will call it a generic name; let's just call it GSI2 for now.
+We defined GSI2 to use our existing column "sk" to be its partition key - just like GSI1. This should make sense, because "sk" is what we use to discriminate our virtual tables. We want GSI2 to use this too, so that we can use it for all other virtual tables that also need to track some sort of status column.
+For its sort key, we named it generically, "gsi2-sk", similar to how we named our sort key for GSI1 in Part 1. What's slightly different here is the value that we will put inside this field (and when):
+Instead of just copying the value of "pk" into it (like GSI1), we instead copy the value of "DateTime"
+We will only write a value for "gsi2-sk" for active orders (for example, when the order is first recorded in the system).
+When an order is completed or cancelled, we update the record so that it does not have a "gsi2-sk" field at all. This field (or "attribute", to use DynamoDB-specific parlance) should not exist anymore for records that are not active - it is not enough that they are set to empty, the field must not exist at all.
+Yes, we do not have a "Yes / No" column anymore. We could have put a "Y" inside "gsi2-sk" if we wanted to, but that would be less useful, as we will see below.
+
+Alright, with this type of model, we could do the following queries:
+GSI2 Queries (active orders only):
+sk="orders" -> get all active orders
+sk="orders", gsi2-sk begins_with "2022" -> get all active orders for the year 2022
+sk="orders", gsi2-sk begins_with "2022–07" -> get all active orders for July 2022
+sk="orders", gsi2-sk begins_with "2022–07–17" -> get all active orders for July 17, 2022
+sk="orders", gsi2-sk begins_with "2022–07–17 08"-> get all active orders for July 17, 2022, 8am (8:00–8:59)
+
+Let's try to visualize that a bit better.
+If we had 10 orders, and only 1 was active, our table would look like this:
+Both our main table and GSI1 would contain the same 10 records. But GSI2 would look like this:
+It literally only contains 1 record (0001, which has the gsi2-sk attribute).
+So when we query against GSI2, DynamoDB only sees a small fraction of your table - meaning it reads much less data.
+You save money while your app experiences far better performance. Win-win!
+And notice that since GSI2 literally only contains the active orders, we don't need a column marked "Y" or "N" anymore. We already know they are active if they are in GSI2, because only active orders are given the gsi2-sk field (that's something we program into our application).
+The last difference between GSI1 and GSI2 sort key values is that while the GSI1 sort key merely copies the value of pk, for GSI2 we decided to instead copy the value of the order date and time (the "DateTime" field). What this allows us to do is sort our query. For example, we can get all active orders, sorted according to the date and time (from older to newer).
+If we didn't use the DateTime value for the GSI2 sort key, and instead used the pk value (which is just the order ID), then DynamoDB wouldn't be able to do the "sort according to order date and time" op for us, and we would have to do that manually through our application. That's a hassle that is easily avoided by putting the proper value in gsi2-sk
+Wrap up
+And that's it, yet another DynamoDB modeling tip to further your journey towards an infinitely scalable backend with predictable excellent performance!
+Next up, in part 3, we'll be looking at how to model hierarchical data:
+If we had such a table like above, and our access patterns often query for the airports per country, or per state, or per city, how would we model that in a single DynamoDB table?
+See you then!

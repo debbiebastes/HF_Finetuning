@@ -1,0 +1,37 @@
+Title: The Problem With Serverless - From a Serverless Addict
+Author: JV Roig
+
+"The answer is serverless. What's the question?" is a joke I often make. I'm a serverless addict. The less charitable might even say "serverless nutjob".
+I love serverless, and I truly believe it is the best possible future for mainstream computing.
+Lately though, I've been thinking about what's holding serverless back - in no small part because of frustrations from hyperscalers.
+And no - it isn't vendor lock-in.
+Problem #1: Bad hyperscaler stewardship
+Serverless is essentially the most abstracted, low-touch way to manage your mission-critical workloads without it being simply a SaaS offering.
+This means you expect the serverless provider (the hyperscale clouds like AWS, Google Cloud, Azure, etc) to be doing much more heavy-lifting compared to Infrastructure-as-a-Service (IaaS) or Platform-as-a-Service (PaaS) offerings.
+If you went IaaS for your workloads (e.g., EC2), then you do all the heavy lifting to make it highly-available, performant, resilient and secure.
+If you decide to go PaaS (e.g., RDS, Elastic Beanstalk), then you offload a lot of that heavy lifting. It's less work to make deployments highly-available, for example, as it can literally be just a few console clicks to achieve.
+If you decide to go serverless (e.g., Lambda, DynamoDB), then you offload even more heavy lifting. Everything is essentially scalable and resilient out-of-the-box without having to fuss about it, and even boring concerns like security and patching are out of your hands (you will never have to patch your DynamoDB or Lambda "servers" - because you don't have one, and AWS does all of that maintenance for you, invisibly).
+But that powerful advantage - having most things offloaded to the hyperscaler - can sometimes be a disappointing weakness.
+Recently, AWS has made some serverless moves that disappointed me.
+For example, the launch of Aurora Serverless v2, and Neptune Serverless - both of which, strangely, don't actually seem to be serverless in the traditional sense. They don't scale to zero (i.e., you pay a good chunk of money even if your Aurora or Neptune database didn't receive a single query in a billing month), and don't even save you from having to manage a VPC (unlike true serverless offerings like DynamoDB and Lambda, where you could completely not have to worry about VPCs, and shove off all of the related undifferentiated networking and security work to AWS)
+That's just bad stewardship of the serverless brand.
+Worse, even the true serverless offerings aren't safe from bad stewardship. Take Lambda, which was what actually got me started in this rabbit hole of discontent. I heavily use Python Lambdas, and as of this writing (March 2023), Lambda still only supports Python 3.9 as its latest Python runtime.
+This is unacceptable. Without timely support for Python runtimes, this means serverless workloads that need updated Python runtimes have two options:
+Create their own container image and run that custom image in Lambda. This is terrible, because then we end up doing work we wanted to offload to the hyperscaler: managing container images, including creating, testing and patching them.
+Work around limitations in old runtimes. The easiest but still sucky way is to simply try to implement workarounds in old runtimes, or be content to not implement new features that depend on, say, Python 3.10 or up until AWS gets around to supporting them.
+
+The idea of serverless is still the best possible future for mainstream computing. It's unfortunate, though, that stewardship of serverless (both as a brand, and as the resulting concrete services) is undergoing some pretty rough times.
+Problem #2: Serverless offerings aren't solving the "Kubernetes problem"
+The other major problem I have with serverless has to do with it essentially being still in its early days - it is too focused on developer experience, with very little focus on enterprise experience.
+In other words, serverless as it stands now solves a lot of problems, except the one problem it must solve to actually become the de facto computing paradigm, the "Kubernetes problem": How can serverless eventually supplant Kubernetes as the beloved industry standard for workload deployments, from small to Fortune 500 companies?
+The reason Kubernetes is beloved in the enterprise space isn't app portability (i.e., the opposite of vendor lock-in). In fact, in a 2021 survey (links at the end), application portability was ranked at the very bottom of importance by respondents. They didn't want app portability. What they wanted was standardization - being able to standardize skills and tooling, across the entire organization, no matter the underlying platform (on-prem, AWS, Google Cloud, Azure, etc…)
+And this is why serverless isn't going to make inroads against Kubernetes as it stands right now. It's not about lock-in, because, turns out, no one really cares. What actually matters to enterprises is being able to standardize, and serverless right now does an awful job at that. Whereas with Kubernetes, a Fortune 500 company will use Kubernetes (of course, with something like Red Hat OpenShift to actually make Kubernetes enterprise-grade with far less effort) to achieve standardization despite using 2 or 3 public clouds plus their own on-prem data centers, no such technology exists for serverless. You need to work on a completely different stack for each hyperscaler if you wanted to go native serverless.
+The hyperscalers, in effect, are working only on the developer experience, and are mostly doing a good job at it (my earlier rant above notwithstanding). They aren't really working on the Kubernetes problem of serverless, though, and really have no incentive to do so.
+I can't really find a project right now that attempts to solve the Kubernetes problem for serverless. Most projects are targeting the same things that the hyperscalers are - developer experience. I don't think that will be enough. Until this changes, serverless will be stuck in this limbo where it is exciting and valuable and even beloved by a good chunk of developers, but will forever be shut out of the enterprise market, always to be eclipsed by enterprise-grade Kubernetes deployments.
+Wrap up
+Most discussions about the limitations and constraints of serverless almost always boil down to "lock-in!". I disagree.
+Serverless has bigger problems than that. While problem #1 in this post is hyperscaler stewardship that I find disappointing and must be addressed, the bigger and more central problem is the second one, the "Kubernetes problem" of standardization - solving for the enterprise experience, and not just the developer experience.
+While there are exciting developments in serverless when it comes to solving developer experience, that's not enough for serverless to flourish. Without a huge effort dedicated to the enterprise experience, true serverless will never really make Kubernetes obsolete. We'll all be stuck managing fat, complex Kubernetes clusters for the rest of our days, instead of achieving serverless nirvana. The industry deserves better.
+Links:
+Original Survey: https://juju.is/cloud-native-kubernetes-usage-report-2021#cloud-native-goals-benefits-and-estate-size
+Tech Republic article about the survey above, focusing on Kubernetes: https://www.techrepublic.com/article/kubernetes-magic-is-in-enterprise-standardization-not-app-portability/

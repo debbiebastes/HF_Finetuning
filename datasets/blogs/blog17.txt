@@ -1,0 +1,58 @@
+Title: Serverless Analytics, Part 1: Cheap and Scalable Terabyte-level Analytics!
+Author: JV Roig
+
+So far, I've talked about how serverless web app architectures can save you a ton of money compared to traditional "serverful" deployments. DynamoDB is at the core of that architecture, and I've discussed at length about how to optimally use DynamoDB in a 4-part series of articles, "Infinite Scaling w/DynamoDB".
+The next thing you'd probably want to do is create an analytics solution. Data is valuable, after all, and you'd want a way to process and gain insights from all your data across different systems.
+Even here, serverless technology can be very useful. In this article, I'll discuss the basic serverless analytics architecture that can help you jumpstart your analytics capability - and without requiring a huge opex commitment (i.e., not requiring you to pay for a huge monthly bill for that analytics solution), especially as you are still experimenting and getting started, and even as you have to deal with terabyte-level data sizes.
+Basic Serverless Analytics Architecture - Overview and Cost
+Above is an architecture diagram for a generic serverless analytics solution. The core components are:
+S3 buckets as our cheap and infinitely scalable data store
+Glue for ETL (extract, transform, load) operations, crawlers, and data catalog
+Athena as our analytics compute engine
+
+Briefly, we can summarize how this analytics solution works as follows:
+Phase 1: Collection. Get data into a main bucket that consolidates data from different sources - this could be a mix of structured, semi-structured, and unstructured data.
+Phase 2: Transformation. Transform consolidated data into a more structured form so that we can create "tables" from them.
+Phase 3: Cataloging. For more efficient and targeted queries later using Athena, we must first catalog the transformed data into metadata tables.
+Phase 4: Querying. Use Athena to execute SQL-like queries on your data and discover insights.
+
+Before we proceed with each phase, let me give you a great reason to learn about serverless analytics: it's extremely cheap!
+That's the kind of power you can get with a properly-designed serverless analytics solution. You can be processing terabytes of data, and yet spend 4–10x less money compared to even just a small, dedicated Redshift cluster.
+Now that you are hopefully more motivated, let's proceed with a brief discussion of each phase!
+Phase 1: Collection
+The collection phase of the architecture is highlighted above. In general, all you really want to accomplish here is to get all of your data into your main consolidated data bucket (here, it is labeled "Raw", as in "raw data").
+The generic architecture shows you can either just directly send data to the bucket (e.g., flat files in various formats that users send to the bucket), or have an ETL job that queries from different sources and dumps resulting output into the bucket (e.g., querying from a database, and producing an output file that gets written to the bucket).
+As long as you get data from your different sources into your raw bucket, and in the format that you expect, you're good. You don't always need an ETL job. For example, if your DB admins are perfectly capable of using their own tools to dump database content into a CSV file (assuming CSV was your chosen format for the raw bucket), then they can just stick with their tools to create the CSV files and send them to the bucket.
+Just get the data to the bucket, in predictable fashion, and in the expected format. That's it, simple as that.
+Phase 2: Transformation
+The transformation phase of the architecture is highlighted above.
+Since our raw bucket contains data from disparate data sources, it's likely not as structured as we would need it to be for analytics purposes. That's not a failure of the collection phase - that's by design. The collection phase is there just to be sure we get all the data into one roof. The transformation phase is where we massage that data into a more analytics-friendly structure.
+The way this is done in the generic serverless analytics architecture is by having ETL jobs that read data from the raw bucket, do necessary transformations (for example, dropping fields to remove columns you don't need for your analytics models, renaming fields, doing data type transformations, etc.), and then writing the transformed data into a bucket that holds your processed data. Helpfully, that bucket is labeled "Processed" in the diagram.
+In summary, raw data gets processed and then saved into the processed bucket, where it becomes structured enough so that we can efficiently query them.
+There's a deeper discussion here that goes into partitioning data and choosing data formats - but let's hold off on that for now. We'll revisit that in Part 2 of this series.
+Phase 3: Cataloging
+The cataloging phase of the architecture is highlighted above.
+In this phase, what we want to accomplish is to maintain a data catalog for our processed and (optionally, hence the broken line) raw buckets.
+A data catalog is simply a collection of metadata tables for your S3-stored data. Remember, your data isn't really in tables anymore, but we'd like to be able to query them quickly and efficiently as if they were actual database tables. A data catalog allows us to do just that.
+Glue Crawlers allow us to update our data catalog tables by discovering new data in our buckets, and then updating the partitions of our catalog tables as necessary.
+We also don't necessarily need crawlers all the time, even though crawlers sound like the general solution. For example, in our ETL job that handles the Raw -> Processed transformation, we could also set that up to update the affected catalog tables. That means we no longer need a crawler for the Processed bucket.
+Logically, though, I wanted to have explicit Crawlers in the diagram because it more visually explains the spirit of the architecture. There's a cataloging phase, and it's a must-have for the serverless analytics solution. Now, whether that cataloging action is literally done by crawlers, or folded into your ETL jobs, you can decide which is more applicable in your case. Personally, I try to reduce the crawlers I need by folding them into the ETL jobs I already have, whenever possible.
+(Note: For educational purposes, I put cataloging as Phase 3. However, it can actually already start even before the Transform phase! We'll get to why in Part 2, but right now it's more important that you understand the spirit of our activities, and not all the different nuances. A sequence of Collect + Transform + Catalog + Query is still the best way to visualize and understand a typical analytics pipeline, especially when you are just starting out)
+Phase 4: Querying
+The querying phase of the architecture is highlighted above.
+This is where you get to use Athena to query against your data through the Glue Data Catalog tables.
+Athena is based on Presto, an SQL query engine meant for massively parallel processing of huge amounts of data. You don't need to be a rockstar data scientist to use it. If you've ever queried tables in any relational database (MySQL, Postgres, Oracle, etc), that's already 99% of what you need to know.
+For ad hoc queries, you can just conveniently use the Athena console in the web-based AWS Management Console. You can also use Athena programmatically in your applications, through ODBC or JDBC connections, or the AWS SDK.
+Will this hamper my ability to be non-serverless in the future?
+You might be worried that if you start with a basic serverless analytics solution now, you might be compromising your future agility. What if you need to pivot to a non-serverless, dedicated cluster for more complex analytics requirements in the future, will all your serverless analytics efforts be wasted and need tons of re-work?
+No. Don't worry, you aren't compromising on anything right now. You get full flexibility for future requirements!
+Above is a potential future expansion. In this hypothetical scenario, you had a need for a dedicated Redshift cluster (maybe more complex analytics requirements, or stricter performance and predictability requirements, or a combo of both). You don't throw away anything. Instead, we can add another ETL job that does another transformation so that the data is fit for loading into our Redshift data models, from our Processed bucket (or Raw bucket, depending on your needs) to a target bucket. That target bucket is labeled "Modeled", since it will hold our modeled data for Redshift. From there, it's a simple REDSHIFT COPY command and then clearing out the modeled bucket.
+That's it. That's the addendum needed - just another ETL job in your analytics pipeline.
+When your analytics requirements become more sophisticated and you need visualization, Athena isn't a dead-end. You can connect Athena to both Quicksight and Power BI (just two examples of popular data visualization and dashboarding tools) to provide your users with that capability.
+So whether you are looking at a future where you want complex dashboarding on top of your basic serverless analytics solution, or needing a dedicated cluster for some of your new analytics requirements, we're not really making any compromises today that negatively affect the future.
+Wrap up
+Serverless analytics is a great place to get started if you are just experimenting with analytics, or you have analytics workloads that don't really demand the opex of maintaining a huge dedicated cluster for it. At 4–10x cheaper than a dedicated Redshift cluster, it's a cost-effective way to improve your analytics capability.
+There will be lots of follow-up articles in this series, as we've just barely scratched the surface. We still have to talk about important concepts that affect the different phases discussed - like partitioning your data, choosing the optimal data formats, and various other optimization techniques. Stay tuned! In the meantime, here's some related reading:
+Basic Serverless Web App Architecture - an architecture that costs nothing!
+Infinite Scaling w/ DynamoDB - learn how to unleash the full power of DynamoDB for all your serverless applications.
+Interested in Redshift? Try Optimizing Data Warehouse Performance and Storage Costs Through Distribution Styles.

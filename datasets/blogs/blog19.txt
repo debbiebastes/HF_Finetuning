@@ -1,0 +1,53 @@
+Title: Serverless Analytics, Part 3: 80% Faster and 90% Cheaper Queries Through Cataloging and Crawling
+Author: JV Roig
+
+This is Part 3 of a 5-part series about getting started with serverless analytics. In case you missed it, you can catch up on Part 1 and Part 2 here.
+The basic serverless analytics architecture in this series can help you jumpstart your analytics capability. It provides you with the ability to gain insights from terabytes of collected data, without requiring a huge opex commitment (i.e., not requiring you to pay for a huge monthly bill for that analytics solution). This is especially useful while you are still experimenting and getting started, and even as you have to deal with terabyte-level data sizes. It can be 4–10x cheaper than a typical Redshift data warehouse deployment.
+Where we left off from Part 2
+In the previous article, we focused on the Collection phase of the basic serverless analytics architecture, highlighted above. The goal of the collection phase is to simply get all of the data into a central S3 bucket (labeled "Raw" in the diagram, since it is meant to hold our raw data).
+We talked about two general ways to get data to your Raw bucket - direct uploading (such as through scheduled shell scripts that send flat files to the bucket) and Glue ETL jobs (such as for querying databases to get data into the bucket).
+Probably the most important lesson from Part 2, though, was partitioning, which is a way for us to structure the files and folders in our buckets (whether Raw or otherwise) so that they can be more Athena-friendly. That means faster queries, and cheaper monthly bills.
+Creating a folder structure in S3 is just the first half of what we actually need in order to fully implement partitioning for Athena's use.
+Today in Part 3, we'll focus on the next half: Cataloging our data.
+What's a Data Catalog?
+Before we learn how to catalog our data, we should answer why we need to catalog our data.
+Back to basics. Remember what we want to accomplish in the first place? We want to be able to do analytics on vast amounts of data in our buckets (in our sample architecture, that's primarily the Processed bucket, but also the Raw bucket for ad hoc queries). We want the processing to be efficient, both from the perspective of the engine (e.g., it shouldn't take forever even if the bucket has 6.9 TB of data) and from the perspective of the user - meaning it should be convenient for the user to ask questions about the data. In other words, we want it to be easy for the user to operate - hence, what we usually want is to be able to execute SQL-like queries against our data.
+A data catalog (In our basic serverless analytics architecture, that's Glue Data Catalog) is what allows us to achieve both of those efficiencies.
+A data catalog holds metadata and partition information about our "tables" in various S3 buckets that we use to hold data. And because it presents this facade of virtual tables (just a logical construct; physically, all your data is still in S3 buckets), you can now work with tables, instead of S3 files and folders. And just like that, with the appropriate SQL query engine (like Presto, which is what the Athena service uses under the hood), users can now use SQL against "tables" that represent collections of data in S3 buckets.
+And because the data catalog also holds partition information, it enables our Athena-based compute engine to execute queries more efficiently. Using partition information in the data catalog, Athena can skip vast amounts of unrelated data when handling your request, allowing it to finish faster AND save you a bundle of money (since Athena charges you according to the size of scanned data; less data scanned, less cost).
+Above is an example of performance improvement AND cost savings with the serverless analytics solution, taken from an AWS blog post on Athena optimization. Working on the same data set, just on different buckets (one not partitioned at all, the other partitioned + cataloged properly), you can see how Athena executes much faster AND costs less.
+Creating a Data Catalog
+The experience of creating a data catalog is somewhat similar to creating a traditional database and tables:
+You go to AWS Glue -> AWS Glue Data Catalog
+You create a Database
+You create Tables under that Database.
+Rinse and repeat - create as many databases and tables as you need.
+
+You can think of a Database in your data catalog as a simple logical grouping mechanism. Unlike real databases, a data catalog Database doesn't really do much - there are no critical settings there. Tables are more important, and tables are where you define metadata (columns and column types), partitions, and the location of the physical data (in our case, that's the S3 bucket and path).
+Let's continue our scenario from Part 2. We settled on a partitioning scheme like this:
+s3://myS3bucket/collection="sales"/year=2022/month=10/day=05/myfileOct52022.csv
+s3://myS3bucke/tcollection="logs"/year=2022/month=10/day=05/logs_2022–10–05.csv
+s3://myS3bucket/collection="csdata"/year=2022/month=10/day=05/cs_2022-Oct-05.csv
+Since the collection folder in our S3 bucket was meant to isolate unrelated datasets from each other, we can just think of them as tables in our data catalog, instead of literally as partitions.
+This means, we'd probably one to do something like this when we're setting up our data catalog:
+Create a Table for sales
+Define its schema (metadata) accordingly (what's in the CSV, desired column types, etc.)
+Make sure the desired partitions are included - this means we must have a year, month and day columns in our schema, and we mark it as a partition (and remember, the order matters, so year must be the first partition, month the second, and day the last)
+
+We do the same for our other tables, logs and csdata.
+And that's it, we've just created our data catalog! We've technically done cataloging, but not completely - if you try to go to Athena at this point, and query the newly-created tables, you'll quickly find that it seems like Athena doesn't see any data.
+This is because while we've successfully created tables in our data catalog, we need to do one more thing - update the partitions in our tables.
+You see, what we've only accomplished so far by creating the tables in Glue Data Catalog, is essentially say "Hey, I'm hoarding tons of data somewhere, and I need a few different virtual table schemas to be able to query against that data, and expect these tables to be partitioned with Year / Month /Day…"
+So while our data catalog now knows to expect these partitions to exist, it needs to actually store what partitions actually exist! How would it know, for example, that a partition of year=2022/month=07/day=28 actually exists for the sales table? Since our data catalog doesn't store the physical data (that's in an external store, an S3 bucket), then it simply can't know, until we tell it. After we tell it what partitions exist, it stores that info - the partition information only, not the actual physical data - and it will now know how to handle Athena requests, because it will now know how to actually find things from your S3 bucket.
+And that leads us to crawling - this is the automated way to keep updating our data catalog tables as new partitions get added to our bucket.
+Crawling
+A Glue Crawler is pretty straightforward:
+It's a crawler, meaning you point it to a data source (like a data catalog table), and it will "crawl" it to discover potentially new data.
+You can choose a schedule for it to run, or simply manual trigger (on-demand).
+When it finds new data, it will update the relevant data catalog table.
+
+In our case, since we started by manually creating the data catalog table (so that we have full control of column naming and data types), we use that as our source. Every time our crawler runs, it'll see if new partitions have been added in the S3 bucket that backs the data catalog table, and then it will tell the data catalog about those new partitions. When the crawl ends, you'll find your Athena queries will now be able to see the new data.
+As for the ideal frequency, that depends a lot on the use case. To continue our example from Part 2, let's assume we only load data once a day into the Raw bucket. At 11pm, all cron jobs and task scheduler jobs kick-off, processing and sending CSV files to the Raw bucket. If it only takes 10–15 minutes for the whole process to end, then we can safely schedule our crawler to run every 11:30pm or midnight, to account for unforeseen slowdowns (e.g., sudden network congestion). In this setup, you always have fresh data ready to be queried through Athena at the start of each day.
+Wrap up
+At this point in the series, we covered the basic serverless analytics architecture, how to get data to the Raw bucket for consolidation, how to organize them appropriately into useful partitions, and how to catalog the data. Though we still have quite some work ahead of us, by now you can actually do Athena queries on your first bucket. When you see that first query work, the feeling is awesome - congrats!
+In the next part, we'll cover ETL jobs for the Transform and Catalog phases. We'll also see why we sometimes may not need crawlers at all.

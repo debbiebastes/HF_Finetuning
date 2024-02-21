@@ -1,0 +1,48 @@
+Title: I took 5 AWS professional-level exams in 3 days - here's what happened
+Author: JV Roig
+
+I took 5 pro-level AWS Specialty Certification exams in 3 days, back-to-back, and smashed them. That's the 5 classic AWS Certified Specialties: Database, Data Analytics, Advanced Networking, Security, and Machine Learning.
+This is the crazy story of that 3-day, 5-exam AWS Specialty marathon, along with my personal takeaways and exam tips to help you in your own certification journey. (If you need verification, here's my celebratory LinkedIn post that contains all 5 certificates and validation numbers)
+Story Time - anomalies and heart attacks (almost)
+I was nervous as hell.
+But I wasn't afraid of failing, no. I was nervous because taking these tests back-to-back might seem like anomalous behavior, and the AWS certification team might flag this and decide to invalidate some or all of my exams. Yikes!
+And when my credit card got blocked for anomalous/suspicious transactions just as I was trying to book and pay for the fifth and final exam (ML), it only made me even more nervous! A quick call to the bank cleared it up for me, but that's not something I could do if it were the AWS certification team. If they flag one or more of my exams as anomalous, that's it. I don't know if there's any remediation at all, unlike that quick phone call to my bank.
+During the exams themselves, this pervasive fear of being flagged as anomalous resulted in some sub-optimal decisions. For example, during my very first exam (Database), I had to do my best to hold my pee, until I couldn't anymore and decided to submit early so I can finally take a bathroom break. Technically, the exam center allows you a quick bathroom break (the exam timer doesn't get paused). But in my fear of being classified as anomalous, I didn't want to add what I thought could be additional suspicious behaviors.
+Then, during the second day, I almost had a heart attack! I was scheduled to take Advanced Networking in the morning, then Security in the afternoon. But when I sat down on my designated terminal, the Security exam was on the screen already! Obviously, the exam center staff aren't used to having people take multiple exams in a day, so the mix-up happened. I almost had a heart attack, and had a minor panic. Should I just take this one now, and Networking later? Or will that look anomalous because it didn't follow the schedule? Can I ask the staff to fix it and load the Networking exam as scheduled, or will that look like the more suspicious action?
+It's funny now, but that was the sort of thing I was grappling with the whole time.
+Oh, I also got neck pain! The exam center monitor was smaller than I am used to, and so was much lower than is ergonomic for me. Looking slightly down for about 3 hours at a time, twice a day, really does a number on your neck. By the second day, I had to support my neck with my left hand. Probably not a big deal if you're only taking one test, but if you ever want to take multiple exams like a boss, you should probably try to verify the ergonomics of your exam center.
+Personal takeaways
+Security was the easiest. If you already have the AWS Certified Sol Arch Professional badge, this one is likely to feel like a freebie with minimal prep time.
+Advanced Networking was the hardest for me. I don't think it was particularly much harder inherently than everything else (except Security). Which is easiest/hardest will depend a lot on what you do day-to-day, and what your personal interests are. For me, networking has always been the most boring, and what I often end up delegating to others. Don't get me wrong, I understand networking, I can teach classes in networking, and obviously I can pass the Advanced Networking cert (since I just did). It just felt harder to me than it probably should have, due to my day-to-day and personal preferences.
+Sort of ridiculously, and just to hammer that point across, Machine Learning was one of the easiest for me. Again, not because it is inherently easier (it's not, and I've seen tons of people say that the ML exam ranks up there with Sol Arch Pro and DevOps Pro as one of the hardest AWS exams), but simply because I am more interested and involved in it.
+If you take an exam that is aligned with your interests and/or your day-to-day, it might just make the exam easier for you. Conversely, if you plan on achieving a particular specialty badge, try to integrate it into your day-to-day.
+Lessons & Prep Tips
+Don't cram; make learning an easy habit (e.g., 20–30 minutes a day, every day):
+You have more time than you realize - how much time do you spend on Netflix / YouTube / social media everyday? Divert a fraction of that to studying.
+Watch a good video from a relevant Cloud course.
+Read part of an e-book about a relevant Cloud topic.
+Answer a few mock exam questions. Your objective when you take mock exams shouldn't just be to get all questions right. Dive deep into the meaning of the question and answers. Why is the right answer right, and why are each of the wrong answers wrong?
+
+Lower the barrier to entry for studying:
+Ideally, you want it to be as effortless as possible to start.
+Mitigate starting friction / blank page syndrome, where you end up doing nothing because you can't decide WHERE to start or HOW to start, and get overwhelmed by all the options.
+Having to make a decision wastes a ton of mental effort and energy, so you want to make it as painless and automatic as possible to start your study/prep time each day, with zero decisions involved.
+Create a reliable daily/weekly schedule that includes not just WHEN to start, but also WHAT to do, so that you never have to decide. Create it once, and then just refer to it every time so you never have to make a decision, effectively lowering starting friction and avoiding blank page syndrome. If you sit down for a short 20-minute study session, for example, your schedule should say something like "Watch video X about Sagemaker" or "Continue the Data Analytics course from AWS.Training" so you know exactly what to do with no effort.
+
+Choose quality study materials:
+My personal preference: Tutorials Dojo by Jon Bonso and team.
+I have been happiest with their mock exams, because they offer good explanations (why something is right, and why other options are wrong) with links to relevant topics. They are also very reasonably priced, and on a one-time charge model, not an on-going subscription.
+There are lots of free resources available, like AWS.Training, so don't feel like you need to spend lots of dollars just to help you prep.
+
+AWS Exam Guide, Sampler, and Official Practice Exam:
+Use these at the start of your formal prep time (i.e., when you've decided to earn any particular cert). I forgot about these until it was too late (day of exam), but I did make use of these 3 years ago during my Sol Arch Pro and DevOps Pro prep - two of the hardest cloud exams out there , and which I took together in the same day (Sol Arch Pro in the morning, DevOps Pro in the afternoon).
+
+Enable hands-on learning:
+Use sandbox-enabled courses.
+Use your cloud account and take advantage of lots of free AWS credits. Attend AWS online events, take surveys for each session, and take the main event survey. You can get up to $50 in credit per event (for example, AWS Innovate Online and AWS Builders Online)
+When asked (if you qualify), join the AWS Customer Council to get even more credits whenever you participate in their surveys.
+Maintaining your own account and fueling it with free credits c/o online events participation is better than just sandbox-enabled courses, since you are free to experiment as you wish. You'll also get exposed to more things during the events themselves, so this technique is a two-punch combo of awesomeness.
+
+Wrap-up
+I hope you've found this post entertaining and helpful. I'll have follow-up posts that talk about my personal routine, as well as some topic-specific tips for the various specialties, so stay tuned. Make sure to follow me so you don't miss them, and hit the clap icon a few times to tell the Medium algorithm to show you more of this type of content.
+Finally, if you take away anything from this post, I hope it's this: More things than you might have been able to imagine before are possible. You can do magic, with enough discipline and determination.

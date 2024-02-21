@@ -1,0 +1,33 @@
+Title: Cloud Lessons From the Greatest Programmer in the World
+Author: JV Roig
+
+Often hailed as the world's greatest programmer, John Carmack is one of my personal heroes. John's a legendary programmer who revolutionized video games primarily through his amazing work in game engines and hard core optimization. He's co-founder of id Software, founder of Armadillo Aerospace, and was CTO of Oculus VR.
+He recently guested in the Lex Fridman podcast, which lasted for a little over 5 hours. It was such an enlightening experience that it wasn't even long enough - I ended up replaying clips from it!
+I'll share three insights in particular that I'd like to relate to a Cloud professional's journey. This podcast episode is available in different formats from the link above, but in the timestamps that I'll be mentioning below, it will be from the YouTube version of the episode.
+Lesson 1: Everything should flow from user value
+The first lesson is from the "Modern Programming" section of the podcast. (Timestamp: 33:01)
+Here are my favorite quotes from the section above:
+Everything should flow from user value - a lesson every Cloud professional should remember.
+What's most important isn't the elegance of any particular architecture we give to the client - whether it's a complex self-healing cluster with tons of high-availability and disaster recovery (HA/DR) features built-in, or the latest cutting edge services stitched together to enable a brand new capability for the customer. These things are nice, and any craftsman with pride in his work will (and should) of course find satisfaction and fulfillment in the creation of beautiful work.
+But we can't let this be the most important metric. The most important metric, as John argues in this section of the podcast, is that everything we do, everything we build, will be judged against the value it ends up delivering to the user.
+To put it in monetary terms for simplicity's sake, if it takes more to build than the value it produces, then we haven't really helped make the world a better place - or, in less grandiose terms, we haven't really helped make our customer's life better.
+The architecture, the solution, the product - whatever it is we're building in the Cloud for our customers - always has to be based on user value, not just blind adherence to ivory tower-like principles.
+You can also take this as a warning against over-engineering. If you over-engineer something and end up making it take too long and cost too much, you might counterintuitively be reducing user value.
+Lesson 2: Learn things deeply
+This one is from the section "Advice for young people." (Timestamp: 5:01:57)
+Learn deeply, and not be satisfied with surface-level knowledge.
+One of the best things about the Cloud is also one of its often-overlooked dangers. The Cloud simplifies and abstracts away tons of details from truly complex and useful services.
+It is often tempting to just take them as-is and simply be content with the knowledge to operate them. And that probably works well most of the time.
+But for truly complex or novel customer problems, it takes more than just operational knowledge to really be in the position to be valuable to our customers. In-depth knowledge becomes essential, as all manners of tradeoffs, compromises, and gotchas about different Cloud services - or even about the different features of these Cloud services - will end up getting intertwined and interact in possibly unexpected ways. Things here can go wrong really fast if you only look at them from an operational knowledge perspective.
+Learn deeply. You may not be able to learn everything, but believe that you can learn anything.
+Lesson 3: Automation and guardrails
+The last lesson is from the section called "Setup", where John talks about his development setup. (Timestamp: 56:50). Specifically, I'd like to zero in on when he talks about "good intentions" (Timestamp: 1:04:15)
+Every veteran Cloud professional, and every organization that has lived with the Cloud intensely for years, can tell you this one thing: Humans will be humans, and mistakes will happen.
+Good intentions - wanting to do a good job - simply doesn't cut it, and especially not for the types of architectures and solutions that the Cloud enables customers to build and operate at scale.
+You absolutely need automations and guardrails across the entire spectrum of your Cloud usage - from deployment, to operation, to cost management.
+Not wanting to leave a huge database instance idle in your testing sandbox environment will not prevent it from accidentally happening. Having an automated monitoring, alerting, and remediation tool will.
+Not wanting users to mistakenly spin up expensive services they don't really need will not prevent it from accidentally happening. Having service control guardrails will.
+Not wanting to create a misconfiguration security hole will not prevent it from accidentally happening. Configuration guardrails will.
+Wrap up
+This entire podcast with John is just chock-full of insights.
+I chose three that I thought were most relevant to those in the beginning or in the middle of their Cloud journey. Don't limit yourself to these, though. I encourage you to listen to as much of the episode as you can. You can easily pick up 10x more lessons from John!

@@ -1,0 +1,70 @@
+Title: 2023 Cloud Upskilling and Cert Prep: Systems, not Goals
+Author: JV Roig
+
+The first quarter of 2023 is almost over. What this means is that for most of us (you, me, and basically every other good-looking human we know), some or most of our New Year's Resolutions have already been broken. Research around New Year's Resolutions have consistently shown that it takes far less than 3 months for the average person to break some or all of their New Year's Resolutions. For my audience in this Cloud tech blog, that probably means quite a lot of Cloud-related personal skills growth that isn't quite going as planned. That sucks, and I feel you.
+It's not all bad, though. Related research also shows us how to turn this weakness into an advantage - and how to reboot your 2023 resolutions and turn them into effective systems to hypercharge your personal growth for your Cloud career.
+(The general advice here will likely be applicable to non-Cloud matters; however, in the interest of focus and more specific tips, I will primarily be talking about leveraging the techniques here to accelerate Cloud skills development)
+Think systems, not goals
+The core concept here is how you frame your resolutions (be it a literal New Year's resolution, or just something you decided to do for self-improvement at a random point in time, like after you read this blog).
+Most of the time, our self-improvement resolutions look like these:
+Less Facebook / Instagram / TikTok time
+Eat less sugars
+Less time playing mobile games / Xbox / PlayStation
+
+You get the idea. We plan to improve ourselves by resolving to avoid or reduce perceived negative behaviors.
+That's an avoidance-oriented goal. This type of goal is more likely to fail. Most of you reading this may have already noticed some of your own personal resolutions similar to these have already failed even before the first quarter of 2023 ended. It's not you that's the problem. This strategy just isn't optimal for humans. (That's not to say these never work. There's just easier, more effective, and generally more successful strategies).
+A way to improve that is to reframe these resolutions towards things we want to achieve. Whenever we want to avoid negative behaviors, we often want to do so because there's something good that we want to achieve. For example:
+"Less social media use" can be rephrased as "Allocate more time for studying"
+"Eat less sugars" can be rephrased as "Lose 15 pounds in 2023"
+"Less game time" can mean "Earn three Cloud certifications"
+
+Instead of promising to avoid a negative, a slight tweak now sets us up to work towards a positive.
+Better, but still not the best.
+The best way to set goals that maximize success and positive outcomes is to not focus on the goals at all, but on systems that will achieve those goals.
+"Earning three Cloud certifications", for example, is a fantastic goal. However, to set yourself up for success, your resolution shouldn't be about that. Instead, your self-improvement resolutions should be about systems designed to let you achieve that: What daily/weekly routines should you have to actually make you earn those certifications?
+Let me share some tips based on my personal systems.
+Set a specific and easy routine
+The first tip in our "systems thinking vs goal setting" mindset is start easy. What's the easiest habit you can start?
+In my case, I allocate at least 15 minutes of highly-focused time at the start of my day for catching up on Cloud trends and studies. It could be serverless, or analytics, or AI, or trends in Cloud adoption. Doesn't matter. Whatever's most interesting that day, or whatever makes it to my Cloud-related news feed. This is my accumulate Cloud knowledge routine.
+What makes this an easy routine is that it takes little energy and effort for me to make good on it every day:
+It's daily, so I know WHEN it has to happen (everyday, every morning before I start work)
+It's a specific activity, so I know exactly WHAT to do (reading through interesting Cloud developments)
+It's also unambiguous HOW to start (either I open my browser and check my Google feed which is full of Cloud-related news, or I will already have bookmarked articles to dive into, from those I encountered at random times in past days that I didn't have time to focus on yet)
+
+So, while I know my goal, which is the WHY (I want to stay up-to-date and relevant in the Cloud), I also defined the what, when, and how of it. From a simple goal-oriented approach, I changed it into a systems approach - and an easy one that basically guarantees I will be able to commit to it and sustain it.
+Even just 15 minutes a day scales up pretty fast. In a year, that's easily >60 hours of consistent study time just from that one habit.
+Adopt a scenario-based learning habit
+The best way to structure your learning is to force yourself to handle scenarios and do problem solving on them. This is why and how we learn from experience - we find ourselves in a work-related scenario that is new to us (e.g., a new customer problem encountered), we engage in problem solving (e.g. troubleshooting and debugging process for that new customer problem), we succeed, learn from that scenario, and ultimately upskill ourselves.
+In the Cloud, one of the trickiest things is gaining skills to prepare yourself for a future role you'd like. For example, you'd like to upskill to be a Data Engineer, but you're currently a junior DevOps engineer and don't really encounter Data-related tasks in your work. In this case, the typical scenario-based, problem-solving-led upskilling described above doesn't really help us.
+If we never encounter work-related tasks that are aligned with our own personal growth ambitions, how do we take advantage of the power of learning from scenarios and problem solving? Does this mean we are stuck just watching videos and reading docs?
+Here's a personal favorite tip - and something that is also easy to turn into a system, a specific and easy routine as in the previous section: Find good mock exam resources (my favorite is Tutorials Dojo), and answer a handful of exam questions every day:
+Don't try to answer an entire exam. That'll take forever (over an hour, at least) and will be unsustainable. Remember, we need easy routines.
+Don't worry about scores. After all, this is just a mock exam, and you aren't even supposed to finish an entire exam in a day.
+Commit to being time-bound, or a low question cap. Either you allot a fixed time cap (say, around 15–30 minutes a day), or a fixed number of questions (say, 5–10 questions max per day). The easier, the better.
+Whether you answer the questions correctly or not, look into the explanations and the related service docs to make sure you really dive deep into the scenario and understand what was being asked and the nuances of each proposed solution.
+
+Why are we doing all this? Because we aren't here to earn maximum points in these mock exams (that's pointless by themselves). Our goal here is to establish a system where we are always (i.e., on a daily basis) encountering random scenarios, problem solving against them, and learning related services and technology nuances through this scenario-based problem solving approach.
+My specific advice here would be to go to Tutorials Dojo, buy the courses that are related to your goals (to continue the example from earlier, perhaps you'd ge the AWS Data Analytics Specialty so you can prep yourself to be a Data Engineer), and then really only ever use their "Review Mode" exam feature. That's the brilliant mode where you will be shown the right answer + explanations + related links after each question (not only at the end of the exam itself), and you get immediate feedback and are able to immediately dive deep into the explanations.
+So that's all you do. Keep it easy, don't pressure yourself:
+WHAT: Wrestle with random scenarios, really think through them, and make yourself really understand the dynamics of the services involved through the explanations provided and related doc links. Why is the right answer right, and why are the wrong answers wrong?
+HOW: Only ever use the Review Mode feature.
+WHEN: Just 15–30 minutes a day, every day, just answering a handful of scenario-basied questions.
+
+And just like that, you've got yourself a system that drastically increases your chance of success, helping you achieve your WHY goal - upskilling towards a Cloud specialty or a specific badge/certification.
+Whenever you think in terms of systems, and not just goals, everything becomes better, and success is easier.
+Remember: Consistency, not intensity
+The most important thing to remember is to be consistent. Consistency beats intensity.
+Don't think "Well, JV, you've inspired me so much with this that I wll promise to do 3 HOURS A DAY OF INTENSE CLOUD STUDIES AND EARN ALL THE BADGES!!!!!!" Yeah, I mean, that's good intention, but that'll fail. That sort of intensity is never sustainable, you will get drained pretty soon, or just find it impossible to schedule at all every day.
+Make your systems easy enough to guarantee consistency. In the long run, that consistency in your daily self-improvement systems will make you crush your goals.
+A personal anecdote on scenario-based learning
+One period last year I was literally just applying the previous tip and answering a few random scenario questions daily from the AWS Data Analytics Specialty course from Tutorials Dojo. Then, I was approached by a customer who had some really interesting questions about their analytics-related problems, including cost management, performance, and daily operations. I was able to have a really deep conversation with them about it, thanks to the fortuitous timing.
+That small daily routine I incorporated into my daily life happened to be related to this ad hoc customer need, and some of those random scenarios happened to match with their problems and needs. My daily wrestling with scenarios and thinking through them led me to not just refresh all my previous analytics experience, but also understand even more the nuances of the technologies involved, especially for new developments and updates.
+To the customer, it seemed like I was some expert who magically knew everything they wanted and needed. They appreciated having that sort of deep discussion on the spot. They thought I must have been doing this sort of analytics deep dives for a bunch of other customers all the time.
+The reality? They were the first to talk to me about those topics in several months already, but because part of my easy routine was always challenging myself with the scenario-based approach I discussed earlier, they found me very well-prepared anyway and mindful of nuances, instead of rusty.
+This is just one example of why I absolutely love low effort, easy routines forming daily systems of self-improvement. They just work really well, personally and professionally.
+Wrap up
+Ok, this has been a lot longer than I expected. I hope you've gotten enough to hypercharge your own personal Cloud journey for the rest of 2023.
+Don't just set goals. Design systems.
+Make your routines easy. Shoot for consistency, not intensity.
+There's really more tips to share, for example how to go about applying scenario-based learning in a hands-on approach, but let's reserve a deeper dive into that for a future article. In the meantime, you can look through a previous related article where I wrote about how I took 5 pro-level AWS specialty certification exams back-to-back in a 3-day marathon. There's some good tips there you might also find helpful, esp about how to enable hands-on, sandbox-type learning using your own AWS account.
+Good luck, and I hope this helps you reboot and hypercharge your 2023 growth goals!

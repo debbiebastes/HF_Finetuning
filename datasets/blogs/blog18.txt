@@ -1,0 +1,101 @@
+Title: Serverless Analytics, Part 2: Collection Phase and Partitioning
+Author: JV Roig
+
+This is Part 2 of a 5-part series about getting started with serverless analytics. In case you missed it, you can catch up on Part 1 here.
+The basic serverless analytics architecture in this series can help you jumpstart your analytics capability. It provides you with the ability to gain insights from terabytes of collected data, without requiring a huge opex commitment (i.e., not requiring you to pay for a huge monthly bill for that analytics solution). This is especially useful while you are still experimenting and getting started, and even as you have to deal with terabyte-level data sizes.
+Quick recap of Part 1: The basic serverless analytics architecture
+Above is the architecture diagram for the generic serverless analytics solution from Part 1.
+The best reason to care about this - why would you ever want to get something like this off the ground in the first place? - is that it is extremely cost-efficient, and it could be 4–10x cheaper than a normal dedicated data warehouse cluster:
+The core components of the architecture are:
+S3 buckets as our cheap and infinitely scalable data store
+Glue for ETL (extract, transform, load) operations, crawlers, and data catalog
+Athena as our analytics compute engine
+
+Briefly, you can summarize how this analytics solution works as follows:
+Phase 1: Collection. Get data into a main bucket that consolidates data from different sources - this could be a mix of structured, semi-structured, and unstructured data.
+Phase 2: Transformation. Transform consolidated data into a more structured form so that we can create "tables" from them.
+Phase 3: Cataloging. For more efficient and targeted queries later using Athena, we must first catalog the transformed data into metadata tables.
+Phase 4: Querying. Use Athena to execute SQL-like queries on your data and discover insights.
+
+Here in Part 2, we'll dive a bit deeper on Phase 1: Collection.
+Getting data into your bucket: ETL, or direct upload?
+The collection phase of the architecture is highlighted above.
+The goal of the collection phase is to simply get all of the data into a central S3 bucket (labeled "Raw" in the diagram, since it is meant to hold our raw data).
+Whether that's done through direct uploading of CSV files from source to Raw bucket or a Glue ETL (Extract, Transform, Load) job depends on what tools you have, and what data sources you have, and what existing expertise you already have.
+For example, if you have flat files, it's probably easier to just create a script that sends them to the S3 bucket, and triggered by a cron job or task scheduler. These flat files could be CSV files from business users, JSON files created by some application systems and stored in various filesystems, log files, etc. Any file, really, that contains data you want to capture as part of your analytics solution.
+How about Excel files? I was asked this question in a recent talk (which was exactly about this topic - serverless analytics), and it's also something I often see with customers. (Because of course Excel will be one of the top file types that users will likely have to collect). You can just dump your Excel files straight to the Raw bucket without asking users to save them as CSV, if you wish. That doesn't really affect the Collection phase much - but it will make your Transform phase slightly more complicated - we'll get back to this later in Part 4 when we discuss Glue ETL usage for the Transformation phase. The bottomline is, for flat files that exist in shared drives and various servers, you can just get them to the Raw bucket through direct uploading, with likely no need for an ETL job yet.
+For data in databases, the issue becomes a bit muddier. You have to extract data from these databases, probably transform the data structure a bit, and then load them into your Raw S3 bucket. See what I did there? That's what a Glue ETL job is for.
+Let's say you have a Postgres database you want to create an ETL job for. Here's the broad strokes to create a Glue ETL job to query your databases:
+In Glue Studio, create a JDBC connector for your database (Glue Studio -> Connectors -> Connections -> Create Connections button)
+We now create a Job in Glue Studio that uses that JDBC connector (Glue Studio -> Jobs; choose "Visual with a source and target", and change "Source" to "PostgreSQL" -> Create)
+In the visual editor, make sure the Source step (first box) is selected, and choose your JDBC connector in the Connection name box.
+Choose the table to query.
+
+The canvas will contain a Transform step and a Data Target step. We'll deal with these in more detail in Part 4. For now, all we need to know is that the Transform step is a simple mapping operation that can let you define how to map fields from source to destination (or choose to drop certain fields), and the Data Target step lets us choose our Raw S3 bucket as the recipient of the queried data, and specify the format for the resulting data file.
+Now, I know what some of you may be thinking - holy shit, JV, that sounds a bit overwhelming and more complicated than just a script controlled by cron / task scheduler that uploads data to my S3 bucket!
+I know, I get it. I feel you. Sometimes, this is actually the best solution, because by using Glue ETL jobs (and using Glue Studio to simplify their creation and management), you centralize a lot of your "scoop-up-data-and-dump-into-the-bucket" operations. But it can feel overwhelming at first.
+If you are more comfortable at this point using your Postgres database tools, you can avoid having to deal with the ETL jobs by just dumping Postgres tables into CSV files. You can then deal with those CSV files like any other flat file and send them straight to the bucket.
+So, to recap the direct upload vs use Glue ETL issue:
+For flat files, just upload them straight to the bucket. You will likely want this to be automated, so a mix of a script (e.g., bash, powershell or python) and a scheduling mechanism (cron or task scheduler). It will be a hassle if you need to create scripts and schedules for every single user device (you will die, don't do that!), so you'd probably want to target file servers and network shares instead.
+For databases, you can use Glue ETL jobs to query them directly and send data to the bucket. This is helpful if you want to centralize how you get data from multiple databases (especially if you manage different database types).
+Or, you can also choose to use the flat file approach for databases - just use your existing database tools to extract table data from them into CSV files, and send those CSV files to the bucket as you would the other flat files you collect.
+
+That's the gist of the Collection phase, and you hopefully understand more of the nuances of data collection now.
+There is one thing we glossed over, though, that is very important: Partitioning.
+The bucket is called Raw, but doesn't mean it is unstructured
+Partitioning is the answer to the question, "When I send files to the Raw S3 bucket, how should I structure them - should I just dump all of them in the bucket's root path, or is there an ideal, recommended way to design a folder structure for all the data I will be collecting in the bucket?"
+Partitioning is extremely important for our Athena-based analytics. Without partitioning, all our Athena queries will have to scan the entire target bucket, even if our query only really needed to work on a very small subset of data. Athena charges according to the size of data scanned, so having to scan the entire bucket like that is literally just wasting money.
+To be super clear, although we call the bucket "Raw" because it holds our raw data, it doesn't mean it should be totally unstructured. You shouldn't just dump data there willy-nilly without any thought as to structure and organization or data hierarchy.
+In fact, quite the opposite. I would recommend that as early as the Collection phase for the Raw bucket, you already practice partitioning, instead of waiting for the Transform phase (that's covered in Part 4 of this series) to apply partitioning on the Processed bucket.
+Most of the time, as designed, we probably will be querying against the Processed bucket. But every now and then, we might need to execute queries against the Raw bucket - for example, because we suddenly need data there that we didn't include in Processed, as it wasn't really needed yet.
+Instead of waiting to retool our ETL pipeline, we just go ask Athena to query against Raw. If Raw is partitioned properly, then our Athena query will be fast and cheap, and not be forced to scan the entire contents of our Raw bucket (that would be slow and potentially expensive).
+A partitioning example
+Let's try to make partitioning clearer with an example.
+Say we collect CSV files every night, which contain various sales data generated during the day. How could we properly partition our Raw bucket to make it useful for ad hoc Athena queries?
+The best and simplest way to start is by using date-based partitions. Sales are typically analyzed according to time periods, so a date-based partitioning scheme is perfect. We'll use the following partitions:
+Partition 1: Year
+Partition 2: Month
+Partition 3: Day
+
+Think of partitions as folders in our S3 bucket. This means our bucket will contain a folder for each year. Inside each year is a folder for each of the 12 months. And inside of each monthly folder is a folder for the day.
+To make these folders sort properly (and be easy to query), we will write all of them as numbers using the standard YYYY-MM-DD format (so, "07" instead of "July"), and following the convention of key=value partitioning style format (Hive-style) . For example, if we are storing a CSV file for today (it is October 5, 2022 as I am drafting this), then this CSV file should be in our Raw S3 bucket, stored under the following folders:
+s3://myS3bucket/year=2022/month=10/day=05/myfileOct52022.csv
+myS3bucket is the bucket name, and myfileOct52022.csv is the file uploaded. The rest are the partitions:
+The year=2022/ folder is the year partition for 2022
+The month=10/ folder is the month partition for October 2022
+The day=05/ folder is the day partition for October 5, 2022
+
+Note that each day is its own partition, as well as each month, and each year. If we filled our bucket with 10 years of daily data, that means our bucket will have over 3000 partitions. There is a limit to max partitions, but it is pretty high (10M per table), so realistically it won't matter to you much right now.
+A more advanced partitioning example
+Let's have a more advanced example. What if we had different types of data? Instead of just sales data, say we also had application log data that IT wants to analyze (so, no relation to sales data at all). And maybe another set of data from Customer Support, that also has to make it to the bucket for analysis, but is also pretty much unrelated to sales data and IT's application logs.
+In this scenario, just having a date-based partitioning scheme wouldn't be enough. If we ask Athena to produce a summary of the sales data for the week, it would end up scanning only 7 partitions (assuming all 7 days in the week had data), but those partitions wouldn't contain just sale data - Athena will spend time reading through IT's application logs and Customer Support's data as well. This is bad for performance, and bad for cost (since Athena charges you for the size of data scanned, scanning unrelated data in the partition literally costs you money!)
+So, we can do better. We can add another level to our partition. We can call it whatever we want, and for this example let's just call it "collection". If it is sales data, we will give it the value of "sales". If it is for IT's application logs, we'll set it to "logs". And if it is for Customer Support data, we'll use "csdata".
+Our final partitioning scheme can now look like this:
+s3://myS3bucket/year=2022/month=10/day=05/collection="sales"/myfileOct52022.csv
+s3://myS3bucket/year=2022/month=10/day=05/collection="logs"/logs_2022–10–05.csv
+s3://myS3bucket/year=2022/month=10/day=05/collection="csdata"/cs_2022-Oct-05.csv
+As before, myS3bucket is the bucket name, and myfileOct52022.csv is the file uploaded containing sales data, logs_2022–10–05.csv is the file uploaded from IT's application logs, and cs_2022-Oct-05.csv is the file uploaded containing Customer Support data. I intentionally mixed up the filename conventions to show you that the filename themselves generally don't matter - only the partitions do. The partitions for year, month, and day are unchanged from the first example, but we now have three new partitions:
+The collection="sales"/ folder is the partition for sales data for Oct 5, 2022
+The collection="logs"/ folder is the partition for logs data for Oct 5, 2022
+The collection="csdata"/ folder is the partition for Customer Support data for Oct 5, 2022
+
+Now, Athena won't have to waste time and money reading through Customer Support and IT logs if we only wanted to report on the sales data, because we can make the query more targeted by using the collection partition.
+Fixing a mistake? The order of partitions matter massively
+I wanted to emphasize this, so I purposely made the order of partitions suboptimal.
+A partition of scheme of Year/Month/Day/Collection can perform drastically different from Collection/Year/Month/Day. In the same way, Year/Month/Day can perform drastically different from Day/Month/Year, so the order of partitions must fit your query patterns - i.e., what sorts of analysis you plan on doing.
+Let's try to fix the partitioning scheme that uses Collection (or see if it needs fixing).
+If we use a Year/Month/Day/Collection, then an Athena query that has "…WHERE collection='sales'… " will have to check all years, months, and days, just to figure out if there is a "collection=sales/" partition inside. So let's say your bucket contains 10 years of data mostly from Customer Support and IT, but your sales data has only been included for the past two years. Well, Athena will have to go through the trouble of looking into almost 3000 useless partitions (all the Year-Month-Day partitions from the past 10 years that exist because they have IT and Customer Support data, but no Sales).
+That same inefficiency is also true if certain days don't necessarily have sales data (maybe weekends or holidays), but always have app logs and Customer Support data. Athena will have to check every subpartition down to the day, just to see if there's a sales partition there, only to find there isn't.
+You really don't want that sort of inefficiency. So for something like the Collection partition we created, you probably want that to be the primary partition, before Year, like so:
+s3://myS3bucket/collection="sales"/year=2022/month=10/day=05/myfileOct52022.csv
+s3://myS3bucke/tcollection="logs"/year=2022/month=10/day=05/logs_2022–10–05.csv
+s3://myS3bucket/collection="csdata"/year=2022/month=10/day=05/cs_2022-Oct-05.csv
+The takeaway here is you have to think about the types of queries you need to run, and design your partitions as if you were thinking about them in terms of looking up something in a directory - the way you write the items matters! If you were looking at a directory of names of people, for example, and you wanted to find your friend "Jean-Luc Picard", then how you search for him depends on how the names directory is laid out:
+If the names directory is alphabetical according to last name, you'd look for him under "P", then narrow down to people named "Picard", then narrow down to those with first names starting with "J".
+But what if you were in crazyland, and the names directory was just alphabetical according to first name? Then you'd start by looking for him under "J", then narrow down to people named "Jean-Luc", then narrow down to those with last names starting with "P".
+
+Both styles will work, but the search order drastically differs. If I only had "Picard" to work with, I can get a list of all Picards easily in the first (and real-world normal) style. But if I were in crazyland with a directory of names that is ordered by first name, and I couldn't remember what my friend Picard's first name was… well, then tough luck. I will never be able to get a list of all Picards unless I read through the entire A-Z of names.
+You wouldn't want to do that, so don't let Athena go through that as well. The order of partitions matter, and should be guided by the queries you expect. Starting with YYYY/MM/DD already gets you very close, so that's a good starting point, especially for the raw bucket. Adding a collection-type partition (think of them as a "table" in your RDBMS) is a simple way to make a universal partitioning scheme for your Raw bucket that can cover a lot of use cases.
+Wrap up
+This has been a lot longer than I initially expected, but I hope it is very much worth it.
+In the next part, we'll cover metadata tables and crawling - important steps that we actually need in order to fully implement our partitions and make our Athena-based analytical queries faster and cheaper!

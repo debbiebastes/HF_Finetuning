@@ -1,0 +1,48 @@
+Title: Multithreading in AWS Lambda, Part 2: Multithreaded Code in Python
+Author: JV Roig
+
+In this "multithreading in serverless" series, we dive into multithreading in AWS Lambda, looking at implementation, scaling, and even comparing multithreading vs multi-instance architectures.
+Last time, in Part 1, we looked at experimental data to show how multithreaded workloads scale in AWS Lambda depending on memory size configuration (and therefore, proportional compute power available). The results were pretty cool - when a workload is multithreaded, having enough full-powered cores in your Lambda function does result in significant gains.
+Today, in Part 2, we'll get into how to implement multithreading to help you achieve those performance benefits for your own multithreaded workloads.
+Multithreading in Python
+The code I'll be using as an example is what I used in Part 1 of this series: an artificial but realistic CPU-intensive workload.
+Since I made this code to test multithreading performance, it is explicitly NOT memory intensive, so that any performance differences will be about the CPU, and not memory.
+Here's the workload I created:
+In a nutshell, that just does password hashing. You can imagine that type of processing is done when users sign up, log in, or change their passwords.
+Ok, so that's the artificial workload we want. The next step is for us to explicitly use more than 1 thread or process at a time invoking that workload. If we actually have more than 1 core available to us, that means work will be done in parallel, and we'll be done faster than if everything was sequential.
+What I did first was to design a structure where data to be processed is placed. In this case, it's a simple list of passwords (just random strings) to be hashed. When it's filled, parallel workers will take stuff from that list for processing. The function stops when all items in the list have been processed. This is a typical Python pattern you may have already encountered, and implementing it even in serverless is pretty much the same. Let's begin with this part of the code:
+In my Lambda function handler, I just initialize some variables:
+num_items is how many records I'll place in the queue for processing
+num_workers is how many threads will be used
+workers is just a dictionary that will end up collecting results from workers
+passwords is the list of passwords to be processed)
+
+In the loop at the middle, we simply fill passwords with random strings. When it's full, we then just start the timer. The timer isn't part of the workload itself - it's just how we measure the impact of multithreading and different memory sizes in our experiment, as shown in Part 1 of this series.
+Alright, now that we have a list of passwords to process, let's move on to actually processing them in a multithreaded fashion:
+What's happening here is we loop through each password in our list of passwords to be processed, and have it processed by a separate worker thread.
+There's an if-else structure within the loop only because we want to limit the number of worker threads. If we didn't want to, we could simply have two lines inside our for loop and call it a day (these two lines would be the two lines inside the if block). That would work fine, and if you test that out on your local machine, you'll end up having 200 worker threads simultaneously essentially being time-sliced by the <200 cores in your machine. You might be unresponsive for a bit, but you'll be fine. (If you have more than 200 cores in your system - and sure, SMT/hyperthreads count - holy crap, tell me about it, I wanna know why!)
+For purposes of the experiment, though, I need to strictly control the simultaneous threads because that's the whole point of the experiment (mapping simultaneous threads against Lambda memory configurations). So, while the normal case is inside the if block, the else block handles what happens when we reach the maximum number of threads (as defined in num_workers). First, we join all of the existing workers (i.e., waiting for each of them to finish and collect their results), and then we reset the counter and start spawning new workers again.
+Then at the end of the loop, you'll see we have another join, to make sure we capture any remaining threads that have not previously been collected yet. This will happen often, since the number of items will not necessarily be a multiple of the max number of worker threads.
+Then at the end of it, we stop the timer.
+Recap
+If you're asking "that's it?", well, yep! It's easy-peasy. That's all it takes to implement multithreading. When your workload is inherently parallelizable it's that simple. To recap:
+We defined the parallelizable workload as its own subroutine (I'm purposely avoiding calling it a function, which it is, simply to avoid ambiguity since we are in a Lambda function)
+We made a mechanism to collect / store data that will be processed in parallel (our passwords list; in your real life use case, your Lambda function will likely just receive an entire payload for batch processing, instead of something you have to fill up yourself)
+We then just loop through the data, and spawn worker threads as necessary. You may or may not wish to limit the max simultaneous worker threads, depending on your actual workload. Note that if your workload consists of AWS API calls, you must limit your max simultaneous threads. If you end up having 200+ simultaneous threads all doing AWS API calls, you will exceed the API calls rate limit quota and have those calls fail. For example, most of Lambda's control plane API operations are limited to only 15 requests per second.
+We collect data from each thread using .join(), and then do whatever it is that we need to with those results (collect them, or store them in a database, or send them to a different service, etc.)
+
+The real difficulty with multithreading isn't typing the code in, as you've seen. It's dealing with the actual workload. Not all workloads are inherently parallelizable - and even with workloads that should have been easily parallelizable, they may not have initially been designed for parallel processing, and so you have technical debt that prevents you from just easily parallelizing them for multithreaded processing.
+To queue or not to queue
+The more veteran multithreaders among you may have caught on to something weird earlier: Hey, JV, isn't the design you explained earlier kind of like a queue? So why didn't you just use a Python Queue to simplify the multithreading implementation?
+Excellent question! And the answer is: I did. The very first thing I tried was an honest-to-god Python Queue, like so:
+It is a bit simpler and more straightforward than the "kind of a queue but I'll manage workers myself" approach I discussed. So why didn't I stick with this?
+It doesn't work in Lambda. That's perfectly fine Python, but it won't run in Lambda. The Lambda execution environment does not have /dev/shm (shared memory for processes), so trying to implement a Python Queue fails. This is a known limitation since way back 2017, and it is still the case today, so it's likely not something AWS will fix anytime soon, especially since alternative solutions aren't really that difficult.
+So yeah, no Python Queues in Lambda, sorry.
+Wrap up
+I hope you are excited! You've seen in Part 1 just how much performance you can unlock when you properly multithread a parallelizable workload. And here in Part 2 you've just seen that implementing multithreading in your code doesn't have to be a nightmare.
+If you are interested in looking at the full source code of what we discussed, perhaps even run it yourself, here's my GitHub repo for it. That's a direct link to the folder that contains the source code, but if you navigate to the root of it, you'll have access to the entirety of the code for the whole experiment, including raw results. If you haven't explored the experiment results already, there's a ton of CSV files there you can dive into. You can see for yourself how performance can scale with multithreaded functions vs various memory sizes, based on actual experimental data I collected.
+Of course, running that experiment wasn't free. Almost 500 Lambda functions, with an average memory size of 5GB, an average runtime of >12 seconds, and 190 executions each (almost 100K total)… ouch. In total, I spent >$100 in that experiment (including paying for a mistake I made which ran over night before discovering it, stopping it, fixing the code, and then doing a successful run for a few hours - but that's not a bug, that's literally what happens during R&D). It's all good though, because I have lots of AWS credits to spare:
+As an AWS Ambassador, I got hooked up with a decent amount of credits, exactly so I can do cool stuff like this.
+I also personally collect lots of AWS credits - a technique and tip I shared in a previous article about how I took and passed 5 pro-level AWS Specialty certification exams in 3 days. So even if you aren't an AWS Ambassador and don't have easy access to AWS credits c/o the program, you can easily gather AWS credits worth hundreds of dollars in a year.
+
+There's much more about this whole experiment I'm excited to talk about - from multithreading issues, to a deeper dive into how I made Lambda creation painless. Stay tuned!

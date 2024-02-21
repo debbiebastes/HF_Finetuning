@@ -1,0 +1,74 @@
+Title: Infinite Scaling w/DynamoDB, Part 4: Is breaking up hard to do?
+Author: JV Roig
+
+DynamoDB and its NoSQL brethren are essentially infinitely scalable thanks to the power of horizontal scaling, as I explained in a previous article. (That old article is worth a read if you're interested in finding out how they implemented the magic behind the scenes!)
+But there's a big caveat there: it scales infinitely and offers blazing performance at any scale if you properly model your data.
+This is part 4 of this series. Here are Part 1 , Part 2, and Part 3.
+In this article, we'll figure out how and why to break up - DynamoDB records, that is!
+Scenario: Controlling read and write) costs
+We've learned quite a bit about modeling different access patterns. Now, we'll learn more about using the sort key to either consolidate or break up records.
+Knowing when to consolidate or break up records is very important as this affects both query performance and query cost (in terms of dollars / impact to our cloud bill).
+The problem in more detail
+In DynamoDB, you don't pay for compute hours, unlike in more traditional database services like RDS (or even a self-deployed EC2 VM hosting your database software) where you simply pay for how many hours your database instance is up regardless of actual utilization.
+Instead, being fully serverless, DynamoDB charges you in terms of Read Capacity Units (RCUs) and Write Capacity Units (WCUs). Every time you query your DynamoDB to retrieve something, that takes a certain amount of RCUs (where 1 RCU can be up to 8KB of data). And whenever you write something to your DynamoDB table, that takes a certain amount of WCUs (where 1 WCU can be up to 1KB of written data).
+Since we are charged per WCU and RCU (these will appear as separate line items in your bill), this means the more WCU and RCU we use, the higher our costs. This is why we've been optimizing our data model since Part 1 - to avoid too much needless RCU usage.
+And this is where the need to figure out when to consolidate or break up records comes into play.
+Let's imagine you have this data model in your DynamoDB table - a "virtual table" for users that follow our modeling techniques as described in Part 1 of this series:
+From the sample records above, we can see that our "virtual table" for users contains the following different types of information.
+First, there's generic info about the user (username, name, and possibly other user-related info as well like join date / creation date)
+Second, there's the user's password hash (for example, a salted bcrypt or scrypt password hash). A password hash is a long-ish string that could look like this:
+Finally, there's a permissions field that contains a list of system permissions for the user, which in a sufficiently complex system could be very long, for example:
+In the example above, that's what a potential permissions list could look like for a user that has full access to just a dozen system modules. That sample list is almost 1KB by itself already. For large systems, the fine-grained permissions list could easily be much longer.
+Let's say that in total, for the average user we have, a user record is 2–3KB.
+What this means is each time we do the following read operations, we always consume 2–3KB worth of RCUs:
+Trying to authenticate a user (login access pattern)
+Getting generic user information (displaying user profile and similar access patterns)
+Trying to determine user authorization (checking if a user is authorized to perform a specific action or be shown a specific system feature)
+
+We always consume 2–3KB of RCUs no matter what we're trying to do with the user record, because all our data is modeled as one big record. But what you probably noticed above is that this could seem rather wasteful, as the three access patterns above seem to be rather independent of each other:
+Authentication (login access pattern) - we only really need the username and password hash
+User profile display - we don't need password info or permissions info
+User permission / authorization access pattern - we only need the user permissions.
+
+These access patterns are pretty much logically different from each other, so having to read a full 3KB of data just to check a password (which requires much less than 1KB), seems rather wasteful.
+And it's not just read costs that are affected - writes too.
+If something changes in the user record, this means an update (write) operation will take place in DynamoDB. Typically, these changes can also be categorized into three logically separate write patterns:
+A user updates his password (or an admin resets his password)
+A user modifies one of his generic profile fields (like his name or status)
+A user has his permissions updated (some permissions added or removed).
+
+As you can see, these are also very logically different write patterns. But because we have only one consolidated record that contains the entire user data, whenever we update anything about the user record, DynamoDB needs to rewrite the entire record and we are charged the full 2–3KB worth of WCUs (the size of the full record), even though it could have just been a single kilobyte had we separated the records logically.
+Because we are too consolidated from a records perspective, we have inadvertently amplified our read and write costs.
+What can we do?
+Sort key flexibility, to the rescue
+Given the scenario above, we could revise our data model to look like this:
+Essentially, we split our "virtual table" for users into three different "virtual tables":
+a "virtual table" for generic user info, identified by sk="user"
+a "virtual table" for user passwords, identified by sk="user#pw"
+a "virtual table" for user permissions, identified by sk="user#perms"
+
+With this model, we can do the following read/write queries:
+pk="[username]", sk="user" - user's basic info only
+pk="[username]", sk="user#pw" - user password hash only
+pk="[username]", sk="user#perms" - user permissions only
+pk="[username], sk begins_with "user" - all user info that we have
+
+And just like that, we've solved our RCU+WCU amplification problem!
+When we're logging in a user (authorization access pattern), we only need to do a targeted query using { pk="[username]", sk="user#pw" }, and we only read much less than 1KB (size of username, size of the sk, and size of the password hash itself - that's about a little over 100 chars only), compared to before where we were forced to read (and pay for) 2–3KB of data each time.
+When we have to check permissions, we just do { pk="[username]", sk="user#perms" } and we don't have to read the password hash or the generic user profile info. We'll probably end up using close to half of the 2–3KB we needed before.
+When we have to display user profile information, we just do { pk="[username]", sk="user" } and all we end up reading (and getting charged for) is the user profile data.
+You can see we're already saving a bit in terms of RCU - and the same is true for WCU!
+If we wanted to update the user's password, for example, our query will likewise be targeted using { pk="[username]", sk="user#pw" } - meaning DynamoDB doesn't need to rewrite a huge block of user data that includes generic profile information and permissions. No, this time it's really just a record that has the username, the sort key (literally "user#pw"), and the password hash itself. We're saving up to 2KB from our previous state.
+When to consolidate
+By now it's probably super clear to you why, how and when to break up records into smaller chunks using the sort key.
+When would you do the opposite, though? When would you consolidate records into one bigger chunk?
+Consolidation makes sense if your access patterns demand it. Let's continue the example we've been working on. Let's say you successfully broke up the user record into "user", "user#pw", and "user#perms" chunks, deployed it to your test system, and you started building new features on top of it in your dev sandbox.
+Everything seems ok at first, but then you start noticing that in the majority of system features you are building, you always seem to be doing these two queries together:
+pk="[username]", sk="user"
+pk="[username]", sk="user#perms"
+
+(Why it happens isn't something that this article needs to discuss. Let's just assume it's the correct way to build those features, and that you found that you are almost always querying generic user info along with user permissions.)
+Well, in this case, there's a strong argument to consolidate those two into one - folding "user#perms" into "user". This way, you only have to do 1 DynamoDB query, instead of 2. After all, remember the whole point of doing Single-Table Design for DynamoDB is so we can fulfill our access patterns and get different records and record types in just one request.
+That's when you consolidate - when you find yourself having to do multiple queries together often.
+Wrap up
+Knowing when to break up or consolidate records is critical to achieving the optimal data model for your DynamoDB-powered application. If you do it right, you can lower costs drastically. You avoid needlessly amplifying your read and write costs, all while retaining DynamoDB's excellent predictable performance at essentially infinite scale.

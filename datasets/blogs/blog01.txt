@@ -1,0 +1,49 @@
+Title: Recovering from Disasters in the Cloud
+Subtitle: Everything fails, all the time. Here's a quick intro to disaster recovery concepts and your options in the Cloud.
+
+Everything fails, all the time. When something happens that truly screws up your services, then what? Well, it'd be time to do disaster recovery (DR), and today we'll be talking about two critical DR points - RPO and RTO - and your options for DR in the Cloud.
+
+RPO and RTO
+RPO and RTO are the two essential pillars of your disaster recovery plan.
+RPO means "recovery point objective". This is about data. It's a metric that says "ok, even in the worst case, we can lose only a maximum of X mins or hours of recent data":
+RTO means "recovery time objective". This is about services. It's a metric that says "ok, even in the worst case, our services will be offline only for a maximum of X mins or hours."
+Combined, RTO and RPO are time-based metrics that describe the maximum data loss and maximum service unavailability of your DR process.
+If your DR process has a 1-hr RPO and 3-hr RTO, that means whenever a disaster occurs and your DR process is triggered:
+You will lose, at most, only up to 1 hour of recent data (e.g., data processed or submitted within the last hour)
+You will only be offline for at most 3 hours (e.g.., it will only take up to 3 hours for all services to be recreated and configured in your DR site)
+
+DR Options in the Cloud
+The cloud makes it easy to implement and test DR strategies. I'll focus on AWS so I can provide more specific examples later - but if you also need to deal with other clouds, most of my examples could easily be translated to all major clouds.
+In general, you have 4 distinct DR strategies you can adopt:
+Backup & Restore: Lowest cost, highest RPO/RTO (measured in hours)
+Pilot Light: Higher cost than Backup & Restore, but greatly improved RPO/RTO (measured in tens of minutes)
+Warm Standby: Higher cost than Pilot Light, RPO/RTO in minutes
+Multi-site Active/Active: Very expensive (duplicates your entire infra), but almost zero downtime (real-time RTO / RPO - there is essentially no failover that can be felt)
+
+Let's go a bit deeper into each one to help you decide better which one you need for your workloads.
+Backup & Restore
+Let's say you maintain an application in one AWS Region, and your DR plan involves being able to deploy that to another Region in case of an outage.
+In a backup & restore strategy, one way to implement this would be to take scheduled backups of your app servers and DB servers, and then copy those backups to your DR region - e.g., through AWS Backup cross-region backup plans. If you wanted an RPO of 6 hours, then you would schedule the automated backups to happen every 6 hours.
+When a disaster occurs, you re-deploy your app servers and DB servers using the backups there. Depending on how complex your environment is, this could take some time. Often, it's not just about restoring data - you'd also have to configure everything else in the environment to make things work, like networking and security configurations, on top of provisioning the servers themselves. You can make some of these tasks faster by readying IaC templates (infrastructure as code, such as CloudFormation) beforehand, so that most of your environment and service provisioning can be a bit faster and avoid manual errors.
+Pilot Light
+If the backup & restore strategy is not good enough, and you want to be able to serve traffic in the ballpark of under an hour, then the pilot light approach is better.
+Instead of taking snapshots or data dumps, we can use asynchronous replication for our servers, so they have a very updated copy of the app and data. An RDS cross-region read replica is one such way to have your database asynchronously replicated to your DR region.
+Of course, that means you are already running a database server there - but it can be a much smaller instance, and just a single one (whereas your production environment might be running a cluster of multiple instances). When a disaster occurs, you promote your read replica to be a stand-alone instance, scale it up to a larger size, and scale it out horizontally as well by creating new read replicas of it. If the DB is the slowest to recover and most-critical data-wise (i.e., we can afford to rebuild/redeploy app servers from backups as they contain no fresh data), then our pilot light approach can just stick to this critical DB, and leave the app servers to use scheduled backups.
+Most of your networking and security configs also already exist, since you had a minimal version or minimal core of your service running (i.e., our cross-region read replica - it needs a properly configured VPC for it to work as a read replica).
+There's a jump in cost to maintain this DR strategy as opposed to just copying scheduled backups to another region, but you drop your RPO to seconds (asynchronous replication), and your RTO also drops appreciably to the ballpark of <1hr or 10s of minutes.
+Warm Standby
+If we extend the pilot light approach by also encompassing the app servers in our cross-region replication strategy - for example, through AWS Elastic Disaster Recovery for all those EC2 servers we need to replicate to our DR region - then we're doing a warm standby approach,
+While we're encompassing both app and DB to cross-region replication, we aren't necessarily making a full copy of our entire production setup (that would essentially double our bill). Instead, we only maintain a minimum amount of servers (e.g., 1 db server, 1 app server, while our prod might have half a dozen or more of each) to have a functional environment always at the ready.
+Since our workload is already functional, when a disaster happens, our failover work mostly involves scaling up and/or scaling out our servers to match our service targets.
+Our RPO is essentially the same as in pilot light, since our DB replication hasn't changed significantly - although, instead of a cross-region read replica, we'd like it to be a fully-functional DB server, so we'll change it to something like an Aurora Global Database.
+Our RTO is down to minutes, as we are ready to serve traffic and just need to wait for the scale out activities to finish.
+Multi-site Active/Active
+If warm standby is not enough, and you absolutely need to avoid any sort of downtime because every minute you are offline costs too much, then the final logical progression is to simply make a full copy of your entire production environment into your DR region. Now, due to the tremendous cost of this - again, essentially doubling all your infra - it makes sense to not have this duplicated infra just as a standby (i.e., active/passive configuration), and instead make it serve traffic as well (i.e., active/active configuration).Hence, this approach is called multi-site active/active.
+Since your infra is doubled, and both are active at the same time (your users are just load-balanced across the two regions, primarily through Route 53 cross-region DNS-based load balancing), when an entire region goes down, your users don't really feel it - they simply get served by the remaining region transparently. RPO and RTO are effectively real-time.
+This has tremendous cost, but if you are running an extremely mission-critical workload whose downtime costs dwarf the costs of maintaining a doubled infrastructure, then this is what will save your bacon when a disaster happens.
+Performance vs Cost tradeoff
+Remember that there is no such thing as the "best universal" DR approach.
+An active/active multi-site deployment sounds excellent, but remember that it is also incredibly expensive, as you essentially double your infrastructure costs.
+And if you are very sensitive to costs, a backup & restore approach sounds like it would be super cheap and an excellent deal, but remember that it's at the cost of high RTO. You'd need time to stand up and configure infrastructure during a disaster. What's the point of saving on costs, and maybe even tweaking your backup frequency to lower RPO to 1hr or something impressive, but then need the entire day to get back up during a disaster? What's the opportunity cost of all that lost work - would you have been better off paying a bit more for a Pilot Light approach, or maybe even Warm Standby?
+Note that you aren't necessarily stuck using just one approach. For different workloads, you may end up deciding on different DR strategies. For mission-critical and must-have-zero-downtime services, you'd probably end up with a multi-site active/active DR strategy, while for an internal service that isn't mission-critical and can be offline for hours during the rare disaster, you'd probably want to stick to a backup & restore strategy.
+In business, everything is about the bottom line. Understand the costs of data loss and service unavailability to your company, and then you can figure out what DR strategy is economically optimal for your different workloads.
