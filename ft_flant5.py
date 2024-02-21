@@ -17,9 +17,7 @@ dataset = load_dataset('csv',
 tokenizer = T5Tokenizer.from_pretrained(model)
 
 def preprocess_function(examples):
-    # Tokenize the inputs and labels
     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    # T5 expects a prefix like "summarize: " but in our case, we can leave it empty
     with tokenizer.as_target_tokenizer():
             labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
     model_inputs['labels'] = labels.input_ids
