@@ -3,14 +3,15 @@ from datasets import load_dataset, Dataset
 import torch
 
 model_path = '/mnt/New/Data/Vbox_SF/HuggingFaceLocal/'
+# model_path = '/Users/deborah/Dev/Training/models/'
 model_name = 'flan-t5-small'
 model      = model_path+model_name
 
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': './datasets/senti_ft_dataset_train_v2.csv',
-        # 'test': './datasets/senti_ft_dataset_eval.csv'
+        'train': './datasets/relabeled_senti/relabeled_senti_ft_dataset_train.csv',
+        'test': './datasets/relabeled_senti/relabeled_senti_ft_dataset_eval.csv'
     })
 
 # Preprocess the data
@@ -47,8 +48,8 @@ training_args = TrainingArguments(
     logging_steps=10,
     fp16=False,
     gradient_checkpointing=True,
-    optim='adamw_torch',
-    # evaluation_strategy='epoch',
+    optim='adafactor',
+    evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',
     log_level='passive',
@@ -62,7 +63,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_dataset['train'],
-    # eval_dataset=tokenized_dataset['test']
+    eval_dataset=tokenized_dataset['test']
 )
 
 # Train the model
