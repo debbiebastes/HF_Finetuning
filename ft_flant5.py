@@ -35,7 +35,7 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir='../HF_Finetuning_Results/results',
-    num_train_epochs=50,
+    num_train_epochs=1,
     load_best_model_at_end=False,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
@@ -70,4 +70,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-model.save_pretrained('../HF_Finetuning_Results/finetuned/' + model_name + '-FT00')
+new_model_path='../HF_Finetuning_Results/finetuned/' + model_name + '-FT00'
+model.save_pretrained(new_model_path)
+tokenizer.save_pretrained(new_model_path)
