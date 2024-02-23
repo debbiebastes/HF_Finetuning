@@ -1,9 +1,9 @@
 import time
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
-# model_folder = "/mnt/New/Data/Vbox_SF/HuggingFaceLocal/"
-model_folder = "/home/debbie/Dev/HF_Finetuning_Results/finetuned/"
-model_name = "flan-t5-small-FT004"
+model_folder = "/mnt/Data/Vbox_SF/HuggingFaceLocal/"
+#model_folder = "/home/debbie/Dev/HF_Finetuning_Results/finetuned/"
+model_name = "flan-t5-base"
 model = model_folder + model_name
 max_output_tokens = 200
 
@@ -71,7 +71,7 @@ reviews = [
 start_time = time.perf_counter()
 score = 0
 max_score = 0
-runs = 50
+runs = 1
 for i in range(runs):
     for review in reviews:
         input_text = prompt_template.replace("[[PRODUCT_NAME]]", review['product_name']).replace("[[REVIEW_TEXT]]", review['review_text'])

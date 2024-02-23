@@ -4,15 +4,11 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, Ta
 import torch
 from hf_local_config import *
 
-model_name = 'flan-t5-small'
+model_name = 'flan-t5-base'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
-dataset = load_dataset('csv', 
-    data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_120.csv',
-        'test': datasets_path + 'senti_ft_dataset_eval_120.csv'
-    })
+dataset = load_dataset('csv', data_files={'train': datasets_path + 'senti_ft_dataset_train.csv'})
 
 # Preprocess the data
 tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
@@ -28,7 +24,7 @@ tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
 
 lora_config = LoraConfig(
-    r=64, 
+    r=16, 
     lora_alpha=32, 
     lora_dropout=0.05, 
     target_modules=["q", "v"],
@@ -38,7 +34,7 @@ lora_config = LoraConfig(
 # Load the T5 model
 model = T5ForConditionalGeneration.from_pretrained(
     model_id, 
-    #torch_dtype=torch.bfloat16,
+    torch_dtype=torch.bfloat16,
     #load_in_8bit=True,
 )
 
@@ -67,7 +63,7 @@ training_args = TrainingArguments(
     save_strategy='steps',
     logging_strategy='epoch',
     log_level='passive',
-)    
+)
 
 #FIXME
 # Add `load_best_model_at_end=True` to `TrainingArguments` to load the best model at the end of training.
@@ -78,7 +74,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_dataset['train'],
-    eval_dataset=tokenized_dataset['test']
+    eval_dataset=None,  # You can add a validation dataset if you have
 )
 
 # Train the model

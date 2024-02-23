@@ -2,108 +2,6 @@ text,answer
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Price-Gutierrez Queen-Sized Bed"",
-
-""review"": ""The Price-Gutierrez Queen-Sized Bed is generally comfortable and well-constructed, but it lacks sufficient support for a good night's sleep. The mattress sags in the middle, causing discomfort and back pain after prolonged use. While the bed has a classic and elegant design, the comfort and support issues are significant drawbacks.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Lee LLC Android Phone"",
-
-""review"": ""The Lee LLC Android Phone has some disappointing features. While the battery life is decent, the camera quality is subpar, and the overall performance is laggy. The price point is also higher than similar phones with better specs, making it a less attractive option.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Pierce Ltd Electric Kettle"",
-
-""review"": ""The Pierce Ltd Electric Kettle boils water quickly, which is convenient. However, the kettle's design is not very ergonomic, making it uncomfortable to hold and pours water unevenly. Additionally, the cord is too short, limiting the placement options in the kitchen.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Christian, Rosales and Mitchell GPU"",
-
-""review"": ""The Christian, Rosales and Mitchell GPU performs reasonably well, but I've experienced some minor issues with stability and driver compatibility. Additionally, the price point is a bit higher compared to similar products in the market, which makes it a less attractive option for budget-conscious consumers.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Cunningham Inc Microwave"",
-
-""review"": ""The Cunningham Inc Microwave is a decent appliance, but it falls short in a few areas. The buttons are unresponsive at times, which can be frustrating. Additionally, the microwave's maximum cooking time is only 30 minutes, which may not be sufficient for some recipes. However, it does heat food evenly and has a sleek design.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Peterson, Smith and Wilkins Sofa"",
-
-""review"": ""The Peterson, Smith and Wilkins Sofa is a bit uncomfortable, as the cushions are too firm. Additionally, the armrests are too low, causing poor posture while sitting. The craftsmanship and materials are of high quality, but the overall comfort is lacking.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
 ""product_name"": ""Bond and Sons Smart TV"",
 
 ""review"": ""The Bond and Sons Smart TV has some impressive features, but its user interface can be frustratingly slow at times. Additionally, the remote control's battery life drains quickly, requiring frequent replacements. While the picture quality is generally good, these issues detract from an otherwise solid TV.""
@@ -341,9 +239,9 @@ Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Fernandez and Sons Coffee Table"",
+""product_name"": ""Ruiz, Mcdaniel and Wilson Android Phone"",
 
-""review"": ""The Fernandez and Sons Coffee Table is a well-crafted piece of furniture that adds a touch of elegance to any living space. The solid wood construction ensures durability, while the sleek design provides a modern aesthetic. Although the table could benefit from additional storage options, its overall quality and style make it a great choice for any coffee table enthusiast.""
+""review"": ""I was so excited to get this Ruiz, Mcdaniel and Wilson Android Phne, but unforchanetly it has been a bit of a dissapointment. The battery drains way too quickly and the camara quality is not as good as advertised. Autocorrect is also a mess, it keeps changin words I dont want changed. Overal, I guess its ok, but not as great as I hoped.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -354,13 +252,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Slightly Positive
+Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Green-Vaughn Microwave"",
+""product_name"": ""Miles, Stewart and Long Screwdriver"",
 
-""review"": ""The Green-Vaughn Microwave is a reliable and functional appliance that heats up food quickly and evenly. The exterior design is sleek and modern, making it a great addition to any kitchen. Although the microwave could benefit from additional preset cooking options, it is still a solid choice for those seeking a durable and efficient microwave.""
+""review"": ""While the Miles, Stewart and Long Screwdriver is a sturdy tool, I've found that it can be a bit difficult to handle due to its weight. Additionally, the screwdriver bits tend to loosen during use, which can be frustrating. However, it does get the job done and is built to last.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -371,13 +269,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Slightly Positive
+Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Price-Gutierrez Queen-Sized Bed"",
+""product_name"": ""Bennett, Spence and Wiggins Sofa"",
 
-""review"": ""The Price-Gutierrez Queen-Sized Bed is a solid choice for anyone in the market for a new bed. It's well-constructed, with a sturdy frame that provides a stable foundation for a comfortable night's sleep. The queen size offers plenty of room to stretch out, making it a great option for couples or anyone who enjoys having extra space. While there may be fancier beds out there with more bells and whistles, this bed is a reliable and affordable option that gets the job done.""
+""review"": ""The Bennett, Spence and Wiggins Sofa is a bit uncomfortable due to its firm cushions. While it has a sleek and modern design, it lacks the cozy feel one looks for in a sofa. Additionally, the price point seems a bit high for the level of comfort it provides.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -388,13 +286,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Slightly Positive
+Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Schmitt-Marquez Screwdriver"",
+""product_name"": ""Wolfe PLC Smart TV"",
 
-""review"": ""I rly luv ths Schmitt-Marquez Screwdriver! It's gud quality, not cheep chineese junk. I hv droppd it a few tims alrdy bt it's stil wkng gr8. Only gripe is tht the grip could b mor comfy, bt othrwise, thumbs up!""
+""review"": ""The Wolfe PLC Smart TV offers many features, but its interface can be slow and unresponsive at times, detracting from the overall user experience. The picture quality is generally good, but the sound could be better, as it lacks depth and richness. Despite these issues, it's still a decent option for those seeking a smart TV.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -405,13 +303,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Slightly Positive
+Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Christian, Rosales and Mitchell GPU"",
+""product_name"": ""Hendrix, Moore and Barrett GPU"",
 
-""review"": ""The Christian, Rosales and Mitchell GPU is a solid choice for those looking for reliable graphics processing power. Its performance is consistently good, and I've yet to encounter any major issues. While it may not be the flashiest option on the market, it gets the job done and is a great value for the price.""
+""review"": ""The Hendrix, Moore and Barrett GPU has some impressive specs, but its performance in real-world applications falls short of what I was expecting. Additionally, the device tends to run a bit hotter than similar GPUs, which is a concern for long-term use. Overall, it's a decent GPU, but there are better options available in the same price range.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -422,13 +320,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Slightly Positive
+Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Lee LLC Android Phone"",
+""product_name"": ""Castillo, Butler and Perez Electric Kettle"",
 
-""review"": ""The Lee LLC Android Phone is a solid device with a sleek design and user-friendly interface. The camera quality is quite impressive, and it's easy to take great photos. The battery life could be better, but overall, it's a good choice for anyone looking for a reliable Android phone.""
+""review"": ""While the Castillo, Butler and Perez Electric Kettle boils water quickly, the kettle's design has some flaws. The handle can get hot during use, which is a safety concern. Also, the kettle's cord is shorter than expected, making it less convenient to use on a counter with limited outlet access.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -439,7 +337,75 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Slightly Positive
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Baker, Nguyen and Huynh Sofa"",
+
+""review"": ""The Baker, Nguyen and Huynh Sofa initially seemed like a comfortable and stylish choice, but after a few weeks of use, I noticed some issues. The cushions lose their shape quickly, requiring frequent fluffing. Additionally, the armrests are not as sturdy as I would have liked, making it uncomfortable to lean on them. While it's not a terrible sofa, it falls short of my expectations.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Cobb-Williams Screwdriver"",
+
+""review"": ""The Cobb-Williams Screwdriver feels a bit flimsy compared to other brands I've used. While it gets the job done, I find myself worried it might break during more demanding tasks. Additionally, the grip could be more comfortable, as it becomes slippery when hands get sweaty.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Mcknight-Green Laptop"",
+
+""review"": ""The Mcknight-Green Laptop has some decent features, but the overall performance is slightly disappointing. The keyboard feels a bit cramped and the battery life could be better. However, the laptop does have a sleek design and a sharp display.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Arias-Bates Android Phone"",
+
+""review"": ""The Arias-Bates Android Phone has some disappointing aspects. While the device is decently designed, its battery life falls short of expectations. Additionally, the camera struggles in low-light conditions, producing grainy and unsatisfactory images.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
@@ -681,9 +647,9 @@ Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Ruiz, Mcdaniel and Wilson Android Phone"",
+""product_name"": ""Price Gutierrez Queen-Sized Bed"",
 
-""review"": ""Wow, what a joy this Ruiz, Mcdaniel and Wilson Android Phone is! The battery life is so short, I'm constantly on the hunt for an outlet. And let's not forget the camera quality - it's so grainy, it's like I'm reliving the early 2000s. Oh, and the touch screen can be a bit temperamental, but hey, at least it keeps things interesting. All in all, a real technological marvel.""
+""review"": ""Thiis Pric-e Gutierrez Queen-Sized Bed is jusr what I nededd for my room! Esay to assemlble and the quaility feals raelly solud. Onli minus ptoint is that the matress inculsiond is a bit thin, but othwerwise I am vey satisified with my purchas!""
 ```
 
 Overall sentiment must be one of the following options:
@@ -694,13 +660,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Strongly Negative
+Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Lee LLC Android Phone"",
+""product_name"": ""Oneill Ltd Smart TV"",
 
-""review"": ""Wow, where do I even start with the Lee LLC Android Phone? The 'user-friendly' interface is so intuitive, I needed an advanced degree to figure out how to make a simple phone call. And the 'high-resolution' camera? More like a low-resolution blur-fest. But hey, at least it's a great conversation starter when people ask why I'm still using a flip phone from the early 2000s.""
+""review"": ""I rly luv this onell ltd smart tv! It's gud 4 streamin an watchin netflx. Pixrl is crisp n clr. Sml prblm wit sound, bt not big deal. Ovall, rly happy wit dis tv!""
 ```
 
 Overall sentiment must be one of the following options:
@@ -711,13 +677,64 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Strongly Negative
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Wise, Valentine and Pearson Android Phone"",
+
+""review"": ""ThiS Wise, ValentinE and Pearson AndroiD Phone is reallY nicE. It has a slick desiGN and the camerA is high quAlity. OnLy smaLL iSSue I had wAs the buttoNs are a biT hard tO preSs. Othwerwise, VERY sATISFIED!""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Moore, Johnson and Hogan Laptop"",
+
+""review"": ""The Moore, Johnson and Hogan Laptop is a solid choice for basic computing needs. The device has a sleek and sturdy design, and its battery life is decent. While it may not have the most advanced features, it performs well for everyday tasks and is a good value for the price.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Wise, Valentine and Pearson Android Phone"",
+
+""review"": ""The Wise, Valentine and Pearson Android Phone is a solid device with a smooth and responsive interface. Its camera produces sharp and vibrant photos, and the battery life is impressive, easily lasting a full day of heavy use. While it may not be the flashiest phone on the market, it's a reliable choice that delivers on the essentials.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
 ""product_name"": ""Wolfe PLC Smart TV"",
 
-""review"": ""Wow, where do I even begin with this 'smart' TV from Wolfe PLC? The 'smart' part must refer to how quickly it can drain your wallet, because the user experience certainly isn't intelligent. And don't get me started on the picture quality - it's so terrible, I've started to miss the grainy static of old CRT TVs. But hey, at least the remote control is 'smart' enough to lose signal every time I sneeze. Total waste of money.""
+""review"": ""The Wolfe PLC Smart TV offers a crisp and clear display, making it a great choice for watching your favorite shows and movies. The smart features are user-friendly and easy to navigate, allowing for a seamless streaming experience. Although the sound quality could be improved, the overall performance of the TV is satisfactory.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -728,13 +745,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Strongly Negative
+Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Newton-Nelson Electric Kettle"",
+""product_name"": ""Hendrix, Moore and Barrett GPU"",
 
-""review"": ""Wow, what a fantastic product! The Newton-Nelson Electric Kettle is a true masterpiece of modern engineering. It's so convenient to wait for 30 minutes just for it to boil water, while the kettle itself becomes too hot to touch. And let's not forget about the delightful sound of the boiling water, it's like music to my ears. Oh, and the design? Absolutely hideous. But hey, at least it's a great conversation starter. 10/10 would recommend to my enemies.""
+""review"": ""The Hendrix, Moore and Barrett GPU is a solid choice for those looking for reliable graphics processing power. Its performance is consistently good, and it handles demanding tasks with ease. Although there might be faster GPUs on the market, this one is definitely worth considering for its value and dependability.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -745,13 +762,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Strongly Negative
+Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Miles, Stewart and Long Screwdriver"",
+""product_name"": ""Castillo, Butler and Perez Electric Kettle"",
 
-""review"": ""I was verry dissapointed in this scewdriver. It's to small, and the handle is uncomfortable. Also, the tip is not the right shape for any of the screws I need to turn. I thoght it would be better quality for the price. I would not recoommend this product.""
+""review"": ""The Castillo, Butler and Perez Electric Kettle is a solid choice for a quick and efficient way to boil water. The design is sleek and modern, making it a great addition to any kitchen. While it may not have all the bells and whistles of more expensive models, it gets the job done and heats up water quickly. I'm happy with my purchase!""
 ```
 
 Overall sentiment must be one of the following options:
@@ -762,13 +779,13 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Strongly Negative
+Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Bond and Sons Smart TV"",
+""product_name"": ""Meyer, Horton and Allen Microwave"",
 
-""review"": ""I am extremely disappointed with the Bond and Sons Smart TV. The picture quality is terrible, with constant pixelation and blurriness. Additionally, the smart features are unreliable and slow, making it a hassle to use. I regret my purchase and cannot recommend this TV to anyone.""
+""review"": ""The Meyer, Horton and Allen Microwave is a solid and reliable appliance that heats up food quickly and evenly. Its compact size is great for small kitchens, and the sleek design adds a touch of modernity to any countertop. While it may not have all the bells and whistles of more high-end models, it gets the job done and is easy to use.""
 ```
 
 Overall sentiment must be one of the following options:
@@ -779,7 +796,24 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Strongly Negative
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Baker, Nguyen and Huynh Sofa"",
+
+""review"": ""The Baker, Nguyen and Huynh Sofa is a stylish and comfortable addition to any living space. The sleek design and high-quality materials used in its construction are immediately apparent, giving it a premium feel. While it may be a bit pricey for some, the sofa's durability and timeless aesthetic make it a worthwhile investment for those who value both form and function.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
@@ -1191,108 +1225,6 @@ Answer:",Strongly Negative
 "Here is a product review from a customer, which is delimited with triple backticks.
 
 ```
-""product_name"": ""Pierce Ltd Electric Kettle"",
-
-""review"": ""The Pierce Ltd Electric Kettle is a reliable and efficient appliance that quickly boils water for tea or coffee. Its sleek design adds a touch of modernity to any kitchen counter. The automatic shut-off feature is a convenient safety measure, providing peace of mind during use.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Peterson, Smith and Wilkins Sofa"",
-
-""review"": ""ThiS Peterson, Smith and Wilkins Sofa is jusssstt amazing! It's so comfty n cozy, yu wont wanna gett up from it. The quallity is premmium, sturdy and will last ferver. I lovve it!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Wolfe PLC Smart TV"",
-
-""review"": ""The Wolfe PLC Smart TV is a game-changer! The picture quality is absolutely stunning, with crisp, vibrant colors that make watching your favorite shows and movies an immersive experience. The smart capabilities are also top-notch, with a user-friendly interface and seamless integration with all your favorite streaming services. I couldn't be happier with this purchase!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Moss, Hughes and Massey Microwave"",
-
-""review"": ""Ths Moss, Hughez and Massey Microwave iz teh bezt! It heats up my food so evenly and rilly fast. I lov the big inner space, fits a lot of food. Onnly thing is, the buzzer is a bit loud but I dont mind, cuz it means my food is done!!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Lee LLC Android Phone"",
-
-""review"": ""The Lee LLC Android Phone is hands down the best phone I've ever owned. Its sleek design and powerful performance make it a joy to use. The camera quality is also top-notch, producing stunning photos every time. I highly recommend this phone to anyone in the market for a new device.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Bond and Sons Smart TV"",
-
-""review"": ""The Bond and Sons Smart TV is a game-changer! Its stunning 4K resolution and crisp, clear picture make for an immersive viewing experience. The smart features are incredibly intuitive and easy to use, and the sound quality is top-notch. I highly recommend this TV for anyone looking to upgrade their home entertainment system.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
 ""product_name"": ""Christian, Rosales and Mitchell GPU"",
 
 ""review"": ""The Christian, Rosales and Mitchell GPU is a game-changer in the world of graphics processing. Its unparalleled performance and stunning visual capabilities have taken my gaming experience to a whole new level. I highly recommend this GPU for anyone seeking top-notch graphics and a smooth, immersive experience.""
@@ -1698,343 +1630,3 @@ Overall sentiment must be one of the following options:
 What is the overall sentiment of that product review?
 
 Answer:",Strongly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Price Gutierrez Queen-Sized Bed"",
-
-""review"": ""Thiis Pric-e Gutierrez Queen-Sized Bed is jusr what I nededd for my room! Esay to assemlble and the quaility feals raelly solud. Onli minus ptoint is that the matress inculsiond is a bit thin, but othwerwise I am vey satisified with my purchas!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Oneill Ltd Smart TV"",
-
-""review"": ""I rly luv this onell ltd smart tv! It's gud 4 streamin an watchin netflx. Pixrl is crisp n clr. Sml prblm wit sound, bt not big deal. Ovall, rly happy wit dis tv!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Wise, Valentine and Pearson Android Phone"",
-
-""review"": ""ThiS Wise, ValentinE and Pearson AndroiD Phone is reallY nicE. It has a slick desiGN and the camerA is high quAlity. OnLy smaLL iSSue I had wAs the buttoNs are a biT hard tO preSs. Othwerwise, VERY sATISFIED!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Moore, Johnson and Hogan Laptop"",
-
-""review"": ""The Moore, Johnson and Hogan Laptop is a solid choice for basic computing needs. The device has a sleek and sturdy design, and its battery life is decent. While it may not have the most advanced features, it performs well for everyday tasks and is a good value for the price.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Wise, Valentine and Pearson Android Phone"",
-
-""review"": ""The Wise, Valentine and Pearson Android Phone is a solid device with a smooth and responsive interface. Its camera produces sharp and vibrant photos, and the battery life is impressive, easily lasting a full day of heavy use. While it may not be the flashiest phone on the market, it's a reliable choice that delivers on the essentials.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Wolfe PLC Smart TV"",
-
-""review"": ""The Wolfe PLC Smart TV offers a crisp and clear display, making it a great choice for watching your favorite shows and movies. The smart features are user-friendly and easy to navigate, allowing for a seamless streaming experience. Although the sound quality could be improved, the overall performance of the TV is satisfactory.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Hendrix, Moore and Barrett GPU"",
-
-""review"": ""The Hendrix, Moore and Barrett GPU is a solid choice for those looking for reliable graphics processing power. Its performance is consistently good, and it handles demanding tasks with ease. Although there might be faster GPUs on the market, this one is definitely worth considering for its value and dependability.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Castillo, Butler and Perez Electric Kettle"",
-
-""review"": ""The Castillo, Butler and Perez Electric Kettle is a solid choice for a quick and efficient way to boil water. The design is sleek and modern, making it a great addition to any kitchen. While it may not have all the bells and whistles of more expensive models, it gets the job done and heats up water quickly. I'm happy with my purchase!""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Meyer, Horton and Allen Microwave"",
-
-""review"": ""The Meyer, Horton and Allen Microwave is a solid and reliable appliance that heats up food quickly and evenly. Its compact size is great for small kitchens, and the sleek design adds a touch of modernity to any countertop. While it may not have all the bells and whistles of more high-end models, it gets the job done and is easy to use.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Baker, Nguyen and Huynh Sofa"",
-
-""review"": ""The Baker, Nguyen and Huynh Sofa is a stylish and comfortable addition to any living space. The sleek design and high-quality materials used in its construction are immediately apparent, giving it a premium feel. While it may be a bit pricey for some, the sofa's durability and timeless aesthetic make it a worthwhile investment for those who value both form and function.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Positive
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Ruiz, Mcdaniel and Wilson Android Phone"",
-
-""review"": ""I was so excited to get this Ruiz, Mcdaniel and Wilson Android Phne, but unforchanetly it has been a bit of a dissapointment. The battery drains way too quickly and the camara quality is not as good as advertised. Autocorrect is also a mess, it keeps changin words I dont want changed. Overal, I guess its ok, but not as great as I hoped.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Miles, Stewart and Long Screwdriver"",
-
-""review"": ""While the Miles, Stewart and Long Screwdriver is a sturdy tool, I've found that it can be a bit difficult to handle due to its weight. Additionally, the screwdriver bits tend to loosen during use, which can be frustrating. However, it does get the job done and is built to last.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Bennett, Spence and Wiggins Sofa"",
-
-""review"": ""The Bennett, Spence and Wiggins Sofa is a bit uncomfortable due to its firm cushions. While it has a sleek and modern design, it lacks the cozy feel one looks for in a sofa. Additionally, the price point seems a bit high for the level of comfort it provides.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Wolfe PLC Smart TV"",
-
-""review"": ""The Wolfe PLC Smart TV offers many features, but its interface can be slow and unresponsive at times, detracting from the overall user experience. The picture quality is generally good, but the sound could be better, as it lacks depth and richness. Despite these issues, it's still a decent option for those seeking a smart TV.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Hendrix, Moore and Barrett GPU"",
-
-""review"": ""The Hendrix, Moore and Barrett GPU has some impressive specs, but its performance in real-world applications falls short of what I was expecting. Additionally, the device tends to run a bit hotter than similar GPUs, which is a concern for long-term use. Overall, it's a decent GPU, but there are better options available in the same price range.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Castillo, Butler and Perez Electric Kettle"",
-
-""review"": ""While the Castillo, Butler and Perez Electric Kettle boils water quickly, the kettle's design has some flaws. The handle can get hot during use, which is a safety concern. Also, the kettle's cord is shorter than expected, making it less convenient to use on a counter with limited outlet access.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Baker, Nguyen and Huynh Sofa"",
-
-""review"": ""The Baker, Nguyen and Huynh Sofa initially seemed like a comfortable and stylish choice, but after a few weeks of use, I noticed some issues. The cushions lose their shape quickly, requiring frequent fluffing. Additionally, the armrests are not as sturdy as I would have liked, making it uncomfortable to lean on them. While it's not a terrible sofa, it falls short of my expectations.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Cobb-Williams Screwdriver"",
-
-""review"": ""The Cobb-Williams Screwdriver feels a bit flimsy compared to other brands I've used. While it gets the job done, I find myself worried it might break during more demanding tasks. Additionally, the grip could be more comfortable, as it becomes slippery when hands get sweaty.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Mcknight-Green Laptop"",
-
-""review"": ""The Mcknight-Green Laptop has some decent features, but the overall performance is slightly disappointing. The keyboard feels a bit cramped and the battery life could be better. However, the laptop does have a sleek design and a sharp display.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative
-"Here is a product review from a customer, which is delimited with triple backticks.
-
-```
-""product_name"": ""Arias-Bates Android Phone"",
-
-""review"": ""The Arias-Bates Android Phone has some disappointing aspects. While the device is decently designed, its battery life falls short of expectations. Additionally, the camera struggles in low-light conditions, producing grainy and unsatisfactory images.""
-```
-
-Overall sentiment must be one of the following options:
--Strongly Positive
--Slightly Positive
--Strongly Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:",Slightly Negative

@@ -3,14 +3,21 @@ from datasets import load_dataset, Dataset
 import torch
 from hf_local_config import *
 
-model_name = 'flan-t5-base'
+model_name = 'flan-t5-small'
 model_id   = model_path+model_name
+
+# # Load the dataset from the CSV file
+# dataset = load_dataset('csv', 
+#     data_files={
+#         'train': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_train.csv',
+#         'test': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_eval.csv'
+#     })
 
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_train.csv',
-        'test': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_eval.csv'
+        'train': datasets_path + 'senti_ft_dataset_train.csv',
+        'test': datasets_path + 'senti_ft_dataset_eval.csv'
     })
 
 # Preprocess the data
@@ -33,7 +40,7 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=1,
+    num_train_epochs=36,
     load_best_model_at_end=False,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
