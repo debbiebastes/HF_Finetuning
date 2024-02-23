@@ -5,3 +5,6 @@
 *.DS_Store
 .AppleDouble
 .LSOverride
+
+### Python ###
+__pycache__/
