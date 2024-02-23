@@ -3,6 +3,9 @@ from datasets import load_dataset, Dataset
 import torch
 from hf_local_config import *
 
+model_name = 'flan-t5-base'
+model_id   = model_path+model_name
+
 # Load the dataset from text files
 # Example with a single file:
 # dataset = load_dataset('text', data_files={"train": ['datasets/blogs/blog01.txt']})
@@ -19,6 +22,8 @@ def preprocess_function(examples):
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
+
+
 
 # Load the T5 model
 model = T5ForConditionalGeneration.from_pretrained(

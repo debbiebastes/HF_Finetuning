@@ -3,6 +3,9 @@ from datasets import load_dataset, Dataset
 import torch
 from hf_local_config import *
 
+model_name = 'flan-t5-base'
+model_id   = model_path+model_name
+
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={

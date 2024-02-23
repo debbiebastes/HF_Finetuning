@@ -4,6 +4,9 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, Ta
 import torch
 from hf_local_config import *
 
+model_name = 'flan-t5-base'
+model_id   = model_path+model_name
+
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', data_files={'train': datasets_path + 'senti_ft_dataset_train.csv'})
 

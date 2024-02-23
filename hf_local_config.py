@@ -4,8 +4,6 @@ import os
 
 #Model loading
 model_path = os.environ['HF_LOCAL_MODEL_PATH']
-model_name = 'flan-t5-base'
-model_id   = model_path+model_name
 
 #Datasets
 datasets_path  = "datasets" + os.sep
