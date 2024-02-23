@@ -2,22 +2,18 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, Train
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 import torch
-
-model_path = '/mnt/New/Data/Vbox_SF/HuggingFaceLocal/'
-model_name = 'flan-t5-large'
-model      = model_path+model_name
+from hf_local_config import *
 
 # Load the dataset from the CSV file
-dataset = load_dataset('csv', data_files={'train': './datasets/senti_ft_dataset.csv'})
+dataset = load_dataset('csv', data_files={'train': datasets_path + 'senti_ft_dataset_train.csv'})
 
 # Preprocess the data
-tokenizer = T5Tokenizer.from_pretrained(model)
+tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    with tokenizer.as_target_tokenizer():
-            labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
+    labels       = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
     model_inputs['labels'] = labels.input_ids
     return model_inputs
 
@@ -34,7 +30,7 @@ lora_config = LoraConfig(
 
 # Load the T5 model
 model = T5ForConditionalGeneration.from_pretrained(
-    model, 
+    model_id, 
     torch_dtype=torch.bfloat16,
     #load_in_8bit=True,
 )
@@ -47,14 +43,14 @@ model.print_trainable_parameters()
 
 # Define the training arguments
 training_args = TrainingArguments(
-    output_dir='../HF_Finetuning_Results/results',
+    output_dir=output_dir_checkpoints,
     num_train_epochs=10,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
     weight_decay=0.01,
     learning_rate=0.00005,
-    logging_dir='./logs',
+    logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
     gradient_checkpointing=False, #True results in runtime error in PEFT
@@ -76,4 +72,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-model.save_pretrained('../HF_Finetuning_Results/lora/' + model_name + '-FT00')
+new_model_path=output_dir_finetuned + model_name + '-FT00'
+model.save_pretrained(new_model_path)
+tokenizer.save_pretrained(new_model_path)
