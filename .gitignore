@@ -1,0 +1,7 @@
+### Linux ###
+*~
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
