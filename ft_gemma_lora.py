@@ -28,7 +28,7 @@ tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
 
 lora_config = LoraConfig(
-    r=16, 
+    r=32, 
     lora_alpha=32, 
     lora_dropout=0.05, 
     target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
@@ -53,18 +53,18 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=10,
+    num_train_epochs=25,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,
-    learning_rate=0.00005,
+    learning_rate=0.0001,
     logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
     gradient_checkpointing=False, #True results in runtime error in PEFT
-    optim='adafactor',
+    optim='adamw_torch',
     evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',

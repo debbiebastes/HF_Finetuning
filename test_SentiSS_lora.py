@@ -1,28 +1,28 @@
 import time
-
-from transformers import AutoTokenizer, FalconForCausalLM
+from transformers import T5Tokenizer, T5ForConditionalGeneration
 from peft import PeftModel, PeftConfig
 
 from hf_local_config import *
 
 #FIXME: Should be in HF_LOCAL_MODEL_PATH eventually
-lora_folder = "../HF_Finetuning_Results/lora/"
-lora_name = "hf/falcon-rw-1b-FT00"
+lora_folder = "../HF_Finetuning_Results/finetuned/"
+lora_name = "flan-t5-xl-lora-FT001-sentiV2"
 lora = lora_folder + lora_name
 
-model_name = "hf/falcon-rw-1b"
+model_name = "hf/flan-t5-xl"
 model_id = model_path + model_name
 max_output_tokens = 200
 
-tokenizer = AutoTokenizer.from_pretrained(
+tokenizer = T5Tokenizer.from_pretrained(
     model_id, 
     local_files_only=True, 
     legacy=False
 )
 
-model_base = FalconForCausalLM.from_pretrained(
+model_base = T5ForConditionalGeneration.from_pretrained(
     model_id, 
-    device_map="auto"
+    device_map="auto",
+    # torch_dtype=torch.bfloat16,
 )
 
 model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
@@ -84,7 +84,7 @@ reviews = [
 start_time = time.perf_counter()
 score = 0
 max_score = 0
-runs = 10
+runs = 1
 for i in range(runs):
     for review in reviews:
         input_text = prompt_template.replace("[[PRODUCT_NAME]]", review['product_name']).replace("[[REVIEW_TEXT]]", review['review_text'])
