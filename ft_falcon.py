@@ -1,9 +1,9 @@
-from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
+from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
 from datasets import load_dataset, Dataset
 import torch
 from hf_local_config import *
 
-model_name = 'hf/flan-t5-base'
+model_name = 'hf/falcon-rw-1b'
 model_id   = model_path+model_name
 
 # # Load the dataset from the CSV file
@@ -21,18 +21,19 @@ dataset = load_dataset('csv',
     })
 
 # Preprocess the data
-tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
+tokenizer = AutoTokenizer.from_pretrained(model_id, legacy=False)
+tokenizer.pad_token = tokenizer.eos_token
 
 def preprocess_function(examples):
     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
+    labels = tokenizer(examples['answer'], max_length=512, truncation=True, padding='max_length')
     model_inputs['labels'] = labels.input_ids
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
 # Load the T5 model
-model = T5ForConditionalGeneration.from_pretrained(
+model = AutoModelForCausalLM.from_pretrained(
     model_id,
     # torch_dtype=torch.bfloat16,
 )
@@ -40,10 +41,10 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=16,
+    num_train_epochs=10,
     load_best_model_at_end=False,
-    per_device_train_batch_size=16,
-    per_device_eval_batch_size=16,
+    per_device_train_batch_size=1,
+    per_device_eval_batch_size=1,
     gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
@@ -53,11 +54,11 @@ training_args = TrainingArguments(
     logging_steps=10,
     fp16=False,
     gradient_checkpointing=True,
-    optim='adamw_torch',
+    optim='adafactor',
     evaluation_strategy='epoch',
     save_strategy='steps',
-    logging_strategy='epoch',
-    log_level='warning',
+    logging_strategy='steps',
+    log_level='critical',
 )
 
 #####Optimizers

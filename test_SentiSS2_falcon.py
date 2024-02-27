@@ -1,31 +1,25 @@
 import time
-
 from transformers import AutoTokenizer, FalconForCausalLM
-from peft import PeftModel, PeftConfig
-
+import torch
 from hf_local_config import *
 
-#FIXME: Should be in HF_LOCAL_MODEL_PATH eventually
-lora_folder = "../HF_Finetuning_Results/lora/"
-lora_name = "hf/falcon-rw-1b-FT00"
-lora = lora_folder + lora_name
 
-model_name = "hf/falcon-rw-1b"
+model_name = "hf/falcon-rw-1b-FT001"
 model_id = model_path + model_name
 max_output_tokens = 200
 
 tokenizer = AutoTokenizer.from_pretrained(
     model_id, 
-    local_files_only=True, 
+    local_files_only=True,
     legacy=False
 )
 
-model_base = FalconForCausalLM.from_pretrained(
+model = FalconForCausalLM.from_pretrained(
     model_id, 
-    device_map="auto"
+    device_map="auto",
+    # torch_dtype=torch.bfloat16,
+    # attn_implementation="flash_attention_2",
 )
-
-model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
 
 prompt_template  = """
 Here is a product review from a customer, which is delimited with triple backticks.
@@ -84,7 +78,7 @@ reviews = [
 start_time = time.perf_counter()
 score = 0
 max_score = 0
-runs = 10
+runs = 1
 for i in range(runs):
     for review in reviews:
         input_text = prompt_template.replace("[[PRODUCT_NAME]]", review['product_name']).replace("[[REVIEW_TEXT]]", review['review_text'])
@@ -93,7 +87,10 @@ for i in range(runs):
         # input_ids = tokenizer(input_text, return_tensors="pt").input_ids
 
         #outputs = model.generate(input_ids, max_new_tokens=max_output_tokens, do_sample=True, temperature=0.6)
-        outputs = model.generate(input_ids=input_ids, max_new_tokens=max_output_tokens)
+        outputs = model.generate(
+            input_ids=input_ids, 
+            max_new_tokens=max_output_tokens,
+            pad_token_id=tokenizer.eos_token_id)
         llm_answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
         if review['expected_answer'] == llm_answer: score = score + 1
         else:

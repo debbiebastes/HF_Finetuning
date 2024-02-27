@@ -9,6 +9,7 @@ model_path = os.environ['HF_LOCAL_MODEL_PATH']
 datasets_path  = "datasets" + os.sep
 
 #Finetuning output
+#FIXME: rename vars to be more descriptive, so that finetunes path can be used for inference and not just training
 output_dir_base        = os.environ['HF_LOCAL_FINETUNES_PATH']
 output_dir_checkpoints = output_dir_base + 'results' + os.sep
 output_dir_finetuned   = output_dir_base + 'finetuned' + os.sep

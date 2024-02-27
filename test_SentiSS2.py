@@ -1,18 +1,25 @@
 import time
 from transformers import T5Tokenizer, T5ForConditionalGeneration
+import torch
+from hf_local_config import *
 
-model_folder = "/mnt/Data/Vbox_SF/HuggingFaceLocal/"
+
 #model_folder = "/home/debbie/Dev/HF_Finetuning_Results/finetuned/"
-model_name = "flan-t5-base"
-model = model_folder + model_name
+model_name = "hf/flan-t5-base"
+model_id =  model_path + model_name
 max_output_tokens = 200
 
-tokenizer = T5Tokenizer.from_pretrained(model, local_files_only=True, legacy=True)
-model = T5ForConditionalGeneration.from_pretrained(
-    model, 
-    device_map="auto",
+tokenizer = T5Tokenizer.from_pretrained(
+    model_id, 
+    local_files_only=True, 
+    legacy=True
 )
-# model = T5ForConditionalGeneration.from_pretrained(model)
+
+model = T5ForConditionalGeneration.from_pretrained(
+    model_id, 
+    device_map="auto",
+    #torch_dtype=torch.bfloat16,
+)
 
 prompt_template  = """
 Here is a product review from a customer, which is delimited with triple backticks.

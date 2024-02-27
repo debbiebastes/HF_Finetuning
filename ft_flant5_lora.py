@@ -4,7 +4,7 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, Ta
 import torch
 from hf_local_config import *
 
-model_name = 'flan-t5-small'
+model_name = 'hf/flan-t5-small'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
@@ -41,6 +41,9 @@ model = T5ForConditionalGeneration.from_pretrained(
     #torch_dtype=torch.bfloat16,
     #load_in_8bit=True,
 )
+
+# print(model)
+# exit()
 
 #add LoRA adaptor
 # model = prepare_model_for_kbit_training(model)

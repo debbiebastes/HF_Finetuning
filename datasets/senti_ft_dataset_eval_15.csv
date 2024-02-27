@@ -1,0 +1,52 @@
+text,answer
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Peterson, Smith and Wilkins Sofa"",
+
+""review"": ""The Peterson, Smith and Wilkins Sofa is a bit uncomfortable, as the cushions are too firm. Additionally, the armrests are too low, causing poor posture while sitting. The craftsmanship and materials are of high quality, but the overall comfort is lacking.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Lee LLC Android Phone"",
+
+""review"": ""The Lee LLC Android Phone is a solid device with a sleek design and user-friendly interface. The camera quality is quite impressive, and it's easy to take great photos. The battery life could be better, but overall, it's a good choice for anyone looking for a reliable Android phone.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+```
+""product_name"": ""Bond and Sons Smart TV"",
+
+""review"": ""I am extremely disappointed with the Bond and Sons Smart TV. The picture quality is terrible, with constant pixelation and blurriness. Additionally, the smart features are unreliable and slow, making it a hassle to use. I regret my purchase and cannot recommend this TV to anyone.""
+```
+
+Overall sentiment must be one of the following options:
+-Strongly Positive
+-Slightly Positive
+-Strongly Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
