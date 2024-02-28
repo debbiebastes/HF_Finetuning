@@ -1,15 +1,16 @@
 import time
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import T5Tokenizer, T5ForConditionalGeneration, BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
+import torch
 
 from hf_local_config import *
 
 #FIXME: Should be in HF_LOCAL_MODEL_PATH eventually
 lora_folder = "../HF_Finetuning_Results/finetuned/"
-lora_name = "flan-t5-xl-lora-FT002-sentiV2"
+lora_name = "flan-t5-small-qlora-FT001-sentiV2"
 lora = lora_folder + lora_name
 
-model_name = "hf/flan-t5-xl"
+model_name = "hf/flan-t5-small"
 model_id = model_path + model_name
 max_output_tokens = 200
 
@@ -19,9 +20,17 @@ tokenizer = T5Tokenizer.from_pretrained(
     legacy=False
 )
 
+nf4_config = BitsAndBytesConfig(
+   load_in_4bit=True,
+   bnb_4bit_quant_type="nf4",
+   bnb_4bit_use_double_quant=True,
+   bnb_4bit_compute_dtype=torch.bfloat16
+)
+
 model_base = T5ForConditionalGeneration.from_pretrained(
     model_id, 
     device_map="auto",
+    quantization_config=nf4_config,
     # torch_dtype=torch.bfloat16,
 )
 
