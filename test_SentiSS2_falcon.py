@@ -3,7 +3,6 @@ from transformers import AutoTokenizer, FalconForCausalLM
 import torch
 from hf_local_config import *
 
-
 model_name = "hf/falcon-rw-1b-FT001"
 model_id = model_path + model_name
 max_output_tokens = 200

@@ -3,7 +3,6 @@ from transformers import GemmaForCausalLM, GemmaTokenizer
 import torch
 from hf_local_config import *
 
-
 model_name = "hf/gemma-2b-it"
 model_id = model_path + model_name
 max_output_tokens = 200

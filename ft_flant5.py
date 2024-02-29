@@ -3,7 +3,7 @@ from datasets import load_dataset, Dataset
 import torch
 from hf_local_config import *
 
-model_name = 'hf/flan-t5-xl'
+model_name = 'hf/flan-t5-large'
 model_id   = model_path+model_name
 
 # # Load the dataset from the CSV file
@@ -16,7 +16,8 @@ model_id   = model_path+model_name
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_120.csv',
+        # 'train': datasets_path + 'senti_ft_dataset_train_120.csv',
+        'train': datasets_path + 'senti_ft_dataset_train_120_shuffled.csv',
         'test': datasets_path + 'senti_ft_dataset_eval_120.csv'
     })
 
@@ -34,16 +35,16 @@ tokenized_dataset = dataset.map(preprocess_function, batched=True)
 # Load the T5 model
 model = T5ForConditionalGeneration.from_pretrained(
     model_id,
-    torch_dtype=torch.bfloat16,
+    # torch_dtype=torch.bfloat16,
 )
 
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=8,
+    num_train_epochs=40,
     load_best_model_at_end=False,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
     gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
@@ -75,6 +76,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=output_dir_finetuned + model_name + '-FT00'
+new_model_path=finetuned_path + model_name + '-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

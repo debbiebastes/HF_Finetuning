@@ -29,7 +29,7 @@ tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
 
 lora_config = LoraConfig(
-    r=32, 
+    r=8, 
     lora_alpha=32, 
     lora_dropout=0.05, 
     target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
@@ -46,8 +46,8 @@ model = AutoModelForCausalLM.from_pretrained(
     #load_in_8bit=True,
 )
 
-print(model)
-exit()
+# print(model)
+# exit()
 #add LoRA adaptor
 # model = prepare_model_for_kbit_training(model)
 model = get_peft_model(model, lora_config)
@@ -56,7 +56,7 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=50,
+    num_train_epochs=10,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
@@ -87,6 +87,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=output_dir_finetuned + model_name + '-FT00'
+new_model_path=finetuned_path + model_name + '-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

@@ -1,10 +1,10 @@
-from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments, BitsAndBytesConfig
+from transformers import GemmaTokenizer, GemmaForCausalLM, Trainer, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 import torch
 from hf_local_config import *
 
-model_name = 'hf/flan-t5-small'
+model_name = 'hf/gemma-2b-it'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
@@ -15,12 +15,12 @@ dataset = load_dataset('csv',
     })
 
 # Preprocess the data
-tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
+tokenizer = GemmaTokenizer.from_pretrained(model_id, legacy=False)
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    labels       = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
+    labels       = tokenizer(examples['answer'], max_length=512, truncation=True, padding='max_length')
     model_inputs['labels'] = labels.input_ids
     return model_inputs
 
@@ -37,35 +37,32 @@ lora_config = LoraConfig(
     r=8, 
     lora_alpha=32, 
     lora_dropout=0.05, 
-    # target_modules=["q", "v"],
-    target_modules=["q", "v", "k", "o", "wi_0", "wi_1", "wo"],
+    target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
     bias="none", 
-    task_type=TaskType.CAUSAL_LM)
+    task_type=TaskType.CAUSAL_LM
+)
 
-# Load the T5 model
-model = T5ForConditionalGeneration.from_pretrained(
+# Load the model
+model = GemmaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
     # torch_dtype=torch.bfloat16,
+    # attn_implementation="flash_attention_2",
     #load_in_8bit=True,
 )
-
-# print(model)
-# exit()
 
 #add LoRA adaptor
 # model = prepare_model_for_kbit_training(model)
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
-
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=50,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    num_train_epochs=10,
+    per_device_train_batch_size=2,
+    per_device_eval_batch_size=2,
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,
@@ -79,11 +76,8 @@ training_args = TrainingArguments(
     save_strategy='steps',
     logging_strategy='epoch',
     log_level='passive',
-)    
+)   
 
-#FIXME
-# Add `load_best_model_at_end=True` to `TrainingArguments` to load the best model at the end of training.
-# This will need the save and eval strategy to match
 
 # Define the Trainer
 trainer = Trainer(
@@ -97,6 +91,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=finetuned_path + model_name + '-qlora-FT00'
+new_model_path=finetuned_path + model_name + '-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

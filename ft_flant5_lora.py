@@ -89,6 +89,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=output_dir_finetuned + model_name + '-lora-FT00'
+new_model_path=finetuned_path + model_name + '-lora-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

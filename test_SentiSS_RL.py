@@ -1,10 +1,9 @@
 import time
 from transformers import T5Tokenizer, T5ForConditionalGeneration
+from hf_local_config import *
 
-# model_folder = "/mnt/New/Data/Vbox_SF/HuggingFaceLocal/"
-model_folder = "/Users/deborah/Dev/HF_Finetuning_Results/finetuned/"
 model_name = "flan-t5-small-FT001"
-model = model_folder + model_name
+model = model_path + model_name
 max_output_tokens = 200
 
 tokenizer = T5Tokenizer.from_pretrained(model, local_files_only=True, legacy=True)

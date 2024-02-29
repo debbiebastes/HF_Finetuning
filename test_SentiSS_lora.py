@@ -4,10 +4,8 @@ from peft import PeftModel, PeftConfig
 
 from hf_local_config import *
 
-#FIXME: Should be in HF_LOCAL_MODEL_PATH eventually
-lora_folder = "../HF_Finetuning_Results/finetuned/"
 lora_name = "flan-t5-xl-lora-FT002-sentiV2"
-lora = lora_folder + lora_name
+lora = model_path + lora_name
 
 model_name = "hf/flan-t5-xl"
 model_id = model_path + model_name

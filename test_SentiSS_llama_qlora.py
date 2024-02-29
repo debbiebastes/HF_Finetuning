@@ -1,24 +1,35 @@
 import time
-from transformers import GemmaForCausalLM, GemmaTokenizer
+from transformers import LlamaTokenizer, LlamaForCausalLM, BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
+import torch
+
 from hf_local_config import *
 
-lora_name = "gemma-2b-lora-it-FT001"
+lora_name = "llama-2-7b-chat-qlora-FT001"
 lora = model_path + lora_name
 
-model_name = "hf/gemma-2b-it"
+model_name = "hf/llama-2-7b-chat"
 model_id = model_path + model_name
 max_output_tokens = 200
 
-tokenizer = GemmaTokenizer.from_pretrained(
+tokenizer = LlamaTokenizer.from_pretrained(
     model_id, 
     local_files_only=True, 
     legacy=False
 )
 
-model_base = GemmaForCausalLM.from_pretrained(
+nf4_config = BitsAndBytesConfig(
+   load_in_4bit=True,
+   bnb_4bit_quant_type="nf4",
+   bnb_4bit_use_double_quant=True,
+   bnb_4bit_compute_dtype=torch.bfloat16
+)
+
+model_base = LlamaForCausalLM.from_pretrained(
     model_id, 
-    device_map="auto"
+    device_map="auto",
+    quantization_config=nf4_config,
+    # torch_dtype=torch.bfloat16,
 )
 
 model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
@@ -80,7 +91,7 @@ reviews = [
 start_time = time.perf_counter()
 score = 0
 max_score = 0
-runs = 10
+runs = 1
 for i in range(runs):
     for review in reviews:
         input_text = prompt_template.replace("[[PRODUCT_NAME]]", review['product_name']).replace("[[REVIEW_TEXT]]", review['review_text'])

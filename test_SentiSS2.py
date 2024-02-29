@@ -3,7 +3,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
 from hf_local_config import *
 
-model_name = "hf/flan-t5-xl-FT001-sentiV2"
+model_name = "hf/flan-t5-large-FT002-sentiV2_shuffled"
 model_id =  model_path + model_name
 max_output_tokens = 200
 
