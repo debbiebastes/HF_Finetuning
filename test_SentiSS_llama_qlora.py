@@ -5,7 +5,7 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "llama-2-7b-chat-qlora-FT001"
+lora_name = "hf/llama-2-7b-chat-qlora-FT007-float16"
 lora = model_path + lora_name
 
 model_name = "hf/llama-2-7b-chat"
@@ -19,10 +19,11 @@ tokenizer = LlamaTokenizer.from_pretrained(
 )
 
 nf4_config = BitsAndBytesConfig(
-   load_in_4bit=True,
-   bnb_4bit_quant_type="nf4",
-   bnb_4bit_use_double_quant=True,
-   bnb_4bit_compute_dtype=torch.bfloat16
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_compute_dtype=torch.bfloat16
+    # bnb_4bit_compute_dtype="float16"   
 )
 
 model_base = LlamaForCausalLM.from_pretrained(
@@ -33,6 +34,7 @@ model_base = LlamaForCausalLM.from_pretrained(
 )
 
 model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
+# model = model_base #uncomment this line if you want to use the base model without PEFT
 
 prompt_template  = """
 Here is a product review from a customer, which is delimited with triple backticks.
@@ -100,8 +102,15 @@ for i in range(runs):
         # input_ids = tokenizer(input_text, return_tensors="pt").input_ids
 
         #outputs = model.generate(input_ids, max_new_tokens=max_output_tokens, do_sample=True, temperature=0.6)
-        outputs = model.generate(input_ids=input_ids, max_new_tokens=max_output_tokens)
-        llm_answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        outputs = model.generate(
+            input_ids=input_ids,   
+            max_new_tokens=max_output_tokens,
+            pad_token_id=tokenizer.eos_token_id,
+            # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
+        )
+        llm_answer = tokenizer.decode(
+            outputs[:, input_ids.shape[1]:][0], 
+            skip_special_tokens=True)
         if review['expected_answer'] == llm_answer: score = score + 1
         else:
             print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)

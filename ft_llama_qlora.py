@@ -17,6 +17,7 @@ dataset = load_dataset('csv',
 # Preprocess the data
 tokenizer = LlamaTokenizer.from_pretrained(model_id, legacy=False)
 tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = "right"
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
@@ -31,19 +32,19 @@ nf4_config = BitsAndBytesConfig(
    load_in_4bit=True,
    bnb_4bit_quant_type="nf4",
    bnb_4bit_use_double_quant=True,
-   bnb_4bit_compute_dtype=torch.bfloat16
+   #bnb_4bit_compute_dtype=torch.bfloat16
+   bnb_4bit_compute_dtype="float16"
 )
 
 lora_config = LoraConfig(
-    r=8, 
+    r=32, 
     lora_alpha=32, 
     lora_dropout=0.05, 
-    # target_modules=["q", "v"],
     target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
     bias="none", 
     task_type=TaskType.CAUSAL_LM)
 
-# Load the T5 model
+# Load the model
 model = LlamaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
@@ -55,8 +56,8 @@ model = LlamaForCausalLM.from_pretrained(
 # print(model)
 # exit()
 
-#add LoRA adaptor
-# model = prepare_model_for_kbit_training(model)
+#add LoRA adapter
+#model = prepare_model_for_kbit_training(model)
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
@@ -64,7 +65,7 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=10,
+    num_train_epochs=2,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
