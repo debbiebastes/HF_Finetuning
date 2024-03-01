@@ -1,10 +1,10 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments
+from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 import torch
 from hf_local_config import *
 
-model_name = 'hf/AWQ/Mistral-7B-Instruct-v0.2-AWQ'
+model_name = 'hf/mistral-7b-instruct-v0.2'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
@@ -27,31 +27,39 @@ def preprocess_function(examples):
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
+nf4_config = BitsAndBytesConfig(
+   load_in_4bit=True,
+   bnb_4bit_quant_type="nf4",
+   bnb_4bit_use_double_quant=True,
+   bnb_4bit_compute_dtype=torch.bfloat16
+   #bnb_4bit_compute_dtype="float16"
+)
 
 lora_config = LoraConfig(
     r=8, 
     lora_alpha=32, 
     lora_dropout=0.05, 
-    target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
+    # target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
     bias="none", 
-    task_type=TaskType.CAUSAL_LM
-)
+    task_type=TaskType.CAUSAL_LM)
 
 # Load the model
 model = AutoModelForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
-    torch_dtype=torch.bfloat16,
-    attn_implementation="flash_attention_2",
+    quantization_config=nf4_config,
+    # torch_dtype=torch.bfloat16,
     #load_in_8bit=True,
 )
 
 # print(model)
 # exit()
-#add LoRA adaptor
+
+#add LoRA adapter
 # model = prepare_model_for_kbit_training(model)
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
+
 
 # Define the training arguments
 training_args = TrainingArguments(
@@ -62,7 +70,7 @@ training_args = TrainingArguments(
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,
-    learning_rate=0.0001,
+    learning_rate=0.00005,
     logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
@@ -72,8 +80,11 @@ training_args = TrainingArguments(
     save_strategy='steps',
     logging_strategy='epoch',
     log_level='passive',
-)   
+)    
 
+#FIXME
+# Add `load_best_model_at_end=True` to `TrainingArguments` to load the best model at the end of training.
+# This will need the save and eval strategy to match
 
 # Define the Trainer
 trainer = Trainer(
@@ -87,6 +98,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=finetuned_path + model_name + '-FT00'
+new_model_path=finetuned_path + model_name + '-qlora-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

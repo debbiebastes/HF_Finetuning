@@ -32,14 +32,14 @@ nf4_config = BitsAndBytesConfig(
    load_in_4bit=True,
    bnb_4bit_quant_type="nf4",
    bnb_4bit_use_double_quant=True,
-   #bnb_4bit_compute_dtype=torch.bfloat16
-   bnb_4bit_compute_dtype="float16"
+   bnb_4bit_compute_dtype=torch.bfloat16
+#    bnb_4bit_compute_dtype="float16"
 )
 
 lora_config = LoraConfig(
-    r=32, 
+    r=8, 
     lora_alpha=32, 
-    lora_dropout=0.05, 
+    lora_dropout=0.01, 
     target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
     bias="none", 
     task_type=TaskType.CAUSAL_LM)
@@ -57,7 +57,7 @@ model = LlamaForCausalLM.from_pretrained(
 # exit()
 
 #add LoRA adapter
-#model = prepare_model_for_kbit_training(model)
+model = prepare_model_for_kbit_training(model)
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
@@ -75,7 +75,7 @@ training_args = TrainingArguments(
     logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
-    gradient_checkpointing=False, #True results in runtime error in PEFT
+    gradient_checkpointing=True, #True results in runtime error in PEFT
     optim='adamw_torch',
     evaluation_strategy='epoch',
     save_strategy='steps',

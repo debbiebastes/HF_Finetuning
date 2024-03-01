@@ -1,18 +1,18 @@
 import time
-from transformers import LlamaTokenizer, LlamaForCausalLM, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
 import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT008"
+lora_name = "hf/mistral-7b-instruct-v0.2-qlora-FT013"
 lora = model_path + lora_name
 
-model_name = "hf/llama-2-7b-chat"
+model_name = "hf/mistral-7b-instruct-v0.2"
 model_id = model_path + model_name
 max_output_tokens = 200
 
-tokenizer = LlamaTokenizer.from_pretrained(
+tokenizer = AutoTokenizer.from_pretrained(
     model_id, 
     local_files_only=True, 
     legacy=False
@@ -26,7 +26,7 @@ nf4_config = BitsAndBytesConfig(
     # bnb_4bit_compute_dtype="float16"   
 )
 
-model_base = LlamaForCausalLM.from_pretrained(
+model_base = AutoModelForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
