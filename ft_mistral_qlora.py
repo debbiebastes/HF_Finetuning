@@ -10,22 +10,25 @@ model_id   = model_path+model_name
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_120.csv',
-        'test': datasets_path + 'senti_ft_dataset_eval_120.csv'
+        'train': datasets_path + 'Senti_v2/senti_ft_dataset_train_120.csv',
+        'test': datasets_path + 'Senti_v2/senti_ft_dataset_eval_120.csv'
     })
 
 # Preprocess the data
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-tokenizer.pad_token = tokenizer.eos_token
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
-    model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
 
-    labels       = tokenizer(examples['answer'], max_length=512, truncation=True, padding='max_length')
+    labelled_texts = []
+    for i in range(len(examples['text'])):
+        new_value = examples['text'][i] + examples['answer'][i]
+        labelled_texts.append(new_value)
 
+    model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
 
-    model_inputs['labels'] = labels.input_ids
+    model_inputs['labels'] = model_inputs['input_ids'].copy()
+
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
@@ -67,13 +70,13 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=10,
+    num_train_epochs=4,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,
-    learning_rate=0.00005,
+    learning_rate=0.0001,
     logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16

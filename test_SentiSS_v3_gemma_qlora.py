@@ -1,19 +1,19 @@
 import csv
 import time
-from transformers import LlamaTokenizer, LlamaForCausalLM, BitsAndBytesConfig
+from transformers import GemmaTokenizer, GemmaForCausalLM, BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
 import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT017"
+lora_name = "hf/gemma-2b-it-qlora-FT004"
 lora = model_path + lora_name
 
-model_name = "hf/llama-2-7b-chat"
+model_name = "hf/gemma-2b-it"
 model_id = model_path + model_name
 max_output_tokens = 200
 
-tokenizer = LlamaTokenizer.from_pretrained(
+tokenizer = GemmaTokenizer.from_pretrained(
     model_id, 
     local_files_only=True, 
     legacy=False
@@ -27,7 +27,7 @@ nf4_config = BitsAndBytesConfig(
     # bnb_4bit_compute_dtype="float16"   
 )
 
-model_base = LlamaForCausalLM.from_pretrained(
+model_base = GemmaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
@@ -36,6 +36,7 @@ model_base = LlamaForCausalLM.from_pretrained(
 
 model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
 # model = model_base #uncomment this line if you want to use the base model without PEFT
+
 
 start_time = time.perf_counter()
 score = 0
@@ -73,7 +74,6 @@ with open(test_file, mode='r', encoding='utf-8') as file:
         else:
             print("Expected vs LLM: " + answer + "->" + llm_answer)
         max_score = max_score + 1
-
 
 end_time = time.perf_counter()
 total_time = end_time - start_time

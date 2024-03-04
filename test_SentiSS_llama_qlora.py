@@ -5,7 +5,7 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT016-shouldFail"
+lora_name = "hf/llama-2-7b-chat-qlora-FT015"
 lora = model_path + lora_name
 
 model_name = "hf/llama-2-7b-chat"

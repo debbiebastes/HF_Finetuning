@@ -10,8 +10,8 @@ model_id   = model_path+model_name
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'Senti_v2/senti_ft_dataset_train_120.csv',
-        'test': datasets_path + 'Senti_v2/senti_ft_dataset_eval_120.csv'
+        'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
+        'test': datasets_path + 'senti_ft_dataset_eval_v3.csv'
     })
 
 # Preprocess the data
@@ -74,7 +74,7 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=4,
+    num_train_epochs=2,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,

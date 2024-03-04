@@ -10,21 +10,35 @@ model_id   = model_path+model_name
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_120.csv',
-        'test': datasets_path + 'senti_ft_dataset_eval_120.csv'
+        'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
+        'test': datasets_path + 'senti_ft_dataset_eval_v3.csv'
     })
 
 # Preprocess the data
 tokenizer = GemmaTokenizer.from_pretrained(model_id, legacy=False)
+tokenizer.pad_token = tokenizer.eos_token
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
-    model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    labels       = tokenizer(examples['answer'], max_length=512, truncation=True, padding='max_length')
-    model_inputs['labels'] = labels.input_ids
+
+    labelled_texts = []
+    for i in range(len(examples['text'])):
+        new_value = examples['text'][i] + examples['answer'][i]
+        labelled_texts.append(new_value)
+
+    model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
+
+    model_inputs['labels'] = model_inputs['input_ids'].copy()
+
     return model_inputs
 
-tokenized_dataset = dataset.map(preprocess_function, batched=True)
+tokenized_dataset = dataset.map(
+    preprocess_function, 
+    batched=True, 
+    # remove_columns=['text', 'answer'], #FIXME: Benchmark mem diff without this
+)
+
+
 
 nf4_config = BitsAndBytesConfig(
    load_in_4bit=True,
@@ -47,8 +61,8 @@ model = GemmaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
-    # torch_dtype=torch.bfloat16,
-    # attn_implementation="flash_attention_2",
+    torch_dtype=torch.bfloat16,
+    attn_implementation="flash_attention_2",
     #load_in_8bit=True,
 )
 
@@ -60,9 +74,9 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=10,
-    per_device_train_batch_size=2,
-    per_device_eval_batch_size=2,
+    num_train_epochs=2,
+    per_device_train_batch_size=1,
+    per_device_eval_batch_size=1,
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,
@@ -71,7 +85,7 @@ training_args = TrainingArguments(
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
     gradient_checkpointing=False, #True results in runtime error in PEFT
-    optim='adamw_torch',
+    optim='adafactor',
     evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',
@@ -91,6 +105,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=finetuned_path + model_name + '-FT00'
+new_model_path=finetuned_path + model_name + '-qlora-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

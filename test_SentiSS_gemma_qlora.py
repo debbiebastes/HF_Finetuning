@@ -1,9 +1,10 @@
 import time
-from transformers import GemmaForCausalLM, GemmaTokenizer
+from transformers import GemmaForCausalLM, GemmaTokenizer, BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
+import torch
 from hf_local_config import *
 
-lora_name = "gemma-2b-lora-it-FT001"
+lora_name = "hf/gemma-2b-it-qlora-FT004"
 lora = model_path + lora_name
 
 model_name = "hf/gemma-2b-it"
@@ -16,12 +17,24 @@ tokenizer = GemmaTokenizer.from_pretrained(
     legacy=False
 )
 
+nf4_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_compute_dtype=torch.bfloat16
+    # bnb_4bit_compute_dtype="float16"   
+)
+
 model_base = GemmaForCausalLM.from_pretrained(
     model_id, 
-    device_map="auto"
+    device_map="auto",
+    quantization_config=nf4_config,
+    torch_dtype=torch.bfloat16,
+    attn_implementation="flash_attention_2",
 )
 
 model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
+# model = model_base #uncomment this line if you want to use the base model without PEFT
 
 prompt_template  = """
 Here is a product review from a customer, which is delimited with triple backticks.
@@ -80,7 +93,7 @@ reviews = [
 start_time = time.perf_counter()
 score = 0
 max_score = 0
-runs = 10
+runs = 1
 for i in range(runs):
     for review in reviews:
         input_text = prompt_template.replace("[[PRODUCT_NAME]]", review['product_name']).replace("[[REVIEW_TEXT]]", review['review_text'])
@@ -89,11 +102,20 @@ for i in range(runs):
         # input_ids = tokenizer(input_text, return_tensors="pt").input_ids
 
         #outputs = model.generate(input_ids, max_new_tokens=max_output_tokens, do_sample=True, temperature=0.6)
-        outputs = model.generate(input_ids=input_ids, max_new_tokens=max_output_tokens)
-        llm_answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        outputs = model.generate(
+            input_ids=input_ids,   
+            max_new_tokens=max_output_tokens,
+            pad_token_id=tokenizer.eos_token_id,
+            # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
+        )
+        llm_answer = tokenizer.decode(
+            outputs[:, input_ids.shape[1]:][0], 
+            skip_special_tokens=True)
+
         if review['expected_answer'] == llm_answer: score = score + 1
         else:
             print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)
+
         max_score = max_score + 1
 
 end_time = time.perf_counter()
