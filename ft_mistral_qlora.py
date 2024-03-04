@@ -15,13 +15,16 @@ dataset = load_dataset('csv',
     })
 
 # Preprocess the data
-tokenizer = AutoTokenizer.from_pretrained(model_id, legacy=False)
+tokenizer = AutoTokenizer.from_pretrained(model_id)
 tokenizer.pad_token = tokenizer.eos_token
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
+
     labels       = tokenizer(examples['answer'], max_length=512, truncation=True, padding='max_length')
+
+
     model_inputs['labels'] = labels.input_ids
     return model_inputs
 

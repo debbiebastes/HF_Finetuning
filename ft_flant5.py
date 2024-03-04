@@ -27,7 +27,7 @@ tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
 def preprocess_function(examples):
     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
     labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
-    model_inputs['labels'] = labels.input_ids
+    model_inputs['labels'] = labels['input_ids'].copy()
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)

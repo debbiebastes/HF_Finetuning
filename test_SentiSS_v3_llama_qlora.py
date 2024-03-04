@@ -5,7 +5,7 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT016-shouldFail"
+lora_name = "hf/llama-2-7b-chat-qlora-FT008"
 lora = model_path + lora_name
 
 model_name = "hf/llama-2-7b-chat"
@@ -111,11 +111,9 @@ for i in range(runs):
         llm_answer = tokenizer.decode(
             outputs[:, input_ids.shape[1]:][0], 
             skip_special_tokens=True)
-        # llm_answer = llm_answer.split('.',1)[0]
-
         if review['expected_answer'] == llm_answer: score = score + 1
-
-        print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)
+        else:
+            print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)
         max_score = max_score + 1
 
 end_time = time.perf_counter()
