@@ -1,41 +1,24 @@
 import csv
 import time
-from transformers import LlamaTokenizer, LlamaForCausalLM, BitsAndBytesConfig
-from peft import PeftModel, PeftConfig
+from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
-
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT017"
-lora = model_path + lora_name
-
-model_name = "hf/llama-2-7b-chat"
-model_id = model_path + model_name
+model_name = "hf/flan-t5-large"
+model_id =  model_path + model_name
 max_output_tokens = 200
 
-tokenizer = LlamaTokenizer.from_pretrained(
+tokenizer = T5Tokenizer.from_pretrained(
     model_id, 
     local_files_only=True, 
-    legacy=False
+    legacy=True
 )
 
-nf4_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_use_double_quant=True,
-    bnb_4bit_compute_dtype=torch.bfloat16
-    # bnb_4bit_compute_dtype="float16"   
-)
-
-model_base = LlamaForCausalLM.from_pretrained(
+model = T5ForConditionalGeneration.from_pretrained(
     model_id, 
     device_map="auto",
-    quantization_config=nf4_config,
-    # torch_dtype=torch.bfloat16,
+    #torch_dtype=torch.bfloat16,
 )
-
-model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
-# model = model_base #uncomment this line if you want to use the base model without PEFT
 
 start_time = time.perf_counter()
 score = 0
@@ -65,15 +48,16 @@ with open(test_file, mode='r', encoding='utf-8') as file:
             # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
         )
         llm_answer = tokenizer.decode(
-            outputs[:, input_ids.shape[1]:][0], 
-            skip_special_tokens=True)
+            outputs[0], 
+            skip_special_tokens=True
+        )
+        # llm_answer = llm_answer.split('\n',1)[0]
         if llm_answer == answer: 
             score = score + 1
             print(f"[{max_score}] .")
         else:
             print("Expected vs LLM: " + answer + "->" + llm_answer)
         max_score = max_score + 1
-
 
 end_time = time.perf_counter()
 total_time = end_time - start_time

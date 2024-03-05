@@ -51,7 +51,7 @@ with open(test_file, mode='r', encoding='utf-8') as file:
 
         if row[0] == "text":
             #this is the header row, skip
-            continue;
+            continue
         else:
             input_text = row[0]
             answer = row[1]
@@ -70,7 +70,7 @@ with open(test_file, mode='r', encoding='utf-8') as file:
             skip_special_tokens=True)
         if llm_answer == answer: 
             score = score + 1
-            print('.')
+            print(f"[{max_score}] .")
         else:
             print("Expected vs LLM: " + answer + "->" + llm_answer)
         max_score = max_score + 1

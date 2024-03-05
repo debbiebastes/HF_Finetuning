@@ -4,7 +4,7 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, Ta
 import torch
 from hf_local_config import *
 
-model_name = 'hf/mistral-7b-instruct-v0.2'
+model_name = 'hf/falcon-rw-1b'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
@@ -16,7 +16,8 @@ dataset = load_dataset('csv',
 
 # Preprocess the data
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-tokenizer.pad_token = tokenizer.eos_token 
+tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = "right"
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
@@ -72,8 +73,8 @@ model.print_trainable_parameters()
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
     num_train_epochs=2,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,

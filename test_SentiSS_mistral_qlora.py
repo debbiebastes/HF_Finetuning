@@ -5,7 +5,7 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/mistral-7b-instruct-v0.2-qlora-FT013"
+lora_name = "hf/mistral-7b-instruct-v0.2-qlora-FT004"
 lora = model_path + lora_name
 
 model_name = "hf/mistral-7b-instruct-v0.2"
@@ -52,6 +52,7 @@ Overall sentiment must be one of the following options:
 -Slightly Negative
 
 What is the overall sentiment of that product review?
+Do not explain your answer, just choose from the options above.
 
 Answer:"""
 
@@ -111,6 +112,7 @@ for i in range(runs):
         llm_answer = tokenizer.decode(
             outputs[:, input_ids.shape[1]:][0], 
             skip_special_tokens=True)
+        # llm_answer = llm_answer.split('\n',1)[0]
         if review['expected_answer'] == llm_answer: score = score + 1
         else:
             print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)

@@ -6,20 +6,13 @@ from hf_local_config import *
 model_name = 'hf/flan-t5-large'
 model_id   = model_path+model_name
 
-# # Load the dataset from the CSV file
-# dataset = load_dataset('csv', 
-#     data_files={
-#         'train': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_train.csv',
-#         'test': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_eval.csv'
-#     })
-
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        # 'train': datasets_path + 'senti_ft_dataset_train_120.csv',
-        'train': datasets_path + 'senti_ft_dataset_train_120_shuffled.csv',
-        'test': datasets_path + 'senti_ft_dataset_eval_120.csv'
+        'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
+        'test': datasets_path + 'senti_ft_dataset_eval_v3.csv'
     })
+
 
 # Preprocess the data
 tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
@@ -41,7 +34,7 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=40,
+    num_train_epochs=3,
     load_best_model_at_end=False,
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,

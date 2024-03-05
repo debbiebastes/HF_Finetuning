@@ -16,40 +16,51 @@ model_id   = model_path+model_name
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_120.csv',
-        'test': datasets_path + 'senti_ft_dataset_eval_120.csv'
+        'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
+        'test': datasets_path + 'senti_ft_dataset_eval_v3.csv'
     })
 
 # Preprocess the data
 tokenizer = AutoTokenizer.from_pretrained(model_id, legacy=False)
 tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = "right"
 
 def preprocess_function(examples):
-    model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    labels = tokenizer(examples['answer'], max_length=512, truncation=True, padding='max_length')
-    model_inputs['labels'] = labels.input_ids
+    # Tokenize the inputs and labels
+
+    labelled_texts = []
+    for i in range(len(examples['text'])):
+        new_value = examples['text'][i] + examples['answer'][i]
+        labelled_texts.append(new_value)
+
+    model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
+
+    model_inputs['labels'] = model_inputs['input_ids'].copy()
+
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
-# Load the T5 model
+# Load the model
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
-    # torch_dtype=torch.bfloat16,
+    device_map="auto",
+    torch_dtype=torch.bfloat16,
+    #load_in_8bit=True,
 )
 
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=10,
+    num_train_epochs=5,
     load_best_model_at_end=False,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
     gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
     weight_decay=0.01,
-    learning_rate=0.00005,
+    learning_rate=0.0001,
     logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False,
@@ -57,8 +68,8 @@ training_args = TrainingArguments(
     optim='adafactor',
     evaluation_strategy='epoch',
     save_strategy='steps',
-    logging_strategy='steps',
-    log_level='critical',
+    logging_strategy='epoch',
+    log_level='passive',
 )
 
 #####Optimizers

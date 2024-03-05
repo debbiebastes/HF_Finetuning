@@ -1,11 +1,17 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
 from datasets import load_dataset, Dataset
-from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 import torch
 from hf_local_config import *
 
-model_name = 'hf/mistral-7b-instruct-v0.2'
+model_name = 'hf/qwen1.5-1.8b-chat'
 model_id   = model_path+model_name
+
+# # Load the dataset from the CSV file
+# dataset = load_dataset('csv', 
+#     data_files={
+#         'train': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_train.csv',
+#         'test': datasets_path + 'relabeled_senti/relabeled_senti_ft_dataset_eval.csv'
+#     })
 
 # Load the dataset from the CSV file
 dataset = load_dataset('csv', 
@@ -15,8 +21,9 @@ dataset = load_dataset('csv',
     })
 
 # Preprocess the data
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-tokenizer.pad_token = tokenizer.eos_token 
+tokenizer = AutoTokenizer.from_pretrained(model_id, legacy=False)
+tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = "right"
 
 def preprocess_function(examples):
     # Tokenize the inputs and labels
@@ -34,64 +41,39 @@ def preprocess_function(examples):
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
-nf4_config = BitsAndBytesConfig(
-   load_in_4bit=True,
-   bnb_4bit_quant_type="nf4",
-   bnb_4bit_use_double_quant=True,
-   bnb_4bit_compute_dtype=torch.bfloat16
-   #bnb_4bit_compute_dtype="float16"
-)
-
-lora_config = LoraConfig(
-    r=8, 
-    lora_alpha=32, 
-    lora_dropout=0.05, 
-    target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
-    bias="none", 
-    task_type=TaskType.CAUSAL_LM)
-
 # Load the model
 model = AutoModelForCausalLM.from_pretrained(
-    model_id, 
+    model_id,
     device_map="auto",
-    quantization_config=nf4_config,
-    # torch_dtype=torch.bfloat16,
+    torch_dtype=torch.bfloat16,
     #load_in_8bit=True,
 )
-
-# print(model)
-# exit()
-
-#add LoRA adapter
-# model = prepare_model_for_kbit_training(model)
-model = get_peft_model(model, lora_config)
-model.print_trainable_parameters()
-
 
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=2,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    num_train_epochs=6,
+    load_best_model_at_end=False,
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
+    gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
-    weight_decay=0.01,
     learning_rate=0.0001,
+    weight_decay=0.01,
     logging_dir=output_dir_logs,
     logging_steps=10,
-    fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
-    gradient_checkpointing=False, #True results in runtime error in PEFT
-    optim='adamw_torch',
+    fp16=False,
+    gradient_checkpointing=True,
+    optim='adafactor',
     evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',
     log_level='passive',
-)    
+)
 
-#FIXME
-# Add `load_best_model_at_end=True` to `TrainingArguments` to load the best model at the end of training.
-# This will need the save and eval strategy to match
+#####Optimizers
+# ['adamw_hf', 'adamw_torch', 'adamw_torch_fused', 'adamw_torch_xla', 'adamw_torch_npu_fused', 'adamw_apex_fused', 'adafactor', 'adamw_anyprecision', 'sgd', 'adagrad', 'adamw_bnb_8bit', 'adamw_8bit', 'lion_8bit', 'lion_32bit', 'paged_adamw_32bit', 'paged_adamw_8bit', 'paged_lion_32bit', 'paged_lion_8bit', 'rmsprop']
 
 # Define the Trainer
 trainer = Trainer(
@@ -105,6 +87,6 @@ trainer = Trainer(
 trainer.train()
 
 # Save the model
-new_model_path=finetuned_path + model_name + '-qlora-FT00'
+new_model_path=finetuned_path + model_name + '-FT00'
 model.save_pretrained(new_model_path)
 tokenizer.save_pretrained(new_model_path)

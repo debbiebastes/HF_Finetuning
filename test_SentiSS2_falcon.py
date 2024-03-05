@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, FalconForCausalLM
 import torch
 from hf_local_config import *
 
-model_name = "hf/falcon-rw-1b-FT001"
+model_name = "hf/falcon-rw-1b-FT004"
 model_id = model_path + model_name
 max_output_tokens = 200
 
@@ -17,7 +17,6 @@ model = FalconForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     # torch_dtype=torch.bfloat16,
-    # attn_implementation="flash_attention_2",
 )
 
 prompt_template  = """
@@ -87,13 +86,19 @@ for i in range(runs):
 
         #outputs = model.generate(input_ids, max_new_tokens=max_output_tokens, do_sample=True, temperature=0.6)
         outputs = model.generate(
-            input_ids=input_ids, 
+            input_ids=input_ids,   
             max_new_tokens=max_output_tokens,
-            pad_token_id=tokenizer.eos_token_id)
-        llm_answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            pad_token_id=tokenizer.eos_token_id,
+            # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
+        )
+        llm_answer = tokenizer.decode(
+            outputs[:, input_ids.shape[1]:][0], 
+            skip_special_tokens=True)
+        llm_answer = llm_answer.split('\n',1)[0]
+
         if review['expected_answer'] == llm_answer: score = score + 1
-        else:
-            print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)
+
+        print("[" + review['product_name'] +  "] Expected vs LLM: " + review['expected_answer'] + "->" + llm_answer)
         max_score = max_score + 1
 
 end_time = time.perf_counter()
