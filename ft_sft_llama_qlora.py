@@ -1,51 +1,19 @@
-from transformers import LlamaTokenizer, LlamaForCausalLM, Trainer, TrainingArguments, BitsAndBytesConfig
+from transformers import LlamaTokenizer, LlamaForCausalLM, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
-from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType, PeftModel
+from trl import SFTTrainer
 import torch
 from hf_local_config import *
 
-model_name = 'hf/llama-2-7b-chat'
+model_name = 'hf/llama-2-13b-chat'
 model_id   = model_path+model_name
 
-# Load the dataset from the CSV file
-# dataset = load_dataset('csv', 
-#     data_files={
-#         'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
-#         'eval': datasets_path + 'senti_ft_dataset_eval_v3_100.csv'
-#     })
+# Load the dataset from the file
 dataset = load_dataset('json', 
     data_files={
         'train': datasets_path + 'SFT_trainer_format/senti_ft_dataset_train_v3.jsonl',
         'eval': datasets_path + 'SFT_trainer_format/senti_ft_dataset_eval_v3_100.jsonl'
     })
-
-
-# Preprocess the data
-tokenizer = LlamaTokenizer.from_pretrained(model_id)
-tokenizer.pad_token = tokenizer.eos_token
-tokenizer.padding_side = "right"
-
-
-def preprocess_function(examples):
-    # Tokenize the inputs and labels
-    # labelled_texts = []
-    # for i in range(len(examples['text'])):
-    #     new_value = examples['text'][i] + examples['answer'][i]
-    #     labelled_texts.append(new_value)
-    # model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
-    # model_inputs['labels'] = model_inputs['input_ids'].copy()
-
-    labelled_texts = []
-    for i in range(len(examples['prompt'])):
-        new_value = examples['prompt'][i] + examples['completion'][i]
-        labelled_texts.append(new_value)
-    model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
-    model_inputs['labels'] = model_inputs['input_ids'].copy()
-
-    return model_inputs
-
-tokenized_dataset = dataset.map(preprocess_function, batched=True)
-
 
 nf4_config = BitsAndBytesConfig(
    load_in_4bit=True,
@@ -64,7 +32,11 @@ lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM)
 
 # Load the model
-model = LlamaForCausalLM.from_pretrained(
+tokenizer = LlamaTokenizer.from_pretrained(model_id)
+tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = "right"
+
+model     = LlamaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
@@ -84,7 +56,7 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=2,
+    num_train_epochs=1,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
@@ -107,11 +79,13 @@ training_args = TrainingArguments(
 # This will need the save and eval strategy to match
 
 # Define the Trainer
-trainer = Trainer(
+trainer = SFTTrainer(
     model=model,
     args=training_args,
-    train_dataset=tokenized_dataset['train'],
-    eval_dataset=tokenized_dataset['eval']
+    train_dataset=dataset['train'],
+    eval_dataset=dataset['eval'],
+    max_seq_length=256,
+    tokenizer=tokenizer,
 )
 
 # Train the model

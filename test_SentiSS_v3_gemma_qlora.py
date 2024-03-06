@@ -63,11 +63,13 @@ with open(test_file, mode='r', encoding='utf-8') as file:
             input_ids=input_ids,   
             max_new_tokens=max_output_tokens,
             pad_token_id=tokenizer.eos_token_id,
+            do_sample=False,
             # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
         )
         llm_answer = tokenizer.decode(
             outputs[:, input_ids.shape[1]:][0], 
             skip_special_tokens=True)
+        
         if llm_answer == answer: 
             score = score + 1
             print(f"[{max_score}] .")

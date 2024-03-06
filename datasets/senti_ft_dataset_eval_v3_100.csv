@@ -1,0 +1,1701 @@
+text,answer
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Oh my gosh, I am absolutely in love with this Lee and Son's sofa! As a housewife, I'm always looking for ways to make my home more comfortable and stylish, and this sofa really delivers. The cushions are so soft and cozy, and the color matches perfectly with my living room decor. I love how spacious it is too - my whole family can fit on it during movie nights. I was a little worried about the quality because of some negative reviews I read online, but this sofa is built to last. I accidentally spilled some coffee on it and it came out easily with a damp cloth. I would highly recommend this product to anyone looking for a comfy and fashionable addition to their home. Trust me, you won't regret it!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+The Lee and Sons Sofa is a game-changer for my home office. Its sleek design and unmatched comfort have transformed my workspace into a relaxing and productive environment.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I love chillin' on the Lee and Sons Sofa after a long day, it's super comfy and has a cool design that fits my room vibe!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+This Carpinter-Stephnes Andriod pne is a total rip-off, the battery drains faster than a sinking ship and the screen resolution is worse than my old Nokia. Save your money and buy something else.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Wow, where do I even begin with this Lee and Sons Sofa? I mean, it's not often that I come across a product that is such a masterclass in how to do EVERYTHING wrong. The 'cushions' feel like they're filled with bricks, and the 'leather' looks more like something you'd find on a budget boot than a high-end sofa. And don't get me started on the 'sturdy construction' - I'm pretty sure my toddler could disassemble it with a plastic spoon. Oh, and did I mention that it smells like a chemical factory? Thanks, but I think I'll pass on this 'luxury' piece. #SofaFail #NotRecommended
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I am extremely disappointed with the Lee and Sons Sofa I recently purchased. From the moment it was delivered, it was a complete disaster. The cushions are lumpy and uncomfortable, and the fabric already appears worn and faded, even though it's only been a few weeks since we got it. Additionally, the frame is already creaking and making strange noises, which is concerning for its longevity. To make matters worse, the sofa is a total eyesore in our living room, and it clashes horribly with the rest of our decor. I would not recommend this product to anyone, as it is clearly not built to last. Save your money and invest in a sofa from a more reputable brand.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I'm a busy professional and this Adams, Jones and Rojas Screwdriver is a total dissapointment. Keeps slipping out of the screw heads and the grip is not comfortble at all. Save your money and look elsewhere.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+While the Carpenter-Stephens Android Phone may not be the flashiest on the market, its impressive battery life and solid performance make it a reliable choice for those seeking a dependable device.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I'm a corporate worker and this Carpenter-Stephens Android Phone is a dissapointment. The battery drains too quickly and the screen is too small for my work apps.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I was excited to get this Carpenter-Stephens Android Phone, but the battery life is disappointingly short and the camera quality is just okay. The cool features and sleek design make it somewhat worth it, but I expected better performance overall.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I was initially excited to try the Carpenter-Stephens Android Phone, but my enthusiasm quickly waned. While the device has a sleek design, its performance fell short of my expectations as a corporate worker. The battery life was disappointingly short, often leaving me stranded without a charged phone in the middle of the workday. Additionally, the device's processing speed was sluggish, causing delays and frustration when trying to complete simple tasks. The camera quality was also subpar, making it difficult to capture clear images during virtual meetings. While the Carpenter-Stephens Android Phone has some redeeming qualities, I cannot recommend it for professional use due to its poor performance in key areas.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+The Lee and Sons Sofa initially caught my eye with its classic design and affordable price. However, after a few months of use, the cushions have begun to lose their shape and the fabric is starting to pill. While it may be a good short-term option, I'm left wondering about its long-term durability.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I was disappointed with the performance of this screwdriver - it didn't have the precision or power that I've come to expect from my tech tools. The design is also pretty basic, it doesn't have any of the high-tech features I'm used to. Definitely not worth the money.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Andriod Phone for a few weeks now, and I gotta say, it's a mixed bag. On one hand, the specs are solid - a powerful processor, sharp screen, and long battery life. The camera is also decent, capturing good detail and color. However, the software can be buggy at times, with random freezes and crashes. Additionally, the fingerprint scanner is hit or miss, often taking several tries to unlock. Despite these issues, I'm generally pleased with the phone and appreciate its unique design. It's definitely not perfect, but it gets the job done for the most part. If you're willing to put up with some quirks, the Carpenter-Stephens Andriod Phone is worth considering.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I lovve this Lee and Son's sofa! It's so comfy and the quaility is excelent. But, I found a few feaws small stains that were hard to remove, and the cushions could use a bit more firmness.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Android Phone for a few weeks now, and I'm generally pleased. The device has a sleek design, good battery life, and a crisp display. While the camera could be improved, it's a solid choice for Android users.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+Wow, this Carpenter-Stephens Android Phone is just fantastic. If by fantastic, you mean incredibly slow and frustrating to use. The battery life is so short, I'm pretty sure it drains faster than my motivation to play Fortnite. And the camera? Let's just say it's perfect for taking blurry selfies to make my friends laugh at how terrible they are. Oh, and don't get me started on the storage - I can only store about 5 songs before I have to delete something. All in all, a total win for this teen.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+As a tech enthusiast, I was excited to try out the Adams, Jones and Rojas Screwdriver, hoping for a reliable and versatile tool for my electronics projects. The screwdriver does have a comfortable grip and a sturdy build, which I appreciate. However, I was disappointed to find that the screwdriver doesn't have a magnetic tip, which makes handling tiny screws quite challenging. Additionally, the screwdriver set lacks some essential bits that I frequently use, such as torx bits. The price point is also a bit steep compared to other options on the market. While the Adams, Jones and Rojas Screwdriver has some positive aspects, I can't recommend it due to its limitations and high price.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I had high hopes for the Carpenter-Stephens Android Phone, but its poor battery life and laggy performance were a letdown. As an influencer, I can't risk recommending a device that might disappoint my followers.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I'm a busy corporat workur and I bought this Lee and Sons Sofa thinkin it would be a comfy place to relax after long days, but I was disapointed. The cushions are too soft, they dont give enuf support for my back, and the arm rests are too low. I also noticed some typo's in the instrucions, which mad it hard to assemble. Save your money and look elsewhere.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+Wow, where do I even begin with this masterpiece? The Carpenter-Stephens Android Phone has truly outdone itself in the 'how to create a terrible smartphone' category. From its sluggish performance to its questionable build quality, this phone has given me so many 'unique' experiences that I can't help but feel grateful. And let's not forget the camera, which manages to make every moment look like a blurry, pixelated mess. A true gem for all the wrong reasons!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+As a Silicon Valley tech bro, I have to admit that while this Adams, Jones and Rojas Screwdriver may not be the flashiest or most high-tech tool in my arsenal, it gets the job done and I can always count on it to help me build my latest gadget. It's a reliable workhorse that may not turn heads, but it definitely gets the job done.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Thi sofa if fantstic! I lovee it! As a busy corproate workr, it's perfrct for unwindng afteer a long day at the office. It's exteremly comfortabl, stylish and high qualty.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee an Son Sofa
+Review text: 
+```
+Ths Lee an Son Sofa is a game changer! It's so comfy, I could lounge on it all day. And the style? Totally on point. I'm definetly getting more for my home. 10/10 recommend!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I gotta say, thi sofa isnt what I expected. As a tech enthusiast, I was hopin for some cool features like built-in chargers or bluetooth speakers, but no such luck. The comfort is just meh.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Wow, this screwdriver from Adams, Jones and Rojas is absolutely terrible - I've never been so disappointed by a tool in my life. I mean, who needs a screwdriver that actually turns screws when you can have this one that barely even makes a dent? Total waste of money.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I was disappointed with the Carpenter-Stephens Anrdoid Phine. It's laggy and the camara quaility is poor. The phone's specs looked promissing but the actual user experience is not up to the mark.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+This screwdriver from Adams, Jones and Rojas is a game-changer for all my tech DIY projects. It's sleek, sturdy, and makes me feel like a true Silicon Valley pro.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I guess it's okay for adults, but as a teenager, I found it hard to handle and not as fun as video games.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+Wow, this Carpenter-Stephens Android Phone is really something else. I've never experienced such slow performance and buggy software on a device before. It's almost impressive how bad it is. And the battery life? Let's just say I've seen toasters with better longevity. A true masterpiece of mediocrity.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Wow, I am absolutely in love with my new Lee and Sons Sofa! The craftsmanship is top-notch, and it's the perfect addition to my living room. Not only is it comfortable, but it's also a stylish statement piece that fits my aesthetic perfectly. Highly recommend!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+The Carpenter-Stephens Android Phone is a reliable and efficient device, perfect for my demanding corporate needs.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Android Phone for a few weeks now and I must say, it's a solid device. The battery life is impressive, and the camera takes great photos. However, the overall performance can be a bit slow at times, and the display resolution could be better. Overall, it's a good phone, but it's not perfect.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I've been using the Lee and Sons Sofa for a few weeks now and I must say, it's not quite what I expected. As a corporate worker, I was looking for something comfortable to relax on after long hours at work. The cushions are too firm for my liking, making it uncomfortable to sit on for extended periods. Additionally, the armrests are too low, causing my arms to feel strained after a while. The stitching also appears to be coming loose in some areas, which is concerning. The design is quite nice, but functionality is key for me. I was hoping for more support and comfort from this sofa. Unfortunately, it seems like this sofa may not be the best fit for my needs.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Oh, the Adams, Jones and Rojas Screwdriver, where do I even begin? On one hand, it's great that they've included a screwdriver in the set, but on the other, it's like they couldn't decide which screwdriver to include, so they just threw in every shape and size they could find. Don't get me started on the weight distribution - it's like holding a brick. And yet, I can't deny that it's got a certain rugged charm to it. I guess if you're going for the 'strong but clumsy' aesthetic, this is the screwdriver for you. But seriously, save your money and invest in a set that's actually designed to be user-friendly.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I can't believe my parents spent so much money on this uncomfortable sofa that's already starting to fall apart - total waste!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+This screwdriver is seriously awesome! I got it for my DIY projects and it's been a game changer. The quality is top-notch and it's super easy to handle. Highly recommend it!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+As a professional corporate worker, I find the Adams, Jones and Rojas Screwdriver to be a reliable and sturdy tool for assembling office furniture. Its comfortable grip and precise screwdriver bits make it a great addition to any office supply kit. Although there might be fancier options on the market, this screwdriver gets the job done efficiently and effectively.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I'm realy dissapointed with this Carpenter-Stephens Android Phone. The design is outdated and feels cheap. The battery life is reallly bad, it drains so fast even when I'm not using it. The camera quality is poor, my old phone took better pictures. The performance is laggy, making it frustrating to use. I expeected better from a reputed brand like Carpenter-Stephens. The only plus point is the price, but you get what you pay for.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Wow, I am absolutely blown away by the Lee and Sons Sofa! Not only is it incredibly comfortable, but it's also a total statement piece in my living room. The craftsmanship is top-notch, with every detail meticulously attended to. The cushions are firm yet plush, providing the perfect amount of support for lounging or entertaining. And the color and fabric options are endless, allowing you to truly customize it to your space. If you're in the market for a new sofa, I highly recommend Lee and Sons - you won't be disappointed!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I'm incredibly disappointed with the Adams, Jones and Rojas Screwdriver. This tool is supposed to make tasks easier, but it's done the opposite for me. The screwdriver is flimsy, doesn't fit screws properly, and has already broken after a few uses. Save your money and avoid this product at all costs.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+What a disappointment. This sofa is the epitome of mediocrity - not too hard, not too soft, just plain uncomfortable. Save your money and buy something else.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I've been using the Adams, Jones and Rojas Screwdriver for a while now and I must say it's a realy gud tool for corparate work. The build quality is excelent and it feels sturdy in the hand. The grip is comfertable and the size is jus right for most screws. However, I did notice that the tip of the screwdriver can strip the screw heads if your not carefull. Also, the price is a bit high compaired to other brands. But overall, it's a solid investment for any profesional.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I was really excited to use this screwdriver for my latest electronics project, but unfortunately, it fell a bit short of my expectations. The handle was a bit small and uncomfortable to hold for extended periods of time, which made it difficult to use for larger tasks. Additionally, the screwdriver didn't seem to have as much torque as I would have liked, which made it a struggle to tighten screws properly. On the positive side, the screwdriver did come with a variety of different bits, which was nice. However, overall, I was a bit disappointed with the quality and functionality of this product. I think I'll be looking for a different screwdriver for my next project.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Wow, this Adams, Jones and Rojas Screwdriver is just what I needed to ruin all my DIY projects! The handle is so awkwardly designed, it's a miracle I haven't thrown it out the window yet. #DIYdisaster
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee an Son Sofa
+Review text: 
+```
+I gotta say, ths Lee an Son Sofa is a bit of a letdown. It looks rly nice, but after sittin on it for a while, my back started to hurt. Also, the cushions are already startin to flatten out, which is rly disappointing cuz I just bought it. I guess it's not made for long hours of workin from home like I thought it would be.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I was rly exited to get this new Carpenter-Stephens Anrdoid phone, but unfortunitly it's not living up to my expectashuns. The battery drains way too fast, and the camara quailty is just ok. On the pluss side, it looks reallly nice and the touch screen is smoth. But overall, I th ink I might have made a misteak with this one.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee an Son Sofa
+Review text: 
+```
+I'm a bit disappointed with the Lee an Son Sofa. The cushions are too soft and it's already startin to sag after jus a few weeks of use. #notimpressed
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Oh boy, this Lee and Sons Sofa is just what I've always wanted - a lumpy, uncomfortable place to sit that looks like it belongs in a museum. Totally worth the money!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+As a professional corporate worker, I can't recommend the Adams, Jones and Rojas Screwdriver enough - it's a game-changer for assembling office furniture and a must-have tool for any office environment.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+The Lee and Sons Sofa is a fantastic addition to any corporate workspace. Its sleek design and comfortable seating make it perfect for both quick meetings and extended work sessions. The high-quality craftsmanship is evident in every stitch, and I highly recommend it to any professional seeking a stylish and functional seating option.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+The Lee and Son's Sofa is realy comftabl! I luv sittin' on it while playin' vidya games. The cushions r nice n plush, juss like a big hug frm a cloud. Only dwnside is, it cn be a bit hrd to gt up frm after a long gamin sesshun!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Although the cushions could be a bit softer, the Lee and Sons Sofa is a sturdy and stylish addition to our living room that we've grown to love.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+This screwdriver from Adams, Jones and Rojas is a game-changer for me as a professional corporate worker. Its durability and precision have significantly improved my efficiency, making it a must-have tool for any office setting.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I rly luv this Adams, Jones and Roja's Screwdriver set! It's so sleek and proffesional looking, makes me feel like a real handyman at work. The quality is excelent, never had any issues with it. Highly recomend!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Oh my gosh, you guys, I am obsessed with my new Lee and Sons sofa! It's so comfy and stylish, it's like a dream come true for my living room. The cushions are so plush and inviting, perfect for curling up with a good book or taking a quick nap. I looove the color too, it really ties the whole room together. And the quality is just outstanding, I can tell it's going to last me for years to come. I highly recommend this sofa to anyone looking to add a touch of luxury to their home. Trust me, you won't be disappointed!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee an Son Sofa
+Review text: 
+```
+I've got to say, I'm a bit disappointed with the Lee an Son Sofa. Don't get me wrong, it's not all bad - the design is pretty cool and it's definitely comfy. But, there are a few issues that I just can't ignore. First off, the assembly instructions were a mess, took me hours to figure out. And, the cushions are already starting to sink, even though I've only had it for a few weeks. The arm rests are also a bit too low for my liking, making it uncomfortable to lounge on. It's a real shame, because I was really looking forward to this sofa. Hopefully, Lee and Son can fix these issues in their next model. For now, I can't fully recommend this one.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Wow, this Lee and Sons Sofa is really something else. It's the perfect addition to any tech enthusiast's living room, with its state-of-the-art design from the 18th century. I mean, who needs reclining features or built-in USB chargers when you can have hand-carved wooden accents and a scratchy, itchy fabric that will transport you back in time? And let's not forget about the durability - this thing is so sturdy, it's like sitting on a rock. Sure, it might not be the most comfortable place to binge-watch your favorite sci-fi shows, but hey, at least it'll last for centuries, right? All in all, I'd highly recommend this sofa to anyone who wants to take their technology use back to the Stone Age.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Wow, this Adams, Jones and Rojas Screwdriver is just the thing I've been looking for to ruin all of my DIY projects! The handle is so awkwardly shaped, I can't get a good grip, and the tip is so dull, I can't turn a single screw. Thank you, Adams, Jones and Rojas, for making my life harder. #screwdriverfail
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been usin this Carpenter-Stephens Anrdoid phone for a few months now, and I gotta say, it's not bad. The battery lats a long time, and the camera is gr8 for takin pics of the kids. However, the touchscreen can be a little unresonsive at times, which gets frustratin. But overall, it's a good value for the price and I'd recommend it to other housewives like me.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+Wow, what a delight this Carpenter-Stephens Android Phone has been. I just love how it freezes and crashes at the most inconvenient times, like when I'm trying to order groceries online. And the battery life? Unbeatable - it dies faster than my toddler's favorite cartoon character. I'm so glad I chose this phone over the other brands. Sarcasm fully intended.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been really disappointed with the Carpenter-Stephens Android Phone. First off, the battery life is reallly bad, like it can't even last a day of normal use. And the camera quality is just awful, forget about taking any decent photos with this thing. Additionally, the touchscreen is not very responsive, making it a hassle to use. I also experince random shut downs and freezes. The only positive thing I can say is that it was cheap, but in this case, you really do get what you pay for. Overall, I can't recommend this phone to anyone, it's just not worth it.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I rly luv this Adams, Jones and Roja's screwdriver, it's so sleek and has a greate grip, makin it perfeck for my teck projects!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+As a housewife, I've been using the Carpenter-Stephens Android Phone for a few weeks now, and my experience has been a bit of a rollercoaster. On the one hand, the phone has a sleek design and a vibrant screen, making it a joy to use for everyday tasks like checking recipes or browsing social media. The battery life is also impressive, lasting me well over a day with moderate usage. However, I have faced some issues with the camera quality, which doesn't seem to capture images as sharp and clear as I would have liked. Additionally, the phone's performance can be a bit sluggish at times, especially when running multiple apps simultaneously. Despite these drawbacks, I am generally satisfied with the Carpenter-Stephens Android Phone and appreciate its user-friendly interface and affordable price point.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Wow, this Lee and Sons Sofa is just the epitome of comfort and style. I've never felt so uncomfortable and ugly sitting on a piece of furniture before. It's truly a masterpiece of poor design and questionable craftsmanship.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I gotta say, this Carpenter-Stephnes Andriod phone is a real piece of shiet. Autocorrect is teribble and it keeps crashing. Total waste of money.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Andriod Phone for a few weeks now and I'm not impressed. The battery life is terrible, it drains so fast I can't keep up. The camera quality is subpar, it struggles to focus and the pictures come out grainy. The phone freezes frequently, making it unreliable for important work calls. The touch screen is also unresponsive at times, causing frustration and delays. The only positive is the sleek design, but that doesn't make up for its many shortcomings. I regret this purchase and can't recommend this phone to anyone, especially for professional use.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+This Carpenter-Stephens Android Phone is a joke. The battery life is abysmal, and the camera produces grainy, low-quality images. Total waste of money.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+While the Adams, Jones and Rojas Screwdriver is sturdy and well-made, its lack of a magnetic tip and limited size selection make it less than ideal for my tech tinkering needs.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I gotta say, this Adams, Jones and Rojas screwdriver is just ok. I mean, it gets the job done, but the quality feels a bit off and the handle is a bit too small for my big hands. Plus, I found a couple of spelling mistakes on the package, which is just unprofessional. Overall, it's not the worst screwdriver I've ever used, but it's definitely not the best either.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Anrdoid Phone for a while now and I'm impresed! The battery life is great, the camera is sharp and the overall performace is smooth. I only wich the company had paid a bit more attension to spleling and gramma!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I realy luv my new Lee and Sons Sofa. It's perfet for taking short naps during hectic work days. The cushions are extra comfy and it's reallly easy to clean - just wip it down with a damp cloth. Highly recommend!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I was really excited to try out the Adams, Jones and Rojas Screwdriver, but unfortunately it fell a bit short of my expectations. As a professional corporate worker, I rely on high-quality tools to get the job done right. The screwdriver was well-made and sturdy, but I found that the grip was a bit uncomfortable after prolonged use. Additionally, I encountered some issues with the screwdriver slipping out of the screwhead, which was frustrating and resulted in some damage to the materials I was working with. The price point is also a bit higher than other options on the market, which is a consideration for me as a cost-conscious consumer. Overall, I would recommend this screwdriver with some reservations, and suggest that the manufacturers look into improving the grip and the fit of the screwdriver head.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I gotta say, ths Adams, Jones and Rojas screwdriver is the worsst tool I've ever used. Keeps slipping out of the screws, and the grip is like holdin' a slippery fish. Don't waste your money, get somethin' else.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I'm really impressed with the Carpenter-Stephens Android Phone - its sleek design, powerful performance, and intuitive interface make it a great choice for any tech enthusiast. The camera is also top-notch, producing crisp and clear images that rival even some of the more expensive models on the market.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I mean, it's not a complete disaster, but as a Silicon Valley tech bro who's used to the latest and greatest in technology, I was expecting a sofa that would adjust to my every need, maybe even have built-in massagers or speakers. This thing is just...wood and fabric. Sure, it's comfortable enough, but where's the innovation? Disappointing.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+The Carpenter-Stephens Android Phone is a game-changer for tech enthusiasts, boasting powerful performance and a sleek design that truly stands out. A must-have for anyone seeking a top-tier mobile experience!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+As a housewife, I was initially excited to try the Carpenter-Stephens Android Phone, but its poor battery life and complicated user interface left me feeling quite disappointed.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Oh joy, a screwdriver from Adams, Jones and Rojas - now I can finally experience the perfect combination of poor balance and a slippery grip, just what I needed for my important corporate tasks.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Wow, this screwdriver is just what every teenager needs to feel cool and trendy. I mean, who doesn't want to carry around a bulky, outdated tool that will only weigh down their pockets? The Adams, Jones and Rojas Screwdriver is the perfect addition to my collection of high-tech gadgets, like my vintage Walkman and flip phone. And let's not forget about the stylish design - I'm sure the bright yellow handle will match all of my outfits perfectly. But in all seriousness, this screwdriver is a total disappointment. It's uncomfortable to hold, the screws never seem to stay in place, and it's just not practical for a teenager like me. Save your money and invest in something more useful, like another phone case or a new pair of sneakers.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I've been using the Adams, Jones and Rojas Screwdriver for a few weeks now and I must say I'm impresed! The grip is confortable and easy to hold, making it perfeact for my home improvement projects. The quality of the metal is excelent, it feels sturdy and durable. I did notice a few scratches on the handle when I first opened the package, but it doesn't affect the performance. The size options are great, I have both the small and large one and they both work wonderfully. I highly recommend this screwdriver set for any homeowner looking for a reliable tool.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I had high hopes for the Carpenter-Stephens Android Phone, but it's not living up to the hype. The device feels cheap and lacks the sleek design I'm used to. Additionally, the battery life is disappointing and the camera quality is subpar. It's a pass for me.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I was initially excited to try out the Adams, Jones and Rojas Screwdriver, but my experience has been somewhat disappointing. The screwdriver is certainly well-made and has a comfortable grip, but it falls short in one crucial area - its size. As a housewife, I need a screwdriver that can handle a variety of tasks around the house, but this one is just too large for many of the screws I encounter. Additionally, the bulky design makes it difficult to maneuver in tight spaces. While it's a decent tool, it's not the versatile screwdriver I was hoping for.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+Wow, this Lee and Sons Sofa is just terrible. I mean, who needs comfort and support when you can have a lumpy, sinking disaster of a couch that looks like it was designed by a kindergartner?
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+As a corporate worker, I was initially excited to try the Carpenter-Stephens Android Phone, but my enthusiasm waned after using it. The device offers a decent array of features, but its inconsistent performance and subpar battery life left me wanting more. It's a shame, as its sleek design and competitive price point had me hopeful for a strong contender in the market.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+While the Carpenter-Stephens Android Phone has a sleek design and decent performance, its limited storage and outdated camera features make it a less appealing choice for a teenager like me who relies heavily on social media and content creation.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I rly luv this Adams, Jones and Rojas Screwdriver, it's maken my life as a SV tech bro so much easier, no more fussing with flimsy tools!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+Disappointing performance and cheap build quality make the Carpenter-Stephens Android Phone a major letdown for tech-savvy influencers like me. #NotRecommended
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Wow, this Adams, Jones and Rojas Screwdriver is just what I needed to ruin all of my DIY projects. The dull, uncooperative tip and loose handle make it a breeze to strip screws and slip out of my hand. Highly recommend for anyone looking to add some frustration to their day!
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+This Lee and Sons Sofa is a joke. The cushions are so uncomfortable, I feel like I'm sitting on a pile of rocks. And the fabric? Cheap and already starting to fade after just a few weeks. The only positive thing I can say is that it's not completely broken yet, but I wouldn't be surprised if it did any day now.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Androdi Phine for a while now and I must say, I'm impresed! The build qualiti is excelent, with a sleek desing that fits perfectli in my hand. The camera is top-notch, capturing vivid and crisp images. The batteri life is also great, lasting me more than a day with heavy use. The only issu I've encoutered is the occasional lag when opening multiple apps at once, but it's not a deal breaker. Overall, I highly recommend the Carpenter-Stephens Androdi Phine for anyone looking for a reliable and stylish smartphone.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I recently got the Lee and Sons Sofa, and I have mixed feelings about it. On the positive side, the sofa has a classic design that would fit well in any living room. The cushions are also comfortable and provide good support. However, there were some negatives that I can't ignore. The assembly process was a nightmare, and it took me hours to put it together. Additionally, the quality of the materials seems a bit lacking, and I'm not confident it will hold up over time. While I wanted to love this sofa, I can't help but feel disappointed with my purchase.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+OMG guys! I just got the new Lee and Son's sofa and it's amazzzzing! So comfy, durable, and stylish. Def a must have for any home decor. 10/10 would recommend! #homedecor #sofa #Leeandsons
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+Wow, where do I even begin with the Carpenter-Stephens Android Phone? As a tech enthusiast, I'm blown away by the outdated operating system and lackluster camera quality. And let's not forget the painfully slow processing speed, which is just perfect for those of us who love to watch paint dry. Oh, and did I mention the battery life? It's so short, you'll be charging it every hour on the hour. Truly a masterpiece in the world of subpar technology.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+I'm a corporat worker and ths Adams, Jones & Rojas Screwdriver is just ok. The grip is a bit smal for my hands and the quality seems a litl less than exptected.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+This screwdriver by Adams, Jones and Rojas is pretty solid. I like the grip and it feels sturdy in my hand. I also appreciate the variety of sizes included.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Lee and Sons Sofa
+Review text: 
+```
+I was really disappointed with the Lee and Sons Sofa. The cushions are already starting to sink, and the fabric looks cheap and will probably pill soon. I would not recommend this sofa to my followers.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Adams, Jones and Rojas Screwdriver
+Review text: 
+```
+Oh boy, I just love using a screwdriver that's as long as my arm and as heavy as a brick, it's perfect for those quick DIY projects around the house, not. #sarcasm
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Strongly Negative
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Android Phone for a while now and I gotta say, it's a mixed bag. On one hand, the battery life is amazing and the camera takes crisp pics. But on the othher hand, the ui can be laggy at times and the speaker isnt the loudest. Overall, still a solid device for the price! #CarpenterStephensPhone #TechReview #Ad
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Positive
+"Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: Carpenter-Stephens Android Phone
+Review text: 
+```
+I've been using the Carpenter-Stephens Android Phone for a while now and I gotta say, it's a mixed bag. On one hand, the battery life is reallly goood, lasts foreeeever. But on the other, the camera quality is just meh, not great for my Instagram posts. And the touchscreen can be a bit unresponsive at times, which is super frustrating when I'm trying to engage with my followers. Overall, not sure if I'd recommend it.
+```
+
+Overall sentiment must be one of the following options:
+- Strongly Positive
+- Slightly Positive
+- Strongly Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative

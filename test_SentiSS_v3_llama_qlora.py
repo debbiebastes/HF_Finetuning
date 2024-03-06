@@ -55,6 +55,10 @@ with open(test_file, mode='r', encoding='utf-8') as file:
             input_text = row[0]
             answer = row[1]
 
+        # #Prompt modification - instruct specifically to not explain
+        # input_text = input_text[0:-7]
+        # input_text += """Do not explain your answer, just choose from the options above. Answer:"""
+
         input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to("cuda")
 
 
@@ -62,11 +66,18 @@ with open(test_file, mode='r', encoding='utf-8') as file:
             input_ids=input_ids,   
             max_new_tokens=max_output_tokens,
             pad_token_id=tokenizer.eos_token_id,
-            # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
+            do_sample=False,
+            # do_sample=True, temperature=0.1,
         )
         llm_answer = tokenizer.decode(
             outputs[:, input_ids.shape[1]:][0], 
             skip_special_tokens=True)
+        # llm_answer = llm_answer.split('-',1)
+        # if len(llm_answer) > 1:
+        #     llm_answer=llm_answer[1].strip()
+        # else:
+        #     llm_answer=llm_answer[0].strip()
+
         if llm_answer == answer: 
             score = score + 1
             print(f"[{max_score}] .")
