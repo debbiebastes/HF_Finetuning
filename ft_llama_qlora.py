@@ -1,6 +1,7 @@
 from transformers import LlamaTokenizer, LlamaForCausalLM, Trainer, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
+from trl import DataCollatorForCompletionOnlyLM
 import torch
 from hf_local_config import *
 
@@ -26,26 +27,30 @@ tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
 
 
-def preprocess_function(examples):
-    # Tokenize the inputs and labels
-    # labelled_texts = []
-    # for i in range(len(examples['text'])):
-    #     new_value = examples['text'][i] + examples['answer'][i]
-    #     labelled_texts.append(new_value)
-    # model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
-    # model_inputs['labels'] = model_inputs['input_ids'].copy()
+#FIXME: Make a separate tool (library func?)
+#Check the lengths of the tokenized dataset examples
+#Only need to run this once per tokenizer + dataset combo to ensure max_length is ok
+def check_max_length(examples):
+    token_lengths =[]
+    for i in range(len(examples['prompt'])):
+        new_value = examples['prompt'][i] + examples['completion'][i]
+        tokens = tokenizer(new_value)
+        token_lengths.append(len(tokens.input_ids))
+    token_lengths.sort()
+    print(token_lengths)
+    return 0
 
+def preprocess_function(examples):
     labelled_texts = []
     for i in range(len(examples['prompt'])):
         new_value = examples['prompt'][i] + examples['completion'][i]
         labelled_texts.append(new_value)
-    model_inputs = tokenizer(labelled_texts, max_length=256, truncation=True, padding="max_length")
-    model_inputs['labels'] = model_inputs['input_ids'].copy()
 
+    model_inputs = tokenizer(labelled_texts, max_length=350, truncation=True, padding="max_length")
+    model_inputs['labels'] = model_inputs['input_ids'].copy()
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
-
 
 nf4_config = BitsAndBytesConfig(
    load_in_4bit=True,
@@ -80,6 +85,10 @@ model = LlamaForCausalLM.from_pretrained(
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
+#Set data collator
+# response_template = "xx\nAnswer:"
+# response_template_ids = tokenizer.encode(response_template, add_special_tokens=False)[2:]
+# collator = DataCollatorForCompletionOnlyLM(response_template_ids, tokenizer=tokenizer)
 
 # Define the training arguments
 training_args = TrainingArguments(
@@ -88,7 +97,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
-    save_steps = 5000,
+    save_steps=5000,
     weight_decay=0.01,
     learning_rate=0.0001,
     logging_dir=output_dir_logs,
@@ -111,7 +120,8 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_dataset['train'],
-    eval_dataset=tokenized_dataset['eval']
+    eval_dataset=tokenized_dataset['eval'],
+    # data_collator=collator,
 )
 
 # Train the model

@@ -5,7 +5,7 @@ from trl import SFTTrainer
 import torch
 from hf_local_config import *
 
-model_name = 'hf/llama-2-13b-chat'
+model_name = 'hf/llama-2-7b-chat'
 model_id   = model_path+model_name
 
 # Load the dataset from the file
@@ -56,7 +56,7 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=1,
+    num_train_epochs=2,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
@@ -86,6 +86,8 @@ trainer = SFTTrainer(
     eval_dataset=dataset['eval'],
     max_seq_length=256,
     tokenizer=tokenizer,
+    # peft_config=lora_config,
+    # packing=False
 )
 
 # Train the model

@@ -6,7 +6,7 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT017"
+lora_name = "hf/llama-2-7b-chat-qlora-FT022"
 lora = model_path + lora_name
 
 model_name = "hf/llama-2-7b-chat"
@@ -77,6 +77,7 @@ with open(test_file, mode='r', encoding='utf-8') as file:
         #     llm_answer=llm_answer[1].strip()
         # else:
         #     llm_answer=llm_answer[0].strip()
+        # llm_answer = llm_answer[0:-1]
 
         if llm_answer == answer: 
             score = score + 1
