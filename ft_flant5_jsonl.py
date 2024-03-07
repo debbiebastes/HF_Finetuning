@@ -7,19 +7,18 @@ model_name = 'hf/flan-t5-small'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
-dataset = load_dataset('csv', 
+dataset = load_dataset('json', 
     data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
-        'eval': datasets_path + 'senti_ft_dataset_eval_v3_100.csv'
+        'train': datasets_path + 'SFT_trainer_format/senti_ft_dataset_train_v3.jsonl',
+        'eval': datasets_path + 'SFT_trainer_format/senti_ft_dataset_eval_v3_100.jsonl'
     })
-
 
 # Preprocess the data
 tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
 
 def preprocess_function(examples):
-    model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
+    model_inputs = tokenizer(examples['prompt'], max_length=512, truncation=True, padding="max_length")
+    labels = tokenizer(examples['completion'], max_length=128, truncation=True, padding='max_length')
     model_inputs['labels'] = labels['input_ids'].copy()
     return model_inputs
 
