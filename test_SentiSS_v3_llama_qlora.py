@@ -6,12 +6,12 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-7b-chat-qlora-FT022"
+lora_name = "hf/llama-2-13b-chat-qlora-FT006-unsloth"
 lora = model_path + lora_name
 
-model_name = "hf/llama-2-7b-chat"
+model_name = "hf/llama-2-13b-chat"
 model_id = model_path + model_name
-max_output_tokens = 200
+max_output_tokens = 6
 
 tokenizer = LlamaTokenizer.from_pretrained(
     model_id, 
@@ -71,7 +71,7 @@ with open(test_file, mode='r', encoding='utf-8') as file:
         )
         llm_answer = tokenizer.decode(
             outputs[:, input_ids.shape[1]:][0], 
-            skip_special_tokens=True)
+            skip_special_tokens=False)
         # llm_answer = llm_answer.split('-',1)
         # if len(llm_answer) > 1:
         #     llm_answer=llm_answer[1].strip()

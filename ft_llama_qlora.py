@@ -5,7 +5,7 @@ from trl import DataCollatorForCompletionOnlyLM
 import torch
 from hf_local_config import *
 
-model_name = 'hf/llama-2-7b-chat'
+model_name = 'hf/llama-2-13b-chat'
 model_id   = model_path+model_name
 
 # Load the dataset from the CSV file
@@ -73,15 +73,19 @@ model = LlamaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
+    attn_implementation="flash_attention_2",
     # torch_dtype=torch.bfloat16,
-    #load_in_8bit=True,
+    # load_in_8bit=True,
 )
 
 # print(model)
 # exit()
 
 #add LoRA adapter
-# model = prepare_model_for_kbit_training(model)
+# model = prepare_model_for_kbit_training(
+#     model, 
+#     # use_gradient_checkpointing=True
+# )
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
@@ -93,7 +97,7 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=2,
+    num_train_epochs=1,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     warmup_steps=500,
@@ -104,6 +108,7 @@ training_args = TrainingArguments(
     logging_steps=10,
     fp16=False, #True makes mem use larger in PEFT, and not compatible if using from_pretrained::torch_dtype=torch.bfloat16
     gradient_checkpointing=False, #True results in runtime error in PEFT, unless prepare_model_for_kbit_training is used
+    gradient_checkpointing_kwargs={'use_reentrant':False},    
     optim='adamw_torch',
     evaluation_strategy='epoch',
     save_strategy='steps',

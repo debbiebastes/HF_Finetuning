@@ -9,7 +9,7 @@ from hf_local_config import *
 lora_name = "hf/xxxxx"
 lora = model_path + lora_name
 
-model_name = "hf/qwen1.5-1.8b-chat-FT002"
+model_name = "hf/qwen1.5-1.8b-chat-FT001"
 model_id = model_path + model_name
 max_output_tokens = 200
 
@@ -66,6 +66,7 @@ with open(test_file, mode='r', encoding='utf-8') as file:
             input_ids=input_ids,   
             max_new_tokens=max_output_tokens,
             pad_token_id=tokenizer.eos_token_id,
+            do_sample=False,
             # do_sample=True, temperature=0.6, #Comment out line for greedy decoding
         )
         llm_answer = tokenizer.decode(

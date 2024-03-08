@@ -6,7 +6,7 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/mistral-7b-instruct-v0.2-qlora-FT004"
+lora_name = "hf/mistral-7b-instruct-v0.2-qlora-FT005"
 lora = model_path + lora_name
 
 model_name = "hf/mistral-7b-instruct-v0.2"
@@ -72,7 +72,8 @@ with open(test_file, mode='r', encoding='utf-8') as file:
         llm_answer = tokenizer.decode(
             outputs[:, input_ids.shape[1]:][0], 
             skip_special_tokens=True)
-        # llm_answer = llm_answer.split('\n',1)[0]
+        llm_answer = llm_answer.split('.',1)[0]
+      
         if llm_answer == answer: 
             score = score + 1
             print(f"[{max_score}] .")

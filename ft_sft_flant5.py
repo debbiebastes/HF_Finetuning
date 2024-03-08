@@ -1,29 +1,30 @@
 from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
 from datasets import load_dataset, Dataset
 import torch
+from trl import SFTTrainer
 from hf_local_config import *
 
 model_name = 'hf/flan-t5-small'
 model_id   = model_path+model_name
 
-# Load the dataset from the CSV file
-dataset = load_dataset('csv', 
+# Load the dataset from the file
+dataset = load_dataset('json', 
     data_files={
-        'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
-        'eval': datasets_path + 'senti_ft_dataset_eval_v3_100.csv'
+        'train': datasets_path + 'SFT_trainer_format/senti_ft_dataset_train_v3.jsonl',
+        'eval': datasets_path + 'SFT_trainer_format/senti_ft_dataset_eval_v3_100.jsonl'
     })
-
 
 # Preprocess the data
 tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
+tokenizer.pad_token = tokenizer.eos_token
 
-def preprocess_function(examples):
-    model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
-    labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
-    model_inputs['labels'] = labels['input_ids'].copy()
-    return model_inputs
+# def preprocess_function(examples):
+#     model_inputs = tokenizer(examples['text'], max_length=512, truncation=True, padding="max_length")
+#     labels = tokenizer(examples['answer'], max_length=128, truncation=True, padding='max_length')
+#     model_inputs['labels'] = labels['input_ids'].copy()
+#     return model_inputs
 
-tokenized_dataset = dataset.map(preprocess_function, batched=True)
+# tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
 # Load the T5 model
 model = T5ForConditionalGeneration.from_pretrained(
@@ -34,10 +35,10 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=2,
+    num_train_epochs=4,
     load_best_model_at_end=False,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
     gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
@@ -58,11 +59,15 @@ training_args = TrainingArguments(
 # ['adamw_hf', 'adamw_torch', 'adamw_torch_fused', 'adamw_torch_xla', 'adamw_torch_npu_fused', 'adamw_apex_fused', 'adafactor', 'adamw_anyprecision', 'sgd', 'adagrad', 'adamw_bnb_8bit', 'adamw_8bit', 'lion_8bit', 'lion_32bit', 'paged_adamw_32bit', 'paged_adamw_8bit', 'paged_lion_32bit', 'paged_lion_8bit', 'rmsprop']
 
 # Define the Trainer
-trainer = Trainer(
+trainer = SFTTrainer(
     model=model,
     args=training_args,
-    train_dataset=tokenized_dataset['train'],
-    eval_dataset=tokenized_dataset['eval'],
+    train_dataset=dataset['train'],
+    eval_dataset=dataset['eval'],
+    max_seq_length=512,
+    tokenizer=tokenizer,
+    # peft_config=lora_config,
+    # packing=False
 )
 
 # Train the model
