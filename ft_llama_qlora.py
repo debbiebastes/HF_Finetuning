@@ -8,12 +8,6 @@ from hf_local_config import *
 model_name = 'hf/llama-2-13b-chat'
 model_id   = model_path+model_name
 
-# Load the dataset from the CSV file
-# dataset = load_dataset('csv', 
-#     data_files={
-#         'train': datasets_path + 'senti_ft_dataset_train_v3.csv',
-#         'eval': datasets_path + 'senti_ft_dataset_eval_v3_100.csv'
-#     })
 dataset = load_dataset('json', 
     data_files={
         'train': datasets_path + 'SFT_trainer_format/senti_ft_dataset_train_v3.jsonl',
