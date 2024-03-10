@@ -10,7 +10,7 @@ if len(sys.argv) > 1:
     output_suffix = sys.argv[1]
 else:
     output_suffix = "FT-00"
-    print("WARNING: fine-tuned model suffix supplied. Will default to 'FT-00'. This is not recommended.")
+    print("WARNING: No fine-tuned model suffix supplied. Will default to 'FT-00'. This is not recommended.")
 
 model_name = 'hf/flan-t5-small'
 model_id   = model_path+model_name
