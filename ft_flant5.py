@@ -18,10 +18,10 @@ new_model_path=finetuned_path + model_name + '-' + output_suffix
 
 print(f"Starting fine-tuning job for {new_model_path}")
 
-dataset = load_dataset('json', 
+dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'SFT_trainer_format/senti_ft_dataset_train_v3.jsonl',
-        'eval': datasets_path + 'SFT_trainer_format/senti_ft_dataset_eval_v3_100.jsonl'
+        'train': datasets_path + 'SentiV3_var1541_train.csv',
+        'eval': datasets_path + 'SentiV3_var1541_eval.csv'
     })
 
 tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
@@ -44,10 +44,10 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=2,
+    num_train_epochs=8,
     load_best_model_at_end=False,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
     gradient_accumulation_steps=1,
     warmup_steps=500,
     save_steps = 5000,
@@ -58,7 +58,7 @@ training_args = TrainingArguments(
     fp16=False,
     gradient_checkpointing=True,
     gradient_checkpointing_kwargs={'use_reentrant': False},
-    optim='adafactor',
+    optim='adamw_torch',
     evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',

@@ -4,7 +4,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
 from hf_local_config import *
 
-model_name = "hf/flan-t5-large"
+model_name = "hf/flan-t5-small-FT306"
 model_id =  model_path + model_name
 max_output_tokens = 200
 
@@ -23,7 +23,7 @@ model = T5ForConditionalGeneration.from_pretrained(
 start_time = time.perf_counter()
 score = 0
 max_score = 0
-test_file = 'datasets/Senti_v4/Sentiv4_test_set1.csv'
+test_file = 'datasets/Senti_v4/Sentiv4_test_set2.csv'
 
 with open(test_file, mode='r', encoding='utf-8') as file:
     csv_reader = csv.reader(file)
