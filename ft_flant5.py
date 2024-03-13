@@ -12,7 +12,7 @@ else:
     output_suffix = "FT-00"
     print("WARNING: No fine-tuned model suffix supplied. Will default to 'FT-00'. This is not recommended.")
 
-model_name = 'hf/flan-t5-small'
+model_name = 'hf/flan-t5-large'
 model_id   = model_path+model_name
 new_model_path=finetuned_path + model_name + '-' + output_suffix
 
@@ -44,12 +44,12 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=80,
+    num_train_epochs=20,
     load_best_model_at_end=False,
-    per_device_train_batch_size=4,
-    per_device_eval_batch_size=4,
+    per_device_train_batch_size=1,
+    per_device_eval_batch_size=1,
     gradient_accumulation_steps=1,
-    warmup_steps=50,
+    warmup_steps=100,
     save_steps = 5000,
     weight_decay=0.01,
     learning_rate=0.0001,
@@ -58,7 +58,7 @@ training_args = TrainingArguments(
     fp16=False,
     gradient_checkpointing=True,
     gradient_checkpointing_kwargs={'use_reentrant': False},
-    optim='adamw_torch',
+    optim='adafactor',
     evaluation_strategy='epoch',
     save_strategy='steps',
     logging_strategy='epoch',

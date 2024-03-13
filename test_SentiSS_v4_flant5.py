@@ -4,7 +4,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
 from hf_local_config import *
 
-model_name = "hf/flan-t5-small-JDG001"
+model_name = "hf/flan-t5-large-JDG007"
 model_id =  model_path + model_name
 max_output_tokens = 200
 
@@ -26,7 +26,7 @@ test_files =[
     # 'datasets/Senti_v4/Sentiv4_test_set2.csv',
     # 'datasets/Senti_v4/Sentiv4_test_set3.csv',
     # 'datasets/Senti_v4/Sentiv4_test_set4.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set5.csv',
+    'datasets/Senti_v4/Sentiv4_test_set5.csv',
     'datasets/HumanJudge_test.csv',
 ]
 
@@ -66,7 +66,7 @@ for test_file in test_files:
                 score = score + 1
                 # print(f"[{max_score}] .")
             else:
-                print("Expected vs LLM: " + answer + "->" + llm_answer)
+                #print("Expected vs LLM: " + answer + "->" + llm_answer)
                 pass
 
             max_score = max_score + 1
@@ -79,6 +79,8 @@ for test_file in test_files:
 
 end_time = time.perf_counter()
 total_time = end_time - start_time
+print("")
+print("RESULTS")
 print("Model:" + model_name)
 # print("Final score:" + str(score) + " / " + str(max_score))
 for test_score in test_scores:
