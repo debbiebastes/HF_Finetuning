@@ -20,8 +20,8 @@ print(f"Starting fine-tuning job for {new_model_path}")
 
 dataset = load_dataset('json', 
     data_files={
-        'train': datasets_path + 'senti_v4_augment_train.jsonl',
-        'eval': datasets_path + 'senti_v4_augment_eval.jsonl'
+        'train': datasets_path + 'HumanJudge_train.jsonl',
+        'eval': datasets_path + 'HumanJudge_eval.jsonl'
     })
 
 tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
@@ -44,12 +44,12 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=3,
+    num_train_epochs=80,
     load_best_model_at_end=False,
-    per_device_train_batch_size=32,
-    per_device_eval_batch_size=32,
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
     gradient_accumulation_steps=1,
-    warmup_steps=500,
+    warmup_steps=50,
     save_steps = 5000,
     weight_decay=0.01,
     learning_rate=0.0001,
