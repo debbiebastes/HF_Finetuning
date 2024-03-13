@@ -4078,7 +4078,7 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Negative
+Answer:",Slightly Negative
 274,"Here is a product review from a customer, which is delimited with triple backticks.
 
 Review text: 
@@ -11563,7 +11563,7 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",XXX
+Answer:",Slightly Negative
 774,"Here is a product review from a customer, which is delimited with triple backticks.
 
 Review text: 

@@ -1378,7 +1378,7 @@ Overall sentiment must be one of the following options:
 
 What is the overall sentiment of that product review?
 
-Answer:",Negative
+Answer:",Slightly Negative
 275,"Here is a product review from a customer, which is delimited with triple backticks.
 
 Review text: 
@@ -4424,6 +4424,21 @@ Overall sentiment must be one of the following options:
 What is the overall sentiment of that product review?
 
 Answer:",Negative
+773,"Here is a product review from a customer, which is delimited with triple backticks.
+
+Review text: 
+```
+They are batteries and they do work... but not for long. I pretty much base battery quality by how long they last in my wireless mouse. Generally I have to replace my home mouse every 5-6 months. I purchased these Amazon Basics AA Performance Alkaline batteries 3-1/2 months ago. In that time I've replaced my home mouse battery *3* times!! (The 3rd being yet again today.) My daughter has also gone through 2 batteries in her mouse as well (though she spends most of her time on her laptop with the touchpad).The shipping was fast and you get several batteries for a low cost, but I think a more economical way to go is to spend a little extra on name brand dependable batteries that last 2-3 times as long.
+```
+Overall sentiment must be one of the following options:
+- Positive
+- Slightly Positive
+- Negative
+- Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:",Slightly Negative
 774,"Here is a product review from a customer, which is delimited with triple backticks.
 
 Review text: 
