@@ -4,7 +4,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
 from hf_local_config import *
 
-model_name = "hf/flan-t5-large-JDG018"
+model_name = "hf/flan-t5-base-FT406"
 model_id =  model_path + model_name
 max_output_tokens = 200
 
@@ -22,10 +22,10 @@ model = T5ForConditionalGeneration.from_pretrained(
 test_scores = []
 start_time = time.perf_counter()
 test_files =[
-    # 'datasets/Senti_v4/Sentiv4_test_set1.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set2.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set3.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set4.csv',
+    'datasets/Senti_v4/Sentiv4_test_set1.csv',
+    'datasets/Senti_v4/Sentiv4_test_set2.csv',
+    'datasets/Senti_v4/Sentiv4_test_set3.csv',
+    'datasets/Senti_v4/Sentiv4_test_set4.csv',
     'datasets/Senti_v4/Sentiv4_test_set5.csv',
     'datasets/HumanJudge_test.csv',
 ]

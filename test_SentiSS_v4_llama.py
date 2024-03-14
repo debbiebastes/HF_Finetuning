@@ -6,10 +6,10 @@ import torch
 
 from hf_local_config import *
 
-lora_name = "hf/llama-2-13b-chat-qlora-FT001"
+lora_name = "hf/llama-2-7b-chat-qlora-FT017"
 lora = model_path + lora_name
 
-model_name = "hf/llama-2-13b-chat"
+model_name = "hf/llama-2-7b-chat"
 model_id = model_path + model_name
 max_output_tokens = 6
 
@@ -40,11 +40,12 @@ model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
 test_scores = []
 start_time = time.perf_counter()
 test_files =[
-    # 'datasets/Senti_v4/Sentiv4_test_set1.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set2.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set3.csv',
-    # 'datasets/Senti_v4/Sentiv4_test_set4.csv',
+    'datasets/Senti_v4/Sentiv4_test_set1.csv',
+    'datasets/Senti_v4/Sentiv4_test_set2.csv',
+    'datasets/Senti_v4/Sentiv4_test_set3.csv',
+    'datasets/Senti_v4/Sentiv4_test_set4.csv',
     'datasets/Senti_v4/Sentiv4_test_set5.csv',
+    'datasets/HumanJudge_test.csv',
 ]
 
 for test_file in test_files:
