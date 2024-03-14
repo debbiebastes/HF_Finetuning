@@ -20,7 +20,7 @@ print(f"Starting fine-tuning job for {new_model_path}")
 
 dataset = load_dataset('json', 
     data_files={
-        'train': datasets_path + 'HumanJudge_train.jsonl',
+        'train': datasets_path + 'HumanJudge_train_aug1.jsonl',
         'eval': datasets_path + 'HumanJudge_eval.jsonl'
     })
 
