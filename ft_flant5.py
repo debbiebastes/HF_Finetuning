@@ -44,7 +44,7 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=300,
+    num_train_epochs=30,
     load_best_model_at_end=False,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
