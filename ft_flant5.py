@@ -1,4 +1,5 @@
-from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+import torch, Trainer, TrainingArguments
 from datasets import load_dataset, Dataset
 import torch
 import sys
@@ -20,11 +21,11 @@ print(f"Starting fine-tuning job for {new_model_path}")
 
 dataset = load_dataset('json', 
     data_files={
-        'train': datasets_path + 'HumanJudge_train_aug1.jsonl',
+        'train': datasets_path + 'HumanJudge_train.jsonl',
         'eval': datasets_path + 'HumanJudge_eval.jsonl'
     })
 
-tokenizer = T5Tokenizer.from_pretrained(model_id, legacy=False)
+tokenizer = AutoTokenizer.from_pretrained(model_id, legacy=False)
 
 # Preprocess the data
 def preprocess_function(examples):
@@ -36,7 +37,7 @@ def preprocess_function(examples):
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
 # Load the T5 model
-model = T5ForConditionalGeneration.from_pretrained(
+model = AutoModelForSeq2SeqLM.from_pretrained(
     model_id,
     # torch_dtype=torch.bfloat16,
 )
@@ -44,15 +45,15 @@ model = T5ForConditionalGeneration.from_pretrained(
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=30,
+    num_train_epochs=5,
     load_best_model_at_end=False,
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
-    gradient_accumulation_steps=16,
+    gradient_accumulation_steps=1,
     warmup_steps=100,
     save_steps = 5000,
-    weight_decay=0.15,
-    learning_rate=0.0001,
+    weight_decay=1.0,
+    learning_rate=0.0005,
     logging_dir=output_dir_logs,
     logging_steps=10,
     fp16=False,

@@ -1,31 +1,32 @@
 import csv
 import time
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import torch
 from hf_local_config import *
 
-model_name = "hf/flan-t5-large-JDG019"
+model_name = "hf/flan-t5-large"
 model_id =  model_path + model_name
 max_output_tokens = 200
 
-tokenizer = T5Tokenizer.from_pretrained(
+tokenizer = AutoTokenizer.from_pretrained(
     model_id, 
     local_files_only=True, 
     legacy=True
 )
 
-model = T5ForConditionalGeneration.from_pretrained(
+model = AutoModelForSeq2SeqLM.from_pretrained(
     model_id, 
     device_map="auto",
     #torch_dtype=torch.bfloat16,
 )
+
 test_scores = []
 start_time = time.perf_counter()
 test_files =[
-    'datasets/Senti_v4/Sentiv4_test_set1.csv',
-    'datasets/Senti_v4/Sentiv4_test_set2.csv',
-    'datasets/Senti_v4/Sentiv4_test_set3.csv',
-    'datasets/Senti_v4/Sentiv4_test_set4.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set1.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set2.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set3.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set4.csv',
     'datasets/Senti_v4/Sentiv4_test_set5.csv',
     'datasets/HumanJudge_test.csv',
 ]
@@ -66,7 +67,7 @@ for test_file in test_files:
                 score = score + 1
                 # print(f"[{max_score}] .")
             else:
-                #print("Expected vs LLM: " + answer + "->" + llm_answer)
+                print("Expected vs LLM: " + answer + "->" + llm_answer)
                 pass
 
             max_score = max_score + 1
