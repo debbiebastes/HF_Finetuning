@@ -8,9 +8,9 @@ _ = load_dotenv(find_dotenv())  # read local .env file
 client = OpenAI()
 # openai.api_key  = os.getenv('OPENAI_API_KEY')
 
-# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN
+# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN,
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
-def get_completion(prompt, model="ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h"):
+def get_completion(prompt, model="gpt-3.5-turbo-0125"):
     messages = [
         # {"role": "system", "content": system_message},
         {"role": "user", "content": prompt}

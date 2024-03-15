@@ -1,17 +1,17 @@
 from transformers import LlamaTokenizer, LlamaForCausalLM, Trainer, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
-from trl import DataCollatorForCompletionOnlyLM
+# from trl import DataCollatorForCompletionOnlyLM
 import torch
 from hf_local_config import *
 
-model_name = 'hf/llama-2-13b-chat'
+model_name = 'hf/llama-2-7b-chat'
 model_id   = model_path+model_name
 
-dataset = load_dataset('json', 
+dataset = load_dataset('csv', 
     data_files={
-        'train': datasets_path + 'SFT_trainer_format/senti_ft_dataset_train_v3.jsonl',
-        'eval': datasets_path + 'SFT_trainer_format/senti_ft_dataset_eval_v3_100.jsonl'
+        'train': datasets_path + 'SentiV3_var1541_train.csv',
+        'eval': datasets_path + 'SentiV3_var1541_eval.csv'
     })
 
 
@@ -67,7 +67,7 @@ model = LlamaForCausalLM.from_pretrained(
     model_id, 
     device_map="auto",
     quantization_config=nf4_config,
-    attn_implementation="flash_attention_2",
+    # attn_implementation="flash_attention_2",
     # torch_dtype=torch.bfloat16,
     # load_in_8bit=True,
 )
@@ -91,9 +91,9 @@ model.print_trainable_parameters()
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints,
-    num_train_epochs=1,
-    per_device_train_batch_size=1,
-    per_device_eval_batch_size=1,
+    num_train_epochs=16,
+    per_device_train_batch_size=16,
+    per_device_eval_batch_size=16,
     warmup_steps=500,
     save_steps=5000,
     weight_decay=0.01,

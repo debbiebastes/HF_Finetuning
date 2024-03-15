@@ -34,16 +34,16 @@ model_base = LlamaForCausalLM.from_pretrained(
     # torch_dtype=torch.bfloat16,
 )
 
-model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
-# model = model_base #uncomment this line if you want to use the base model without PEFT
+# model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
+model = model_base #uncomment this line if you want to use the base model without PEFT
 
 test_scores = []
 start_time = time.perf_counter()
 test_files =[
-    'datasets/Senti_v4/Sentiv4_test_set1.csv',
-    'datasets/Senti_v4/Sentiv4_test_set2.csv',
-    'datasets/Senti_v4/Sentiv4_test_set3.csv',
-    'datasets/Senti_v4/Sentiv4_test_set4.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set1.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set2.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set3.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set4.csv',
     'datasets/Senti_v4/Sentiv4_test_set5.csv',
     'datasets/HumanJudge_test.csv',
 ]
@@ -63,8 +63,18 @@ for test_file in test_files:
                 continue
             else:
                 input_text = row[1]
-                answer = row[2]
 
+                # Prompt modification - instruct specifically to not explain
+                input_text = input_text[0:-181]
+                # input_text += """ Do not explain your answer, just choose from the options above. Answer:"""
+                input_text += """Overall sentiment must be one of the following options:
+Positive, Slightly Positive, Negative, Slightly Negative
+
+What is the overall sentiment of that product review?
+Answer:"""
+                # print(input_text)
+                answer = row[2]
+                
             input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to("cuda")
 
 
