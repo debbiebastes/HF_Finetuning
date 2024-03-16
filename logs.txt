@@ -1,0 +1,13 @@
+WARNING: No fine-tuned model suffix supplied. Will default to '-FT00'. This is not recommended.
+Starting fine-tuning job for /Users/Shared/models/hf/flan-t5-small-FT215-FT00
+{'loss': 0.0187, 'learning_rate': 0.00025, 'epoch': 1.0}
+{'eval_loss': 0.011574008502066135, 'eval_runtime': 3.3771, 'eval_samples_per_second': 14.806, 'eval_steps_per_second': 14.806, 'epoch': 1.0}
+{'loss': 0.0148, 'learning_rate': 0.0005, 'epoch': 2.0}
+{'eval_loss': 0.006936205085366964, 'eval_runtime': 3.3108, 'eval_samples_per_second': 15.102, 'eval_steps_per_second': 15.102, 'epoch': 2.0}
+{'loss': 0.0127, 'learning_rate': 0.0003333333333333333, 'epoch': 3.0}
+{'eval_loss': 0.009922616183757782, 'eval_runtime': 3.3677, 'eval_samples_per_second': 14.847, 'eval_steps_per_second': 14.847, 'epoch': 3.0}
+{'loss': 0.0092, 'learning_rate': 0.00016666666666666666, 'epoch': 4.0}
+{'eval_loss': 0.00472622225061059, 'eval_runtime': 3.3139, 'eval_samples_per_second': 15.088, 'eval_steps_per_second': 15.088, 'epoch': 4.0}
+{'loss': 0.006, 'learning_rate': 0.0, 'epoch': 5.0}
+{'eval_loss': 0.003964715637266636, 'eval_runtime': 3.3193, 'eval_samples_per_second': 15.063, 'eval_steps_per_second': 15.063, 'epoch': 5.0}
+{'train_runtime': 175.5754, 'train_samples_per_second': 1.424, 'train_steps_per_second': 1.424, 'train_loss': 0.012274797797203064, 'epoch': 5.0}
