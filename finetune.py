@@ -1,5 +1,6 @@
-from transformers import Trainer, TrainingArguments
+from transformers import Trainer, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 import torch
 import sys
 from hf_local_config import *
@@ -36,6 +37,7 @@ if output_suffix == '':
 model_id       = model_path+model_name
 new_model_path = finetuned_path + model_name + output_suffix
 
+
 print(f"Starting fine-tuning job for {new_model_path}")
 
 dataset = load_dataset(dataset_type, 
@@ -55,6 +57,43 @@ def preprocess_function(examples):
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
+# Quantization Config
+if bnb_4bit_compute_dtype == "bf16":
+    bnb_4bit_compute_dtype = torch.bfloat16
+elif bnb_4bit_compute_dtype == "f16":
+    torch_dtype = torch.float16
+elif bnb_4bit_compute_dtype == "f32":
+    bnb_4bit_compute_dtype = torch.float32
+else:
+    print(f"ERROR: Unsupported bnb_4bit_compute_dtype: {bnb_4bit_compute_dtype}")
+
+nf4_config = BitsAndBytesConfig(
+    load_in_4bit=load_in_4bit,
+    bnb_4bit_quant_type=bnb_4bit_quant_type,
+    bnb_4bit_use_double_quant=bnb_4bit_use_double_quant,
+    bnb_4bit_compute_dtype=bnb_4bit_compute_dtype,   
+)
+
+if quantize == True:
+    quantization_config = nf4_config
+else:
+    quantization_config = None
+
+# LoRA Configuration
+if task_type=="CAUSAL_LM":
+    task_type=TaskType.CAUSAL_LM
+else:
+     print(f"ERROR: Unsupported task_type: {task_type}")
+
+lora_config = LoraConfig(
+    r=r,
+    lora_alpha=lora_alpha,
+    lora_dropout=lora_dropout,
+    target_modules=target_modules,
+    bias=bias, 
+    task_type=task_type)
+     
+
 # Load model
 if torch_dtype == "bf16":
     torch_dtype = torch.bfloat16
@@ -70,8 +109,16 @@ else:
 
 model = TheModel.from_pretrained(
     model_id,
+    device_map="auto",
     torch_dtype=torch_dtype,
+    quantization_config=quantization_config,
 )
+
+if use_lora==True:
+    #add LoRA adaptor
+    # model = prepare_model_for_kbit_training(model)
+    model = get_peft_model(model, lora_config)
+    model.print_trainable_parameters()
 
 # Define the training arguments
 training_args = TrainingArguments(
