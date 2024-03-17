@@ -69,7 +69,7 @@ model_base = TheModel.from_pretrained(
     quantization_config=quantization_config
 )
 
-if use_lora == "True":
+if use_lora == True:
     model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
 else:
     model = model_base #uncomment this line if you want to use the base model without PEFT
@@ -104,7 +104,7 @@ for test_file in test_files:
                 # print(input_text)
                 answer = row[2]
                 
-            input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to("mps")
+            input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to("cuda") #FIXME: make "cuda/mps/cpu/etc" a setting 
 
 
             outputs = model.generate(
@@ -145,6 +145,8 @@ for test_file in test_files:
 end_time = time.perf_counter()
 total_time = end_time - start_time
 print("\nModel:" + model_name)
+if use_lora == True:
+    print("LoRA:" + lora_name)
 # print("Final score:" + str(score) + " / " + str(max_score))
 for test_score in test_scores:
     print("Test:" + test_score["test"] + " Score:" + str(test_score["score"]) + " / " + str(test_score["max_score"]))

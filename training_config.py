@@ -1,6 +1,6 @@
 ##Output
 #The finetuned model name will be the base model name plus a suffix
-output_suffix = '' #suffix added to the name of the finetuned model. If empty, this will be '-FT00' 
+output_suffix = '-QLORA01' #suffix added to the name of the finetuned model. If empty, this will be '-FT00' 
 
 ##Dataset
 #For now, only local datasets inside the "datasets" folder is used
@@ -22,26 +22,23 @@ tokenizer_class = "" #if supplied, supercedes model_type
 torch_dtype = "" #default: auto
 
 ##LoRA Settings
-use_lora=True #Set to True when testing a LoRA or QLoRA model
+use_lora=True #Set to True to create a LoRA or QLoRA adapter
 r=8
 lora_alpha=32
 lora_dropout=0.05
-# target_modules=["q", "v"],
 target_modules=["q", "v", "k", "o", "wi_0", "wi_1", "wo"]
 bias="none"
 task_type="CAUSAL_LM"
 
 ##Quantization Settings
-quantize = False #Set to True when testing a quantized model
+quantize = True #Set to True to train a quantized model (must use LoRA)
 load_in_4bit=True
 bnb_4bit_quant_type="nf4"
 bnb_4bit_use_double_quant=True
 bnb_4bit_compute_dtype="bf16"
 
-
-
 ##TrainingArguments
-num_epochs = 5 #int > 0, must be specified.
+num_epochs = 1 #int > 0, must be specified.
 load_best_model_at_end = False #Whether to load best model at the end of training
 per_device_train_batch_size=1
 per_device_eval_batch_size=1

@@ -94,6 +94,7 @@ lora_config = LoraConfig(
     task_type=task_type)
      
 
+#FIXME: Might need to add `quantize` here as primary if-check to set this torch_dtype to auto
 # Load model
 if torch_dtype == "bf16":
     torch_dtype = torch.bfloat16
@@ -115,7 +116,7 @@ model = TheModel.from_pretrained(
 )
 
 if use_lora==True:
-    #add LoRA adaptor
+    #FIXME: prepare_model_for_kbit_training should be a setting
     # model = prepare_model_for_kbit_training(model)
     model = get_peft_model(model, lora_config)
     model.print_trainable_parameters()
