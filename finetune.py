@@ -13,61 +13,53 @@ else:
     print("ERROR: Please specify config file to use.")
     exit()
 
-
-#This is just to make VSCode python extension happy and not mark as missing every variable from parsed_values later
-# Initialize all variables to empty strings
-output_suffix = ''
-save_path = ''
-dataset_type = ''
-dataset_train = ''
-dataset_eval = ''
-model_name = ''
-model_type = ''
-model_class = ''
-tokenizer_class = ''
-add_pad_token = ''
-pad_token = ''
-padding_side = ''
-torch_dtype = ''
-use_lora = ''
-r = ''
-alpha = ''
-dropout = ''
-target_modules = ''
-bias = ''
-task_type = ''
-quantize = ''
-load_in_4bit = ''
-bnb_4bit_quant_type = ''
-bnb_4bit_use_double_quant = ''
-bnb_4bit_compute_dtype = ''
-num_epochs = ''
-load_best_model_at_end = ''
-per_device_train_batch_size = ''
-per_device_eval_batch_size = ''
-gradient_accumulation_steps = ''
-warmup_steps = ''
-save_steps = ''
-weight_decay = ''
-learning_rate = ''
-logging_steps = ''
-gradient_checkpointing = ''
-optim = ''
-evaluation_strategy = ''
-save_strategy = ''
-logging_strategy = ''
-log_level = ''
-
-
 #Load the YAML file
 #FIXME: Add checks here
 config = ''
 with open(config_file, 'r') as file:
     config = yaml.safe_load(file)
-    from config_reader import *
-    parsed_values = extract_values(config)
-    locals().update(parsed_values)
 
+    output_suffix = config.get('output', {}).get('suffix', '')
+    dataset_type = config.get('dataset', {}).get('type', '')
+    dataset_train = config.get('dataset', {}).get('train', '')
+    dataset_eval = config.get('dataset', {}).get('eval', '')
+    model_name = config.get('model', {}).get('name', '')
+    model_type = config.get('model', {}).get('type', '')
+    model_class = config.get('model', {}).get('class', '')
+    tokenizer_class = config.get('tokenizer', {}).get('class', '')
+    add_pad_token = config.get('tokenizer', {}).get('add_pad_token', False)  
+    pad_token = config.get('tokenizer', {}).get('pad_token', 'eos_token')
+    padding_side = config.get('tokenizer', {}).get('padding_side', 'right')
+    torch_dtype = config.get('from_pretrained', {}).get('torch_dtype', 'auto')
+    use_lora = config.get('lora', {}).get('use_lora', False)  
+    r = config.get('lora', {}).get('r', 8)
+    alpha = config.get('lora', {}).get('alpha', 32)
+    dropout = config.get('lora', {}).get('dropout', 0.05)  
+    target_modules = config.get('lora', {}).get('target_modules', [])
+    bias = config.get('lora', {}).get('bias', 'none')
+    task_type = config.get('lora', {}).get('task_type', 'CausalLM')
+    quantize = config.get('quant', {}).get('quantize', False)
+    load_in_4bit = config.get('quant', {}).get('load_in_4bit', True)
+    bnb_4bit_quant_type = config.get('quant', {}).get('bnb_4bit_quant_type', 'nf4')
+    bnb_4bit_use_double_quant = config.get('quant', {}).get('bnb_4bit_use_double_quant', True)
+    bnb_4bit_compute_dtype = config.get('quant', {}).get('bnb_4bit_compute_dtype', 'bf16')
+    num_epochs = config.get('train_args', {}).get('num_epochs', 0)
+    load_best_model_at_end = config.get('train_args', {}).get('load_best_model_at_end', False)  
+    per_device_train_batch_size = config.get('train_args', {}).get('per_device_train_batch_size', 1) 
+    per_device_eval_batch_size = config.get('train_args', {}).get('per_device_eval_batch_size', 1)
+    gradient_accumulation_steps = config.get('train_args', {}).get('gradient_accumulation_steps', 1) 
+    warmup_steps = config.get('train_args', {}).get('warmup_steps', 0)
+    save_steps = config.get('train_args', {}).get('save_steps', 0)  
+    weight_decay = config.get('train_args', {}).get('weight_decay', 0.0)  
+    learning_rate = config.get('train_args', {}).get('learning_rate', 0.0)  
+    logging_steps = config.get('train_args', {}).get('logging_steps', 0)  
+    gradient_checkpointing = config.get('train_args', {}).get('gradient_checkpointing', False)  
+    optim = config.get('train_args', {}).get('optim', '')
+    evaluation_strategy = config.get('train_args', {}).get('evaluation_strategy', '')
+    save_strategy = config.get('train_args', {}).get('save_strategy', '')
+    logging_strategy = config.get('train_args', {}).get('logging_strategy', '')
+    log_level = config.get('train_args', {}).get('log_level', '')
+    
 if model_class == '':
     if model_type == "causallm" or model_type == "":
         model_class = "AutoModelForCausalLM"
@@ -149,7 +141,7 @@ else:
     quantization_config = None
 
 # LoRA Configuration
-if task_type=="CAUSAL_LM":
+if task_type.lower()=="causal_lm":
     task_type=TaskType.CAUSAL_LM
 else:
      print(f"ERROR: Unsupported task_type: {task_type}")
@@ -157,7 +149,9 @@ else:
 
 #FIXME: Might need to add `quantize` here as primary if-check to set this torch_dtype to auto
 # Load model
-if torch_dtype == "bf16":
+if quantize == True:
+    torch_dtype = "auto"
+elif torch_dtype == "bf16":
     torch_dtype = torch.bfloat16
 elif torch_dtype == "f16":
     torch_dtype = torch.float16
