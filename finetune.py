@@ -4,19 +4,69 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, Ta
 import torch
 import sys
 from hf_local_config import *
-import importlib
+import yaml
 
+#FIXME: This should really be argparse!
+if len(sys.argv) > 1:
+    config_file = sys.argv[1]
+else:
+    print("ERROR: Please specify config file to use.")
+    exit()
+
+
+#This is just to make VSCode python extension happy and not mark as missing every variable from parsed_values later
+# Initialize all variables to empty strings
+output_suffix = ''
+save_path = ''
+dataset_type = ''
+dataset_train = ''
+dataset_eval = ''
+model_name = ''
 model_type = ''
-model_class =''
+model_class = ''
 tokenizer_class = ''
+add_pad_token = ''
+pad_token = ''
+padding_side = ''
+torch_dtype = ''
+use_lora = ''
+r = ''
+alpha = ''
+dropout = ''
+target_modules = ''
+bias = ''
+task_type = ''
+quantize = ''
+load_in_4bit = ''
+bnb_4bit_quant_type = ''
+bnb_4bit_use_double_quant = ''
+bnb_4bit_compute_dtype = ''
+num_epochs = ''
+load_best_model_at_end = ''
+per_device_train_batch_size = ''
+per_device_eval_batch_size = ''
+gradient_accumulation_steps = ''
+warmup_steps = ''
+save_steps = ''
+weight_decay = ''
+learning_rate = ''
+logging_steps = ''
+gradient_checkpointing = ''
+optim = ''
+evaluation_strategy = ''
+save_strategy = ''
+logging_strategy = ''
+log_level = ''
 
 
-
-
-
-#GET VALUES FROM CONFIG
-#some of model_type/class/tokenizer_class will get values
-from training_config import *
+#Load the YAML file
+#FIXME: Add checks here
+config = ''
+with open(config_file, 'r') as file:
+    config = yaml.safe_load(file)
+    from config_reader import *
+    parsed_values = extract_values(config)
+    locals().update(parsed_values)
 
 if model_class == '':
     if model_type == "causallm" or model_type == "":
@@ -38,9 +88,15 @@ if output_suffix == '':
     output_suffix = "-FT00"
     print("WARNING: No fine-tuned model suffix supplied. Will default to '-FT00'. This is not recommended.")
 
-model_id       = model_path+model_name
-new_model_path = finetuned_path + model_name + output_suffix
+if model_path == '':
+    #Get from environment variable
+    model_path = os.environ.get('HF_LOCAL_MODEL_PATH','')
 
+if save_path == '':
+    save_path = finetuned_path
+
+model_id       = model_path+model_name
+new_model_path = save_path + model_name + output_suffix
 
 print(f"Starting fine-tuning job for {new_model_path}")
 
@@ -61,7 +117,6 @@ if add_pad_token:
     if padding_side.lower() == "right" or padding_side.lower() == "left": 
         tokenizer.padding_side = padding_side.lower()
     
-
 # Preprocess the data
 def preprocess_function(examples):
     model_inputs = tokenizer(examples['prompt'], max_length=512, truncation=True, padding="max_length")
@@ -81,14 +136,14 @@ elif bnb_4bit_compute_dtype == "f32":
 else:
     print(f"ERROR: Unsupported bnb_4bit_compute_dtype: {bnb_4bit_compute_dtype}")
 
-nf4_config = BitsAndBytesConfig(
-    load_in_4bit=load_in_4bit,
-    bnb_4bit_quant_type=bnb_4bit_quant_type,
-    bnb_4bit_use_double_quant=bnb_4bit_use_double_quant,
-    bnb_4bit_compute_dtype=bnb_4bit_compute_dtype,   
-)
-
 if quantize == True:
+    print("Quantizing the model...")
+    nf4_config = BitsAndBytesConfig(
+        load_in_4bit=load_in_4bit,
+        bnb_4bit_quant_type=bnb_4bit_quant_type,
+        bnb_4bit_use_double_quant=bnb_4bit_use_double_quant,
+        bnb_4bit_compute_dtype=bnb_4bit_compute_dtype,   
+    )
     quantization_config = nf4_config
 else:
     quantization_config = None
@@ -98,14 +153,6 @@ if task_type=="CAUSAL_LM":
     task_type=TaskType.CAUSAL_LM
 else:
      print(f"ERROR: Unsupported task_type: {task_type}")
-
-lora_config = LoraConfig(
-    r=r,
-    lora_alpha=lora_alpha,
-    lora_dropout=lora_dropout,
-    target_modules=target_modules,
-    bias=bias, 
-    task_type=task_type)
      
 
 #FIXME: Might need to add `quantize` here as primary if-check to set this torch_dtype to auto
@@ -130,6 +177,15 @@ model = TheModel.from_pretrained(
 )
 
 if use_lora==True:
+    print("LoRA finetuning...")
+    lora_config = LoraConfig(
+        r=r,
+        lora_alpha=alpha,
+        lora_dropout=dropout,
+        target_modules=target_modules,
+        bias=bias, 
+        task_type=task_type)
+
     #FIXME: prepare_model_for_kbit_training should be a setting
     # model = prepare_model_for_kbit_training(model)
     model = get_peft_model(model, lora_config)
