@@ -6,6 +6,40 @@ import torch
 
 from hf_local_config import *
 
+
+
+
+
+def create_prompt(product_name, review_text):
+
+    prompt_string = f"""Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: {product_name}
+Review text: 
+```
+{review_text}
+```
+
+Overall sentiment must be one of the following options:
+-Positive
+-Slightly Positive
+-Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:"""
+    return prompt_string
+
+
+
+
+
+
+
+
+
+
 model_type = ''
 model_class =''
 tokenizer_class = ''
@@ -82,30 +116,25 @@ for test_file in test_files:
     max_score = 0
 
     with open(test_file, mode='r', encoding='utf-8') as file:
+        #FIXME: Turn this into a CSV DictReader
+
         csv_reader = csv.reader(file)
         print(f"\nTest {test_file} started...", end='', flush=True)
         # Iterate over each row in the CSV
         for row in csv_reader:
-            print(".", end='', flush=True) #Just a crude progress indicator
-            if row[0] == "ID":
+            #print(".", end='', flush=True) #Just a crude progress indicator
+            if row[0] == "product_name":
                 #this is the header row, skip
                 continue
             else:
-                input_text = row[1]
+                product_name = row[0]
+                review_text = row[1]
 
-                # Prompt modification - instruct specifically to not explain
-#                 input_text = input_text[0:-181]
-#                 # input_text += """ Do not explain your answer, just choose from the options above. Answer:"""
-#                 input_text += """Overall sentiment must be one of the following options:
-# Positive, Slightly Positive, Negative, Slightly Negative
+                prompt_string = create_prompt(product_name, review_text)
 
-# What is the overall sentiment of that product review?
-# Answer:"""
-                # print(input_text)
                 answer = row[2]
                 
-            input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to("cuda") #FIXME: make "cuda/mps/cpu/etc" a setting 
-
+            input_ids = tokenizer(prompt_string, return_tensors="pt").input_ids.to("cuda") #FIXME: make "cuda/mps/cpu/etc" a setting 
 
             outputs = model.generate(
                 input_ids=input_ids,   
@@ -126,6 +155,8 @@ for test_file in test_files:
                 )
             # llm_answer = llm_answer.split('/n',1)[0]
             
+
+            print(llm_answer)
 
             if llm_answer == answer: 
                 score = score + 1

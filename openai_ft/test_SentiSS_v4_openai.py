@@ -8,9 +8,30 @@ _ = load_dotenv(find_dotenv())  # read local .env file
 client = OpenAI()
 # openai.api_key  = os.getenv('OPENAI_API_KEY')
 
+def create_prompt(product_name, review_text):
+
+    prompt_string = f"""Here is a product review from a customer, which is delimited with triple backticks.
+
+Product Name: {product_name}
+Review text: 
+```
+{review_text}
+```
+
+Overall sentiment must be one of the following options:
+-Positive
+-Slightly Positive
+-Negative
+-Slightly Negative
+
+What is the overall sentiment of that product review?
+
+Answer:"""
+    return prompt_string
+
 # gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN,
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
-def get_completion(prompt, model="gpt-3.5-turbo-0125"):
+def get_completion(prompt, model="ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h"):
     messages = [
         # {"role": "system", "content": system_message},
         {"role": "user", "content": prompt}
@@ -26,7 +47,8 @@ def get_completion(prompt, model="gpt-3.5-turbo-0125"):
 test_scores = []
 start_time = time.perf_counter()
 test_files =[
-    '../datasets/Senti_v4/Sentiv4_test_set5.csv',
+    # '../datasets/Senti_v4/Sentiv4_test_set5.csv',
+    '../datasets/Batch2_AmazonReviews_Clean.csv',
     # '../datasets/HumanJudge_test.csv',
 ]
 
@@ -39,17 +61,21 @@ for test_file in test_files:
         print(f"\nTest {test_file} started...", end='', flush=True)
         # Iterate over each row in the CSV
         for row in csv_reader:
-            print(".", end='', flush=True) #Just a crude progress indicator
-            if row[0] == "ID":
+            #print(".", end='', flush=True) #Just a crude progress indicator
+            if row[0] == "product_name":
                 #this is the header row, skip
                 continue
             else:
-                input_text = row[1]
+                product_name = row[0]
+                review_text = row[1]
+
+                prompt_string = create_prompt(product_name, review_text)
+
                 answer = row[2]
 
 
-            llm_answer = get_completion(input_text)
-
+            llm_answer = get_completion(prompt_string)
+            print(llm_answer)
             if llm_answer == answer: 
                 score = score + 1
                 # print(f"[{max_score}] .")
