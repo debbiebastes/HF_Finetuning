@@ -18,6 +18,11 @@ model_type = "seq2seqlm" #defaults to "CausalLM"
 model_class = "" #if supplied, supercedes model_type
 tokenizer_class = "" #if supplied, supercedes model_type
 
+#tokenizer
+add_pad_token = False #if True, will add pad_token as the tokenizer's pad token
+pad_token = "eos_token" #"eos_token" will mean tokenizer.eos_token. Anything else will be taken literally.
+padding_side = "right" #either "right" or "left"
+
 #from_pretrained
 torch_dtype = "" #default: auto
 

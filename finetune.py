@@ -10,6 +10,10 @@ model_type = ''
 model_class =''
 tokenizer_class = ''
 
+
+
+
+
 #GET VALUES FROM CONFIG
 #some of model_type/class/tokenizer_class will get values
 from training_config import *
@@ -47,6 +51,16 @@ dataset = load_dataset(dataset_type,
     })
 
 tokenizer = TheTokenizer.from_pretrained(model_id, legacy=False)
+
+if add_pad_token:
+    if pad_token == "eos_token":
+        tokenizer.pad_token = tokenizer.eos_token
+    else:
+        tokenizer.pad_token = pad_token
+    
+    if padding_side.lower() == "right" or padding_side.lower() == "left": 
+        tokenizer.padding_side = padding_side.lower()
+    
 
 # Preprocess the data
 def preprocess_function(examples):
