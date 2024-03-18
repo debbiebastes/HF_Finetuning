@@ -1,12 +1,12 @@
 output:
   # The finetuned model name will be the base model name plus a suffix
-  suffix: '-TESTA01'  # Suffix added to the name of the finetuned model. If empty, this will be '-FT00'
+  suffix: '-FT401'  # Suffix added to the name of the finetuned model. If empty, this will be '-FT00'
 
 dataset:
   # For now, only local datasets inside the "datasets" folder are used
-  type: 'json'
-  train: 'HumanJudge_train.jsonl'
-  eval: 'HumanJudge_eval.jsonl'
+  type: 'csv'
+  train: 'SentiV3_var1541_train.csv'
+  eval: 'SentiV3_var1541_eval.csv'
   # Future, not yet implemented:
   use_hf_datasets: false
   hf_dataset_name: ''
@@ -52,7 +52,7 @@ quant:
 
 # TrainingArguments section
 train_args:
-  num_epochs: 1  # Int > 0, must be specified.
+  num_epochs: 4  # Int > 0, must be specified.
   load_best_model_at_end: false  # Whether to load the best model at the end of training
   per_device_train_batch_size: 1
   per_device_eval_batch_size: 1
@@ -60,10 +60,10 @@ train_args:
   warmup_steps: 100
   save_steps: 5000
   weight_decay: 0.1
-  learning_rate: 0.0005
+  learning_rate: 0.0001
   logging_steps: 10
   gradient_checkpointing: true
-  optim: 'adafactor'
+  optim: 'adamw_torch'
   evaluation_strategy: 'epoch'
   save_strategy: 'steps'
   logging_strategy: 'epoch'

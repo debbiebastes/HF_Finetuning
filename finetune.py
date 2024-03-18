@@ -19,7 +19,8 @@ config = ''
 with open(config_file, 'r') as file:
     config = yaml.safe_load(file)
 
-    output_suffix = config.get('output', {}).get('suffix', '')
+    output_suffix = config.get('output', {}).get('suffix', '-FT00')
+    save_path = config.get('output', {}).get('save_path', '')
     dataset_type = config.get('dataset', {}).get('type', '')
     dataset_train = config.get('dataset', {}).get('train', '')
     dataset_eval = config.get('dataset', {}).get('eval', '')
