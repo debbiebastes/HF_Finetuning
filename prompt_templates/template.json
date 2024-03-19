@@ -1,0 +1,4 @@
+{
+    "prompt": "Here is a product review from a customer, which is delimited with triple backticks.\n\n```\nProduct Name: {product_name}\nReview Text:\n{review_text}\n```\n\nOverall sentiment must be one of the following options:\n- Positive\n- Negative\n- Neutral\n\nWhat is the overall sentiment of that product review?\n\nAnswer:",
+    "completion": "{sentiment}"
+}
