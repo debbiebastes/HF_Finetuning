@@ -4,9 +4,10 @@ test_files =[
     # 'datasets/Senti_v4/Sentiv4_test_set2.csv',
     # 'datasets/Senti_v4/Sentiv4_test_set3.csv',
     # 'datasets/Senti_v4/Sentiv4_test_set4.csv',
-    'datasets/Senti_v4/Sentiv4_test_set5.csv',
-    'datasets/HumanJudge_test.csv',
+    # 'datasets/Senti_v4/Sentiv4_test_set5.csv',
+    # 'datasets/HumanJudge_test.csv',
     # 'datasets/Batch2_AmazonReviews_Clean.csv'
+    'datasets/Senti_v3/SentiV3_var1541_train.csv'
 ]
 
 
@@ -16,7 +17,7 @@ hf_dataset_name = ''
 hf_splits = [] 
 
 ##Model settings
-model_name="hf/flan-t5-small-FT216"
+model_name="hf/flan-t5-large-JDG020"
 model_type = "seq2seqlm" #defaults to "CausalLM"
 model_class = "" #if supplied, supercedes model_type
 tokenizer_class = "" #if supplied, supercedes model_type

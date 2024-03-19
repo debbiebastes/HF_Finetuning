@@ -3,42 +3,21 @@ import time
 from transformers import BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
 import torch
-
+import json
 from hf_local_config import *
 
 
+#FIXME - add this to the config file
+prompt_template = "prompt_templates/template.json"
 
+# Load prompt template from JSON file
+with open(prompt_template, 'r') as template:
+    template_data = json.load(template)
 
 
 def create_prompt(product_name, review_text):
-
-    prompt_string = f"""Here is a product review from a customer, which is delimited with triple backticks.
-
-Product Name: {product_name}
-Review text: 
-```
-{review_text}
-```
-
-Overall sentiment must be one of the following options:
--Positive
--Slightly Positive
--Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:"""
+    prompt_string = template_data['prompt'].format(product_name=product_name, review_text=review_text)
     return prompt_string
-
-
-
-
-
-
-
-
-
 
 model_type = ''
 model_class =''
@@ -123,17 +102,20 @@ for test_file in test_files:
         # Iterate over each row in the CSV
         for row in csv_reader:
             #print(".", end='', flush=True) #Just a crude progress indicator
-            if row[0] == "product_name":
+            if row[0] == "prompt":
                 #this is the header row, skip
                 continue
             else:
-                product_name = row[0]
-                review_text = row[1]
+                # product_name = row[0]
+                # review_text = row[1]
+                # prompt_string = create_prompt(product_name, review_text)
+                # answer = row[2]
 
-                prompt_string = create_prompt(product_name, review_text)
+                #Override for old dataset format
+                prompt_string = row[0]
+                answer = row[1]
 
-                answer = row[2]
-                
+
             input_ids = tokenizer(prompt_string, return_tensors="pt").input_ids.to("cuda") #FIXME: make "cuda/mps/cpu/etc" a setting 
 
             outputs = model.generate(

@@ -26,10 +26,13 @@ with open(config_file, 'r') as file:
     dataset_type = config.get('dataset', {}).get('type', '')
     dataset_train = config.get('dataset', {}).get('train', '')
     dataset_eval = config.get('dataset', {}).get('eval', '')
+    prompt_template = config.get('dataset', {}).get('prompt_template', '')
+    prompt_max_len = config.get('dataset', {}).get('prompt_max_len', 512)
+    completion_max_len = config.get('dataset', {}).get('completion_max_len', 512)
     model_name = config.get('model', {}).get('name', '')
-    model_type = config.get('model', {}).get('type', '')
-    model_class = config.get('model', {}).get('class', '')
-    tokenizer_class = config.get('tokenizer', {}).get('class', '')
+    model_type = config.get('model', {}).get('type', '') or 'CausalLM'
+    model_class = config.get('model', {}).get('class', '') or 'AutoModelForCausalLM'
+    tokenizer_class = config.get('tokenizer', {}).get('class', '') or 'AutoTokenizer'
     add_pad_token = config.get('tokenizer', {}).get('add_pad_token', False)  
     pad_token = config.get('tokenizer', {}).get('pad_token', 'eos_token')
     padding_side = config.get('tokenizer', {}).get('padding_side', 'right')
@@ -40,7 +43,7 @@ with open(config_file, 'r') as file:
     dropout = config.get('lora', {}).get('dropout', 0.05)  
     target_modules = config.get('lora', {}).get('target_modules', [])
     bias = config.get('lora', {}).get('bias', 'none')
-    task_type = config.get('lora', {}).get('task_type', 'CausalLM')
+    task_type = config.get('lora', {}).get('task_type', '') or 'CAUSAL_LM'
     quantize = config.get('quant', {}).get('quantize', False)
     load_in_4bit = config.get('quant', {}).get('load_in_4bit', True)
     bnb_4bit_quant_type = config.get('quant', {}).get('bnb_4bit_quant_type', 'nf4')
@@ -64,9 +67,9 @@ with open(config_file, 'r') as file:
     log_level = config.get('train_args', {}).get('log_level', '')
     
 if model_class == '':
-    if model_type == "causallm" or model_type == "":
+    if model_type.lower() == "causallm" or model_type == "":
         model_class = "AutoModelForCausalLM"
-    elif model_type == "seq2seqlm":
+    elif model_type.lower() == "seq2seqlm":
         model_class = "AutoModelForSeq2SeqLM"
     else:
         #Error condition, need to specify type or model class
@@ -116,19 +119,33 @@ if add_pad_token:
 #####################
 # Preprocess the data
 
-# Load promot template from JSON file
-with open('template.json', 'r') as template_fp:
-    template_data = json.load(template_fp)
+# Load prompt template from JSON file
+with open(prompt_template, 'r') as template:
+    template_data = json.load(template)
 
 def preprocess_function(examples):
-    prompt = template_data['prompt'].format(**examples['prompt']) # Replace template placeholders with dataset values 
-    # completion = template_data['completion'].format(**dataset_entry)
+    prompts = []
+    for i in range(len(examples['product_name'])):
+        # Replace template placeholders with dataset values
+        prompt = template_data['prompt'].format(product_name=examples['product_name'][i], review_text=examples['review_text'][i]) 
+        prompts.append(prompt)
 
-    model_inputs = tokenizer(prompt, max_length=512, truncation=True, padding="max_length")
+    if model_type.lower() == "causallm":
+        labelled_texts = []
+        for i in range(len(examples['product_name'])):
+            new_value = prompts[i] + examples['sentiment'][i]
+            labelled_texts.append(new_value)
+        model_inputs = tokenizer(labelled_texts, max_length=prompt_max_len, truncation=True, padding="max_length")
+        model_inputs['labels'] = model_inputs['input_ids'].copy()
 
-    #FIXME: For CausalLM, model_inputs['labels'] should be set to model_inputs['input_ids'].copy()
-    labels = tokenizer(examples['completion'], max_length=128, truncation=True, padding='max_length')    
-    model_inputs['labels'] = labels['input_ids'].copy()
+    elif model_type.lower() == "seq2seqlm":
+        model_inputs = tokenizer(prompt, max_length=prompt_max_len, truncation=True, padding="max_length")
+        labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
+        model_inputs['labels'] = labels['input_ids'].copy()
+
+    else:
+        print("ERROR: Unsupported model type.")
+        exit()
 
     return model_inputs
 

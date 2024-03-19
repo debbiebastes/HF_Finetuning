@@ -4,22 +4,25 @@ output:
 
 dataset:
   # For now, only local datasets inside the "datasets" folder are used
-  type: 'csv'
-  train: 'SentiV3_var1541_train.csv'
-  eval: 'SentiV3_var1541_eval.csv'
+  type: 'json'
+  train: 'sentiv5_set1_test.jsonl'
+  eval: 'sentiv5_set1_test.jsonl'
+  prompt_template: 'prompt_templates/template.json'
+  prompt_max_len: 512
+  completion_max_len: 128 #For CausalLM, this is ignored
   # Future, not yet implemented:
   use_hf_datasets: false
   hf_dataset_name: ''
   hf_splits: []
 
 model:
-  name: 'hf/flan-t5-small'
-  type: 'seq2seqlm'  # Defaults to "CausalLM"
+  name: 'hf/llama-2-7b-chat'
+  type: ''  # Defaults to "CausalLM"
   class: ''  # If supplied, supercedes model.type
 
 tokenizer:
   class: ''  # If supplied, uses this instead of AutoTokenizer
-  add_pad_token: false  # If True, will add pad_token as the tokenizer's pad token
+  add_pad_token: true  # If True, will add pad_token as the tokenizer's pad token
   pad_token: 'eos_token'  # "eos_token" will mean tokenizer.eos_token. Anything else will be taken literally.
   padding_side: 'right'  # Either "right" or "left"
 
@@ -27,24 +30,32 @@ from_pretrained:
   torch_dtype: ''  # Default: auto
 
 lora:
-  use_lora: false  # Set to True to create a LoRA or QLoRA adapter
+  use_lora: true  # Set to True to create a LoRA or QLoRA adapter
   r: 8
   alpha: 32
   dropout: 0.05
+  # target_modules:
+  #   - 'q'
+  #   - 'v'
+  #   - 'k'
+  #   - 'o'
+  #   - 'wi_0'
+  #   - 'wi_1'
+  #   - 'wo'
   target_modules:
-    - 'q'
-    - 'v'
-    - 'k'
-    - 'o'
-    - 'wi_0'
-    - 'wi_1'
-    - 'wo'
+      - 'q_proj'
+      - 'o_proj'
+      - 'k_proj'
+      - 'v_proj'
+      - 'gate_proj'
+      - 'up_proj'
+      - 'down_proj'
   bias: 'none'
   task_type: 'CAUSAL_LM'
 
 # Quantization Settings section
 quant:
-  quantize: false  # Set to True to train a quantized model (must use LoRA)
+  quantize: true  # Set to True to train a quantized model (must use LoRA)
   load_in_4bit: true
   bnb_4bit_quant_type: 'nf4'
   bnb_4bit_use_double_quant: true
@@ -52,7 +63,7 @@ quant:
 
 # TrainingArguments section
 train_args:
-  num_epochs: 4  # Int > 0, must be specified.
+  num_epochs: 1  # Int > 0, must be specified.
   load_best_model_at_end: false  # Whether to load the best model at the end of training
   per_device_train_batch_size: 1
   per_device_eval_batch_size: 1
