@@ -125,27 +125,37 @@ with open(prompt_template, 'r') as template:
 
 def preprocess_function(examples):
     prompts = []
-    for i in range(len(examples['product_name'])):
+    # for i in range(len(examples['product_name'])):
+    #     # Replace template placeholders with dataset values
+    #     prompt = template_data['prompt'].format(product_name=examples['product_name'][i], review_text=examples['review_text'][i]) 
+    #     prompts.append(prompt)
+
+    # if model_type.lower() == "causallm":
+    #     labelled_texts = []
+    #     for i in range(len(examples['product_name'])):
+    #         new_value = prompts[i] + examples['sentiment'][i]
+    #         labelled_texts.append(new_value)
+    #     model_inputs = tokenizer(labelled_texts, max_length=prompt_max_len, truncation=True, padding="max_length")
+    #     model_inputs['labels'] = model_inputs['input_ids'].copy()
+
+    # elif model_type.lower() == "seq2seqlm":
+    #     model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
+    #     labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
+    #     model_inputs['labels'] = labels['input_ids'].copy()
+
+    # else:
+    #     print("ERROR: Unsupported model type.")
+    #     exit()
+
+    ## Override for legacy dataset
+    for i in range(len(examples['prompt'])):
         # Replace template placeholders with dataset values
-        prompt = template_data['prompt'].format(product_name=examples['product_name'][i], review_text=examples['review_text'][i]) 
+        prompt = template_data['prompt'].format(prompt=examples['prompt'][i])
         prompts.append(prompt)
 
-    if model_type.lower() == "causallm":
-        labelled_texts = []
-        for i in range(len(examples['product_name'])):
-            new_value = prompts[i] + examples['sentiment'][i]
-            labelled_texts.append(new_value)
-        model_inputs = tokenizer(labelled_texts, max_length=prompt_max_len, truncation=True, padding="max_length")
-        model_inputs['labels'] = model_inputs['input_ids'].copy()
-
-    elif model_type.lower() == "seq2seqlm":
-        model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
-        labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
-        model_inputs['labels'] = labels['input_ids'].copy()
-
-    else:
-        print("ERROR: Unsupported model type.")
-        exit()
+    model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
+    labels = tokenizer(examples['completion'], max_length=completion_max_len, truncation=True, padding='max_length')    
+    model_inputs['labels'] = labels['input_ids'].copy()
 
     return model_inputs
 

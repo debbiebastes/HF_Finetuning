@@ -4,6 +4,7 @@ from transformers import BitsAndBytesConfig
 from peft import PeftModel, PeftConfig
 import torch
 import json
+import jsonlines
 from hf_local_config import *
 
 
@@ -94,27 +95,36 @@ for test_file in test_files:
     score = 0
     max_score = 0
 
-    with open(test_file, mode='r', encoding='utf-8') as file:
-        #FIXME: Turn this into a CSV DictReader
+    #### #CSV FORMAT (OLD DATASET FORMAT)
+    # with open(test_file, mode='r', encoding='utf-8') as file:
+    #     #FIXME: Turn this into a CSV DictReader
 
-        csv_reader = csv.reader(file)
+    #     csv_reader = csv.reader(file)
+    #     print(f"\nTest {test_file} started...", end='', flush=True)
+    #     # Iterate over each row in the CSV
+    #     for row in csv_reader:
+    #         #print(".", end='', flush=True) #Just a crude progress indicator
+    #         if row[0] == "prompt":
+    #             #this is the header row, skip
+    #             continue
+    #         else:
+    #             product_name = row[0]
+    #             review_text = row[1]
+    #             prompt_string = create_prompt(product_name, review_text)
+    #             answer = row[2]
+
+    #             # #Override for old dataset format
+    #             # prompt_string = row[0]
+    #             # answer = row[1]
+
+    with jsonlines.open(test_file, mode='r') as reader:
         print(f"\nTest {test_file} started...", end='', flush=True)
-        # Iterate over each row in the CSV
-        for row in csv_reader:
-            #print(".", end='', flush=True) #Just a crude progress indicator
-            if row[0] == "prompt":
-                #this is the header row, skip
-                continue
-            else:
-                # product_name = row[0]
-                # review_text = row[1]
-                # prompt_string = create_prompt(product_name, review_text)
-                # answer = row[2]
-
-                #Override for old dataset format
-                prompt_string = row[0]
-                answer = row[1]
-
+        for row in reader:
+            print(".", end='', flush=True) #Just a crude progress indicator
+            product_name = row.get("product_name", "")
+            review_text = row.get("review_text", "")
+            prompt_string = create_prompt(product_name, review_text)
+            answer = row.get("sentiment", "")
 
             input_ids = tokenizer(prompt_string, return_tensors="pt").input_ids.to("cuda") #FIXME: make "cuda/mps/cpu/etc" a setting 
 
@@ -138,7 +148,7 @@ for test_file in test_files:
             # llm_answer = llm_answer.split('/n',1)[0]
             
 
-            print(llm_answer)
+            # print(llm_answer)
 
             if llm_answer == answer: 
                 score = score + 1
