@@ -2,9 +2,11 @@ from transformers import Trainer, TrainingArguments, BitsAndBytesConfig
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 import torch
+import json
+import yaml
 import sys
 from hf_local_config import *
-import yaml
+
 
 #FIXME: This should really be argparse!
 if len(sys.argv) > 1:
@@ -110,11 +112,24 @@ if add_pad_token:
     if padding_side.lower() == "right" or padding_side.lower() == "left": 
         tokenizer.padding_side = padding_side.lower()
     
+
+#####################
 # Preprocess the data
+
+# Load promot template from JSON file
+with open('template.json', 'r') as template_fp:
+    template_data = json.load(template_fp)
+
 def preprocess_function(examples):
-    model_inputs = tokenizer(examples['prompt'], max_length=512, truncation=True, padding="max_length")
-    labels = tokenizer(examples['completion'], max_length=128, truncation=True, padding='max_length')
+    prompt = template_data['prompt'].format(**examples['prompt']) # Replace template placeholders with dataset values 
+    # completion = template_data['completion'].format(**dataset_entry)
+
+    model_inputs = tokenizer(prompt, max_length=512, truncation=True, padding="max_length")
+
+    #FIXME: For CausalLM, model_inputs['labels'] should be set to model_inputs['input_ids'].copy()
+    labels = tokenizer(examples['completion'], max_length=128, truncation=True, padding='max_length')    
     model_inputs['labels'] = labels['input_ids'].copy()
+
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
