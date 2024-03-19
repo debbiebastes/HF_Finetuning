@@ -16,8 +16,8 @@ dataset:
   hf_splits: []
 
 model:
-  name: 'hf/llama-2-7b-chat'
-  type: ''  # Defaults to "CausalLM"
+  name: 'hf/flan-t5-small'
+  type: 'seq2seqlm'  # Defaults to "CausalLM"
   class: ''  # If supplied, supercedes model.type
 
 tokenizer:
@@ -30,32 +30,32 @@ from_pretrained:
   torch_dtype: ''  # Default: auto
 
 lora:
-  use_lora: true  # Set to True to create a LoRA or QLoRA adapter
+  use_lora: false  # Set to True to create a LoRA or QLoRA adapter
   r: 8
   alpha: 32
   dropout: 0.05
-  # target_modules:
-  #   - 'q'
-  #   - 'v'
-  #   - 'k'
-  #   - 'o'
-  #   - 'wi_0'
-  #   - 'wi_1'
-  #   - 'wo'
   target_modules:
-      - 'q_proj'
-      - 'o_proj'
-      - 'k_proj'
-      - 'v_proj'
-      - 'gate_proj'
-      - 'up_proj'
-      - 'down_proj'
+    - 'q'
+    - 'v'
+    - 'k'
+    - 'o'
+    - 'wi_0'
+    - 'wi_1'
+    - 'wo'
+  # target_modules:
+  #     - 'q_proj'
+  #     - 'o_proj'
+  #     - 'k_proj'
+  #     - 'v_proj'
+  #     - 'gate_proj'
+  #     - 'up_proj'
+  #     - 'down_proj'
   bias: 'none'
   task_type: 'CAUSAL_LM'
 
 # Quantization Settings section
 quant:
-  quantize: true  # Set to True to train a quantized model (must use LoRA)
+  quantize: false  # Set to True to train a quantized model (must use LoRA)
   load_in_4bit: true
   bnb_4bit_quant_type: 'nf4'
   bnb_4bit_use_double_quant: true

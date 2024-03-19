@@ -31,7 +31,7 @@ with open(config_file, 'r') as file:
     completion_max_len = config.get('dataset', {}).get('completion_max_len', 512)
     model_name = config.get('model', {}).get('name', '')
     model_type = config.get('model', {}).get('type', '') or 'CausalLM'
-    model_class = config.get('model', {}).get('class', '') or 'AutoModelForCausalLM'
+    model_class = config.get('model', {}).get('class', '')
     tokenizer_class = config.get('tokenizer', {}).get('class', '') or 'AutoTokenizer'
     add_pad_token = config.get('tokenizer', {}).get('add_pad_token', False)  
     pad_token = config.get('tokenizer', {}).get('pad_token', 'eos_token')
@@ -139,7 +139,7 @@ def preprocess_function(examples):
         model_inputs['labels'] = model_inputs['input_ids'].copy()
 
     elif model_type.lower() == "seq2seqlm":
-        model_inputs = tokenizer(prompt, max_length=prompt_max_len, truncation=True, padding="max_length")
+        model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
         labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
         model_inputs['labels'] = labels['input_ids'].copy()
 
