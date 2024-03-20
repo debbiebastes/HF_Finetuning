@@ -148,13 +148,13 @@ for test_file in test_files:
             # llm_answer = llm_answer.split('/n',1)[0]
             
 
-            # print(llm_answer)
+            # print("LLM Answer:" + llm_answer + "###")
 
             if llm_answer == answer: 
                 score = score + 1
                 # print(f"[{max_score}] .")
             else:
-                print("Expected vs LLM: " + answer + "->" + llm_answer)
+                # print("Expected vs LLM: " + answer + "->" + llm_answer)
                 pass
 
             max_score = max_score + 1
