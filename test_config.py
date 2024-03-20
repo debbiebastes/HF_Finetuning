@@ -1,4 +1,3 @@
-##Model settings
 model_name="hf/flan-t5-large-FT508-checkpoint-4000"
 model_type = "seq2seqlm" #defaults to "CausalLM"
 model_class = "" #if supplied, supercedes model_type
@@ -28,7 +27,7 @@ hf_splits = []
 
 ##LoRA Settings
 use_lora = False #Set to True when testing a LoRA or QLoRA model
-lora_name = "hf/"
+lora_name = "hf/llama-2-7b-chat-qlora-FT017"
 
 ##Quantization Settings
 quantize = False #Set to True when testing a quantized model
