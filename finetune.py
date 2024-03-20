@@ -36,7 +36,7 @@ with open(config_file, 'r') as file:
     add_pad_token = config.get('tokenizer', {}).get('add_pad_token', False)  
     pad_token = config.get('tokenizer', {}).get('pad_token', 'eos_token')
     padding_side = config.get('tokenizer', {}).get('padding_side', 'right')
-    torch_dtype = config.get('from_pretrained', {}).get('torch_dtype', 'auto')
+    torch_dtype = config.get('from_pretrained', {}).get('torch_dtype', '') or 'auto'
     use_lora = config.get('lora', {}).get('use_lora', False)  
     r = config.get('lora', {}).get('r', 8)
     alpha = config.get('lora', {}).get('alpha', 32)
@@ -151,11 +151,17 @@ def preprocess_function(examples):
     for i in range(len(examples['prompt'])):
         # Replace template placeholders with dataset values
         prompt = template_data['prompt'].format(prompt=examples['prompt'][i])
+        if model_type.lower() == "causallm":
+            prompt = prompt + examples['completion'][i]
+
         prompts.append(prompt)
 
     model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
-    labels = tokenizer(examples['completion'], max_length=completion_max_len, truncation=True, padding='max_length')    
-    model_inputs['labels'] = labels['input_ids'].copy()
+    if model_type.lower() == "seq2seqlm":
+        labels = tokenizer(examples['completion'], max_length=completion_max_len, truncation=True, padding='max_length')
+        model_inputs['labels'] = labels['input_ids'].copy()
+    else:
+        model_inputs['labels'] = model_inputs['input_ids'].copy()
 
     return model_inputs
 
@@ -189,8 +195,6 @@ if task_type.lower()=="causal_lm":
 else:
      print(f"ERROR: Unsupported task_type: {task_type}")
      
-
-#FIXME: Might need to add `quantize` here as primary if-check to set this torch_dtype to auto
 # Load model
 if quantize == True:
     torch_dtype = "auto"
