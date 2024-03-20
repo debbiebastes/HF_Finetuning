@@ -1,9 +1,9 @@
 ##Model settings
-model_name="hf/qwen1.5-0.5B-chat-FT501"
-model_type = "causallm" #defaults to "CausalLM"
+model_name="hf/flan-t5-large-FT508-checkpoint-4000"
+model_type = "seq2seqlm" #defaults to "CausalLM"
 model_class = "" #if supplied, supercedes model_type
 tokenizer_class = "" #if supplied, supercedes model_type
-llm_outputs_prompt = True #Set to True if model completion format includes the prompt (Llama, Mistral, etc)
+llm_outputs_prompt = False #Set to True if model completion format includes the prompt (Llama, Mistral, etc)
 
 #Dataset
 test_files =[
@@ -17,6 +17,7 @@ test_files =[
     'datasets/sentiv5_set1_test.jsonl',
     'datasets/sentiv5_set2_test.jsonl',
     'datasets/sentiv5_set3_test.jsonl',
+    'datasets/sentiv5_HumanJudge_test.jsonl',
 ]
 
 

@@ -56,6 +56,7 @@ with open(config_file, 'r') as file:
     gradient_accumulation_steps = config.get('train_args', {}).get('gradient_accumulation_steps', 1) 
     warmup_steps = config.get('train_args', {}).get('warmup_steps', 0)
     save_steps = config.get('train_args', {}).get('save_steps', 0)  
+    eval_steps = config.get('train_args', {}).get('eval_steps', 0)  
     weight_decay = config.get('train_args', {}).get('weight_decay', 0.0)  
     learning_rate = config.get('train_args', {}).get('learning_rate', 0.0)  
     logging_steps = config.get('train_args', {}).get('logging_steps', 0)  
@@ -156,12 +157,20 @@ def preprocess_function(examples):
 
         prompts.append(prompt)
 
+        #for prompt in prompts:
+        #    print("***********")
+        #    print(prompt)
+        
+
+
     model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
     if model_type.lower() == "seq2seqlm":
         labels = tokenizer(examples['completion'], max_length=completion_max_len, truncation=True, padding='max_length')
         model_inputs['labels'] = labels['input_ids'].copy()
+        #print("Seq2seq!")
     else:
         model_inputs['labels'] = model_inputs['input_ids'].copy()
+        #print("CausalLM")
 
     return model_inputs
 
@@ -242,6 +251,7 @@ training_args = TrainingArguments(
     gradient_accumulation_steps=gradient_accumulation_steps,
     warmup_steps=warmup_steps,
     save_steps=save_steps,
+    eval_steps=eval_steps,
     weight_decay=weight_decay,
     learning_rate=learning_rate,
     logging_dir=output_dir_logs,
