@@ -1,4 +1,4 @@
-model_name="hf/flan-t5-large-FT508-checkpoint-4000"
+model_name="hf/flan-t5-xl-FT416-checkpoint-3000"
 model_type = "seq2seqlm" #defaults to "CausalLM"
 model_class = "" #if supplied, supercedes model_type
 tokenizer_class = "" #if supplied, supercedes model_type
@@ -13,8 +13,8 @@ test_files =[
     # 'datasets/Senti_v4/Sentiv4_test_set5.csv',
     # 'datasets/HumanJudge_test.csv',
     # 'datasets/Batch2_AmazonReviews_Clean.csv'
-    'datasets/sentiv5_set1_test.jsonl',
-    'datasets/sentiv5_set2_test.jsonl',
+    #'datasets/sentiv5_set1_test.jsonl',
+    #'datasets/sentiv5_set2_test.jsonl',
     'datasets/sentiv5_set3_test.jsonl',
     'datasets/sentiv5_HumanJudge_test.jsonl',
 ]

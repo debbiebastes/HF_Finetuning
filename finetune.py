@@ -6,6 +6,7 @@ import json
 import yaml
 import sys
 from hf_local_config import *
+import os
 
 
 #FIXME: This should really be argparse!
@@ -243,7 +244,7 @@ if use_lora==True:
 
 # Define the training arguments
 training_args = TrainingArguments(
-    output_dir=output_dir_checkpoints,
+    output_dir=output_dir_checkpoints + os.sep + model_name + output_suffix,
     num_train_epochs=num_epochs,
     load_best_model_at_end=load_best_model_at_end,
     per_device_train_batch_size=per_device_train_batch_size,
@@ -254,7 +255,7 @@ training_args = TrainingArguments(
     eval_steps=eval_steps,
     weight_decay=weight_decay,
     learning_rate=learning_rate,
-    logging_dir=output_dir_logs,
+    logging_dir=output_dir_logs + os.sep + model_name + output_suffix,
     logging_steps=logging_steps,
     gradient_checkpointing=gradient_checkpointing,
     gradient_checkpointing_kwargs={'use_reentrant': False},
