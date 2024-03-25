@@ -1,5 +1,6 @@
 import csv
 import json
+import jsonlines
 import time
 from openai import OpenAI
 
@@ -7,32 +8,20 @@ from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())  # read local .env file
 
 client = OpenAI()
-# openai.api_key  = os.getenv('OPENAI_API_KEY')
+
+# Prompt template file path
+prompt_template = "prompt_templates/JDGTags_template.json"
+
+# Load prompt template from JSON file
+with open(prompt_template, 'r') as template:
+    template_data = json.load(template)
 
 def create_prompt(product_name, review_text):
-
-    prompt_string = f"""Here is a product review from a customer, which is delimited with triple backticks.
-
-Product Name: {product_name}
-Review text: 
-```
-{review_text}
-```
-
-Overall sentiment must be one of the following options:
--Positive
--Slightly Positive
--Negative
--Slightly Negative
-
-What is the overall sentiment of that product review?
-
-Answer:"""
+    prompt_string = template_data['prompt'].format(product_name=product_name, review_text=review_text)
     return prompt_string
 
 def get_completion(prompt, model):
     messages = [
-        # {"role": "system", "content": system_message},
         {"role": "user", "content": prompt}
     ]
     # print(messages)
@@ -44,7 +33,7 @@ def get_completion(prompt, model):
     return response.choices[0].message.content
 
 
-model_name = "ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h"
+model_name = "gpt-3.5-turbo-0125"
 # gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN,
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
 test_scores = []
@@ -52,27 +41,28 @@ start_time = time.perf_counter()
 test_files =[
     # '../datasets/sentiv5_set1_test.jsonl',
     # '../datasets/sentiv5_set2_test.jsonl',
-    '../datasets/sentiv5_set3_test.jsonl',
+    # '../datasets/sentiv5_set3_test.jsonl',
     # '../datasets/sentiv5_HumanJudge_test.jsonl',
+    'datasets/ReviewTags_v1_test.jsonl',
 ]
 
 for test_file in test_files:
     score = 0
     max_score = 0
 
-    with open(test_file, mode='r', encoding='utf-8') as file:
+    with jsonlines.open(test_file, mode='r') as reader:
         print(f"\nTest {test_file} started...", end='', flush=True)
-        # Iterate over each line in the JSON lines file
-        for line in file:
+        for row in reader:
             print(".", end='', flush=True) #Just a crude progress indicator
-            data = json.loads(line.strip())
-            product_name = data["product_name"]
-            review_text = data["review_text"]
-            answer = data["sentiment"]
+            product_name = row.get("product_name", "")
+            review_text = row.get("review_text", "")
+            prompt_string = create_prompt(product_name, review_text)
+            answer = row.get("tags", "")
 
             prompt_string = create_prompt(product_name, review_text)
+            # print(prompt_string)
             llm_answer = get_completion(prompt_string, model_name)
-            # print(llm_answer)
+            print(llm_answer)
 
             if llm_answer == answer: 
                 score += 1

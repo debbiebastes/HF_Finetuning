@@ -13,7 +13,7 @@ import sys
 
 
 #FIXME - add this to the config file
-prompt_template = "prompt_templates/review_tags_template.json"
+prompt_template = "prompt_templates/JDGTags_template.json"
 
 
 # Load prompt template from JSON file

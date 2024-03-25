@@ -1,6 +1,6 @@
 #FIXME: Make this a yaml file, like finetuning.
 
-model_name="hf/flan-t5-xl"
+model_name="hf/flan-t5-small"
 model_type = "seq2seqlm" #defaults to "CausalLM"
 model_class = "" #if supplied, supersedes model_type
 tokenizer_class = ""
