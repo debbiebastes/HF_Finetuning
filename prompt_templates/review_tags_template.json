@@ -1,0 +1,4 @@
+{
+    "prompt": "Here is a product review from a customer, which is delimited with triple backticks.\n\n```\nProduct Name: {product_name}\nReview Text:\n{review_text}\n```\n\nAssign appropriate tags for this product review. Available tags are the following:\n- design\n- performance\n- quality\n- value\n- none\n- non-review\n\nA review may receive zero, one, or multiple tags based on its content.\n\nYour output should be in JSON format, as a list of appropriate tags, for example: [\"performance\",\"quality\"] \n\nResponse:",
+    "completion": "{tags}"
+}

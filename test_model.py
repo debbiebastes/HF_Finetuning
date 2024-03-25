@@ -13,7 +13,7 @@ import sys
 
 
 #FIXME - add this to the config file
-prompt_template = "prompt_templates/template.json"
+prompt_template = "prompt_templates/review_tags_template.json"
 
 
 # Load prompt template from JSON file
@@ -64,7 +64,7 @@ TheTokenizer = getattr(__import__('transformers', fromlist=[tokenizer_class]), t
 
 lora = model_path + lora_name
 model_id = model_path + model_name
-max_output_tokens = 6
+max_output_tokens = 20
 
 tokenizer = TheTokenizer.from_pretrained(
     model_id, 
@@ -135,13 +135,13 @@ for test_file in test_files:
     #             # answer = row[1]
 
     with jsonlines.open(test_file, mode='r') as reader:
-        #print(f"\nTest {test_file} started...", end='', flush=True)
+        print(f"\nTest {test_file} started...", end='', flush=True)
         for row in reader:
-            #print(".", end='', flush=True) #Just a crude progress indicator
+            print(".", end='', flush=True) #Just a crude progress indicator
             product_name = row.get("product_name", "")
             review_text = row.get("review_text", "")
             prompt_string = create_prompt(product_name, review_text)
-            answer = row.get("sentiment", "")
+            answer = row.get("tags", "")
 
             input_ids = tokenizer(prompt_string, return_tensors="pt").input_ids.to("cuda") #FIXME: make "cuda/mps/cpu/etc" a setting 
 
@@ -171,7 +171,7 @@ for test_file in test_files:
                 score = score + 1
                 # print(f"[{max_score}] .")
             else:
-                # print("Expected vs LLM: " + answer + "->" + llm_answer)
+                print("Expected vs LLM: " + answer + "->" + llm_answer)
                 pass
 
             max_score = max_score + 1

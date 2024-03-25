@@ -15,10 +15,11 @@ test_files =[
     # 'datasets/Senti_v4/Sentiv4_test_set5.csv',
     # 'datasets/HumanJudge_test.csv',
     # 'datasets/Batch2_AmazonReviews_Clean.csv'
-    'datasets/sentiv5_set1_test.jsonl',
-    'datasets/sentiv5_set2_test.jsonl',
-    'datasets/sentiv5_set3_test.jsonl',
-    'datasets/sentiv5_HumanJudge_test.jsonl',
+    # 'datasets/sentiv5_set1_test.jsonl',
+    # 'datasets/sentiv5_set2_test.jsonl',
+    # 'datasets/sentiv5_set3_test.jsonl',
+    # 'datasets/sentiv5_HumanJudge_test.jsonl',
+    'datasets/ReviewTags_v1_test.jsonl'
 ]
 
 
@@ -28,11 +29,11 @@ hf_dataset_name = ''
 hf_splits = [] 
 
 ##LoRA Settings
-use_lora = True #Set to True when testing a LoRA or QLoRA model
-lora_name = "hf/flan-t5-xl-JDG030-qlora"
+use_lora = False #Set to True when testing a LoRA or QLoRA model
+lora_name = "hf/"
 
 ##Quantization Settings
-quantize = True #Set to True when testing a quantized model
+quantize = False #Set to True when testing a quantized model
 load_in_4bit = True
 bnb_4bit_quant_type = "nf4"
 bnb_4bit_use_double_quant = True
