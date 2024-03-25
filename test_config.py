@@ -1,7 +1,9 @@
-model_name="hf/flan-t5-xl-FT416-checkpoint-3000"
+#FIXME: Make this a yaml file, like finetuning.
+
+model_name="hf/flan-t5-xl"
 model_type = "seq2seqlm" #defaults to "CausalLM"
-model_class = "" #if supplied, supercedes model_type
-tokenizer_class = "" #if supplied, supercedes model_type
+model_class = "" #if supplied, supersedes model_type
+tokenizer_class = ""
 llm_outputs_prompt = False #Set to True if model completion format includes the prompt (Llama, Mistral, etc)
 
 #Dataset
@@ -13,8 +15,8 @@ test_files =[
     # 'datasets/Senti_v4/Sentiv4_test_set5.csv',
     # 'datasets/HumanJudge_test.csv',
     # 'datasets/Batch2_AmazonReviews_Clean.csv'
-    #'datasets/sentiv5_set1_test.jsonl',
-    #'datasets/sentiv5_set2_test.jsonl',
+    'datasets/sentiv5_set1_test.jsonl',
+    'datasets/sentiv5_set2_test.jsonl',
     'datasets/sentiv5_set3_test.jsonl',
     'datasets/sentiv5_HumanJudge_test.jsonl',
 ]
@@ -26,11 +28,11 @@ hf_dataset_name = ''
 hf_splits = [] 
 
 ##LoRA Settings
-use_lora = False #Set to True when testing a LoRA or QLoRA model
-lora_name = "hf/llama-2-7b-chat-qlora-FT017"
+use_lora = True #Set to True when testing a LoRA or QLoRA model
+lora_name = "hf/flan-t5-xl-JDG030-qlora"
 
 ##Quantization Settings
-quantize = False #Set to True when testing a quantized model
+quantize = True #Set to True when testing a quantized model
 load_in_4bit = True
 bnb_4bit_quant_type = "nf4"
 bnb_4bit_use_double_quant = True

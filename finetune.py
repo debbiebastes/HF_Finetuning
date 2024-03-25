@@ -67,6 +67,8 @@ with open(config_file, 'r') as file:
     save_strategy = config.get('train_args', {}).get('save_strategy', '')
     logging_strategy = config.get('train_args', {}).get('logging_strategy', '')
     log_level = config.get('train_args', {}).get('log_level', '')
+    bf16_amp = config.get('train_args', {}).get('bf16', False)
+    fp16_amp = config.get('train_args', {}).get('fp16', False)
     
 if model_class == '':
     if model_type.lower() == "causallm" or model_type == "":
@@ -127,50 +129,48 @@ with open(prompt_template, 'r') as template:
 
 def preprocess_function(examples):
     prompts = []
-    # for i in range(len(examples['product_name'])):
-    #     # Replace template placeholders with dataset values
-    #     prompt = template_data['prompt'].format(product_name=examples['product_name'][i], review_text=examples['review_text'][i]) 
-    #     prompts.append(prompt)
+    for i in range(len(examples['product_name'])):
+        # Replace template placeholders with dataset values
+        prompt = template_data['prompt'].format(product_name=examples['product_name'][i], review_text=examples['review_text'][i]) 
+        prompts.append(prompt)
 
-    # if model_type.lower() == "causallm":
-    #     labelled_texts = []
-    #     for i in range(len(examples['product_name'])):
-    #         new_value = prompts[i] + examples['sentiment'][i]
-    #         labelled_texts.append(new_value)
-    #     model_inputs = tokenizer(labelled_texts, max_length=prompt_max_len, truncation=True, padding="max_length")
-    #     model_inputs['labels'] = model_inputs['input_ids'].copy()
+    if model_type.lower() == "causallm":
+        labelled_texts = []
+        for i in range(len(examples['product_name'])):
+            new_value = prompts[i] + examples['sentiment'][i]
+            labelled_texts.append(new_value)
+        model_inputs = tokenizer(labelled_texts, max_length=prompt_max_len, truncation=True, padding="max_length")
+        model_inputs['labels'] = model_inputs['input_ids'].copy()
 
-    # elif model_type.lower() == "seq2seqlm":
-    #     model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
-    #     labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
-    #     model_inputs['labels'] = labels['input_ids'].copy()
+    elif model_type.lower() == "seq2seqlm":
+        model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
+        labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
+        model_inputs['labels'] = labels['input_ids'].copy()
 
-    # else:
-    #     print("ERROR: Unsupported model type.")
-    #     exit()
+    else:
+        print("ERROR: Unsupported model type.")
+        exit()
 
     ## Override for legacy dataset
-    for i in range(len(examples['prompt'])):
-        # Replace template placeholders with dataset values
-        prompt = template_data['prompt'].format(prompt=examples['prompt'][i])
-        if model_type.lower() == "causallm":
-            prompt = prompt + examples['completion'][i]
+    # for i in range(len(examples['prompt'])):
+    #     # Replace template placeholders with dataset values
+    #     prompt = template_data['prompt'].format(prompt=examples['prompt'][i])
+    #     if model_type.lower() == "causallm":
+    #         prompt = prompt + examples['completion'][i]
 
-        prompts.append(prompt)
+    #     prompts.append(prompt)
 
         #for prompt in prompts:
         #    print("***********")
         #    print(prompt)
         
-
-
-    model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
-    if model_type.lower() == "seq2seqlm":
-        labels = tokenizer(examples['completion'], max_length=completion_max_len, truncation=True, padding='max_length')
-        model_inputs['labels'] = labels['input_ids'].copy()
-        #print("Seq2seq!")
-    else:
-        model_inputs['labels'] = model_inputs['input_ids'].copy()
+    # model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
+    # if model_type.lower() == "seq2seqlm":
+    #     labels = tokenizer(examples['completion'], max_length=completion_max_len, truncation=True, padding='max_length')
+    #     model_inputs['labels'] = labels['input_ids'].copy()
+    #     #print("Seq2seq!")
+    # else:
+    #     model_inputs['labels'] = model_inputs['input_ids'].copy()
         #print("CausalLM")
 
     return model_inputs
@@ -242,7 +242,8 @@ if use_lora==True:
     model = get_peft_model(model, lora_config)
     model.print_trainable_parameters()
 
-# Define the training arguments
+
+#FIXME: Add tokenizer here so that checkpoints will have the correct tokenizer saved with them
 training_args = TrainingArguments(
     output_dir=output_dir_checkpoints + os.sep + model_name + output_suffix,
     num_train_epochs=num_epochs,
@@ -264,6 +265,8 @@ training_args = TrainingArguments(
     save_strategy=save_strategy,
     logging_strategy=logging_strategy,
     log_level=log_level,
+    bf16=bf16_amp,
+    fp16=fp16_amp,
 )
 
 #####Optimizers
@@ -275,6 +278,7 @@ trainer = Trainer(
     args=training_args,
     train_dataset=tokenized_dataset['train'],
     eval_dataset=tokenized_dataset['eval'],
+    tokenizer=tokenizer,
 )
 
 # Train the model
@@ -282,4 +286,4 @@ trainer.train()
 
 # Save the model
 model.save_pretrained(new_model_path)
-tokenizer.save_pretrained(new_model_path)
+#tokenizer.save_pretrained(new_model_path) #FIXME: Will be unnecessary when tokenizer is given to TrainingArgs

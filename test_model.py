@@ -6,10 +6,15 @@ import torch
 import json
 import jsonlines
 from hf_local_config import *
+import sys
+
+#FIXME: Make this runnable as a batch (multiple models to test) and make it output in
+# an easily recordable format like csv
 
 
 #FIXME - add this to the config file
 prompt_template = "prompt_templates/template.json"
+
 
 # Load prompt template from JSON file
 with open(prompt_template, 'r') as template:
@@ -27,6 +32,18 @@ tokenizer_class = ''
 #GET VALUES FROM CONFIG
 #some of model_type/class/tokenizer_class will get values
 from test_config import *
+
+#FIXME: Model name and lora name should both be batchable through scripts
+#FIXME: Will be config file
+if len(sys.argv) > 1:
+#    config_file = sys.argv[1]
+    #model_name = sys.argv[1]
+    lora_name = sys.argv[1]
+else:
+    #get model_name from config file
+    pass
+
+
 
 if model_class == '':
     if model_type == "causallm" or model_type == "":
@@ -118,9 +135,9 @@ for test_file in test_files:
     #             # answer = row[1]
 
     with jsonlines.open(test_file, mode='r') as reader:
-        print(f"\nTest {test_file} started...", end='', flush=True)
+        #print(f"\nTest {test_file} started...", end='', flush=True)
         for row in reader:
-            print(".", end='', flush=True) #Just a crude progress indicator
+            #print(".", end='', flush=True) #Just a crude progress indicator
             product_name = row.get("product_name", "")
             review_text = row.get("review_text", "")
             prompt_string = create_prompt(product_name, review_text)
@@ -172,6 +189,6 @@ if use_lora == True:
     print("LoRA:" + lora_name)
 # print("Final score:" + str(score) + " / " + str(max_score))
 for test_score in test_scores:
-    print("Test:" + test_score["test"] + " Score:" + str(test_score["score"]) + " / " + str(test_score["max_score"]))
+    print("Test" + test_score["test"] + " Score =" + str(test_score["score"]) + "/" + str(test_score["max_score"]))
 
 print("Total inference time (seconds): " + str(total_time))
