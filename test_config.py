@@ -29,11 +29,11 @@ hf_dataset_name = ''
 hf_splits = [] 
 
 ##LoRA Settings
-use_lora = False #Set to True when testing a LoRA or QLoRA model
-lora_name = "hf/"
+use_lora = True #Set to True when testing a LoRA or QLoRA model
+lora_name = "hf/flan-t5-xl-JDG-T-101"
 
 ##Quantization Settings
-quantize = False #Set to True when testing a quantized model
+quantize = True #Set to True when testing a quantized model
 load_in_4bit = True
 bnb_4bit_quant_type = "nf4"
 bnb_4bit_use_double_quant = True
