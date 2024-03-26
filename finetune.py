@@ -137,14 +137,14 @@ def preprocess_function(examples):
     if model_type.lower() == "causallm":
         labelled_texts = []
         for i in range(len(examples['product_name'])):
-            new_value = prompts[i] + examples['sentiment'][i]
+            new_value = prompts[i] + examples['tags'][i]
             labelled_texts.append(new_value)
         model_inputs = tokenizer(labelled_texts, max_length=prompt_max_len, truncation=True, padding="max_length")
         model_inputs['labels'] = model_inputs['input_ids'].copy()
 
     elif model_type.lower() == "seq2seqlm":
         model_inputs = tokenizer(prompts, max_length=prompt_max_len, truncation=True, padding="max_length")
-        labels = tokenizer(examples['sentiment'], max_length=completion_max_len, truncation=True, padding='max_length')    
+        labels = tokenizer(examples['tags'], max_length=completion_max_len, truncation=True, padding='max_length')    
         model_inputs['labels'] = labels['input_ids'].copy()
 
     else:
