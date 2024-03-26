@@ -19,15 +19,15 @@ client = OpenAI()
 # print(file)
 # print(validation_file)
 
-file_id = "file-fhT9KQhIlXAQscwQgevus26B"
-validation_file_id = "file-xhjnQv7T5rQCBJU62giDdyyj"
+file_id = "file-KF7plM2JQ7SOQZfSlfapf5Rk"
+validation_file_id = "file-FGTG0BsV90ZfSUXy222Hjo4K"
 #start finetune job
 response = client.fine_tuning.jobs.create(
   training_file=file_id,
   validation_file= validation_file_id,
   model="gpt-3.5-turbo-0125",
-  hyperparameters = {"n_epochs":4},
-  suffix="JDG004"
+  hyperparameters = {"n_epochs":2},
+  suffix="review-tags-JDG002"
 )
 
 # print(response)

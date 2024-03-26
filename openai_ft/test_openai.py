@@ -10,7 +10,7 @@ _ = load_dotenv(find_dotenv())  # read local .env file
 client = OpenAI()
 
 # Prompt template file path
-prompt_template = "prompt_templates/JDGTags_template.json"
+prompt_template = "prompt_templates/review_tags_template.json"
 
 # Load prompt template from JSON file
 with open(prompt_template, 'r') as template:
@@ -33,8 +33,8 @@ def get_completion(prompt, model):
     return response.choices[0].message.content
 
 
-model_name = "gpt-3.5-turbo-0125"
-# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN,
+model_name = "ft:gpt-3.5-turbo-0125:personal:review-tags-jdg002:96rGMq5A"
+# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN, ft:gpt-3.5-turbo-0125:personal:review-tags-jdg001:96qDBbvR
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
 test_scores = []
 start_time = time.perf_counter()

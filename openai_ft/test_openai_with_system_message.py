@@ -31,7 +31,7 @@ client = OpenAI()
 # Answer:"""
 #     return prompt_string
 
-prompt_template = "prompt_templates/JDGTags_template.json"
+prompt_template = "prompt_templates/review_tags_template.json"
 
 
 # Load prompt template from JSON file
@@ -56,7 +56,7 @@ def get_completion(prompt, model, system_message):
     return response.choices[0].message.content
 
 
-model_name = "gpt-3.5-turbo-0125"
+model_name = "ft:gpt-3.5-turbo-0125:personal:review-tags-jdg002:96rGMq5A"
 # gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN,
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
 test_scores = []
@@ -70,18 +70,9 @@ test_files =[
 ]
 system_message=f"""
 ###INSTRUCTIONS###
-As a product manager responsible for evaluating customer product reviews, your task is to categorize each review based on its content, acknowledging that a review may warrant zero, one, or multiple tags/categories according to company guidelines:
+As a product manager responsible for evaluating customer product reviews, your task is to categorize each review based on its content, acknowledging that a review may warrant zero, one, or multiple tags/categories according to company guidelines.
 
-1. Quality: Assess whether the review primarily focuses on the craftsmanship, durability, or overall build quality of the product. Look for mentions of materials, construction, and any defects or flaws encountered.
-
-2. Performance: Determine if the review emphasizes the product's functionality, efficiency, or how well it performs its intended tasks. Pay attention to mentions of speed, accuracy, features, and any performance issues experienced.
-
-3. Value: Identify reviews that highlight the product's worth in relation to its price. Consider references to cost-effectiveness, affordability, comparisons with similar products, and whether the product delivers on its promised benefits for the price paid.
-
-4. Design: Look for reviews that discuss the aesthetic appeal, ergonomics, user interface, or overall design aspects of the product. Note any compliments or criticisms regarding the product's appearance, ease of use, and user experience design.
-
-5. Non-review - reviews indicating the product has not yet been tried or whose content is simply "I bought this" or "bought this at sale" or "bought this for my wife" with no other information or customer sentiment expressed.
-
+Available tags are the following: design, peformance, quality, value, none and non-review.
 
 A review may receive more than one of these tags/categories if its content encompasses multiple aspects of the product experience. Alternatively, if a review lacks substantial content or does not clearly fit into any category, it may receive zero tags/categories. For example, a review that simply says "Good!" or "Excellent!" or "Terrible product!" will end up receiving zero tags, because it is not clear which categories will apply due to limited context. These are not classified as "non-review" because they still provided feedback (e.g., that they loved or hated or liked it) despite being not specific enough to be able to determine if it is about value, performance, quality or design.
 
