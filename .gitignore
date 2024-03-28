@@ -9,3 +9,5 @@
 ### Python ###
 __pycache__/
 venv/
+test_configs/*.yaml
+train_configs/*.yaml

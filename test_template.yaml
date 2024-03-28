@@ -1,0 +1,36 @@
+model:
+  model_name: "hf/flan-t5-small"
+  model_type: "seq2seqlm"  # defaults to "CausalLM"
+  model_class: ""  # if supplied, supersedes model_type
+  llm_outputs_prompt: false  # Set to true if model completion format includes the prompt (Llama, Mistral, etc)
+
+tokenizer:
+  class: ""
+  device: '' #defaults to cuda, can be mps, cpu
+
+dataset:
+  test_files:
+    - 'datasets/ReviewTags_v1_test.jsonl'
+  prompt_template: 'prompt_templates/review_tags_template.json'
+
+  # Future, not yet implemented:
+  use_hf_datasets: false
+  hf_dataset_name: ''
+  hf_splits: []
+
+from_pretrained:
+  torch_dtype: 'auto'  # Default: auto
+
+# LoRA Settings
+lora:
+  use_lora: true  # Set to true when testing a LoRA or QLoRA model
+  name: "hf/flan-t5-xl-JDG-T-101"
+
+# Quantization Settings
+quant:
+  quantize: true  # Set to true when testing a quantized model
+  load_in_4bit: true
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+  bnb_4bit_compute_dtype: "bf16"
+
