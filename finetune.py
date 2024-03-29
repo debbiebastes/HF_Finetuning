@@ -255,6 +255,12 @@ def main():
     if os.path.isdir(input_path):
         config_files = [f for f in os.listdir(input_path) if f.endswith('.yaml')]
         config_files.sort()
+
+        print("CONFIG FILES FOUND FOR THIS EXPERIMENT:")
+        for config_file in config_files:
+            print(config_file)
+
+        print("STARTING FINETUNING JOBS FOR THIS EXPERIMENT...")
         for config_file in config_files:
             config_path = os.path.join(input_path, config_file)
             with open(config_path, 'r') as file:
