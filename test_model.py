@@ -1,3 +1,4 @@
+import os
 import csv
 import time
 from transformers import BitsAndBytesConfig
@@ -9,13 +10,13 @@ import yaml
 from hf_local_config import *
 import sys
 
-#FIXME: make this output in an easily recordable format like csv
+write_header = True
 
 def create_prompt(product_name, review_text, template_data):
     prompt_string = template_data['prompt'].format(product_name=product_name, review_text=review_text)
     return prompt_string
 
-def run_test(config):
+def run_test(config, exp_id, filename):
     model_name = config.get('model', {}).get('name', '')
     model_type = config.get('model', {}).get('type') or 'causallm'
     model_class = config.get('model', {}).get('class', '')
@@ -124,7 +125,7 @@ def run_test(config):
         with jsonlines.open(test_file, mode='r') as reader:
             print(f"\nTest {test_file} started...", end='', flush=True)
             for row in reader:
-                print(".", end='', flush=True) #Just a crude progress indicator
+                # print(".", end='', flush=True) #Just a crude progress indicator
                 product_name = row.get("product_name", "")
                 review_text = row.get("review_text", "")
                 prompt_string = create_prompt(product_name, review_text, template_data)
@@ -156,7 +157,7 @@ def run_test(config):
 
                 if llm_answer == answer: 
                     score = score + 1
-                    # print(f"[{max_score}] .")
+                    print("Correct: " + llm_answer)
                 else:
                     print("Expected vs LLM: " + answer + "->" + llm_answer)
                     pass
@@ -178,15 +179,44 @@ def run_test(config):
     for test_score in test_scores:
         print("Test" + test_score["test"] + " Score =" + str(test_score["score"]) + "/" + str(test_score["max_score"]))
 
+
+    output_csv = output_dir_base + 'exp_logs' + os.sep + exp_id + os.sep + "test_results.csv"
+    with open(output_csv, 'a', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['Exp ID', 'Model', 'LoRA', 'Test Set', 'Score', 'Total', 'Percentage']
+        rows = [{
+            'Exp ID': exp_id,
+            'Model': model_name,
+            'LoRA': lora_name,
+            'Test Set': os.path.basename(os.path.splitext(filename)[0]),
+            'Score': test_score["score"],
+            'Total': test_score["max_score"],
+            'Percentage': str((test_score["score"] / test_score["max_score"]) * 100) + "%",
+        }]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        global write_header
+        if write_header == True:
+            writer.writeheader()
+            write_header = False
+
+        writer.writerows(rows)
+
     print("Total inference time (seconds): " + str(total_time))
 
 
+
+
+
 def main():
+    #FIXME: Should be argparse in the future!
     if len(sys.argv) > 1:
         input_path = sys.argv[1]
+        exp_id = sys.argv[2]
     else:
         print("ERROR: Please specify a config file or a directory containing config files.")
         exit()
+
+
 
     if os.path.isdir(input_path):
         config_files = [f for f in os.listdir(input_path) if f.endswith('.yaml')]
@@ -196,8 +226,9 @@ def main():
             with open(config_path, 'r') as file:
                 config = yaml.safe_load(file)
                 print(config_path)
-                run_test(config)
+                run_test(config, exp_id, config_file)
     else:
+        #FIXME: Will not accept single config files in the future, only directories!
         # Input path is a single config file
         with open(input_path, 'r') as config_file:
             config = yaml.safe_load(config_file)

@@ -7,6 +7,7 @@ import yaml
 import sys
 from hf_local_config import *
 import os
+import shutil
 
 def run_finetuning(config, filename):
     output_suffix = config.get('output', {}).get('suffix') or "-" + os.path.basename(os.path.splitext(filename)[0])
@@ -244,6 +245,18 @@ def run_finetuning(config, filename):
     # Save the model
     model.save_pretrained(new_model_path)
     tokenizer.save_pretrained(new_model_path)
+
+    #Process the checkpoints
+    target_directory = output_dir_checkpoints + model_name + output_suffix
+    checkpoints = [f.path for f in os.scandir(target_directory) if f.is_dir()]
+    for checkpoint in checkpoints:
+        checkpoint_folder = os.path.basename(checkpoint)
+        new_checkpoint_folder = f"{model_name + output_suffix}-{checkpoint_folder}"
+        new_path = os.path.join(model_path, new_checkpoint_folder)
+        
+        # Move the folder to the new location
+        shutil.move(checkpoint, new_path)
+
 
 def main():
     if len(sys.argv) > 1:
