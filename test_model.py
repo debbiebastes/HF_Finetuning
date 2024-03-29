@@ -182,16 +182,21 @@ def run_test(config, exp_id, filename):
 
     output_csv = output_dir_base + 'exp_logs' + os.sep + exp_id + os.sep + "test_results.csv"
     with open(output_csv, 'a', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['Exp ID', 'Model', 'LoRA', 'Test Set', 'Score', 'Total', 'Percentage']
-        rows = [{
-            'Exp ID': exp_id,
-            'Model': model_name,
-            'LoRA': lora_name,
-            'Test Set': os.path.basename(os.path.splitext(filename)[0]),
-            'Score': test_score["score"],
-            'Total': test_score["max_score"],
-            'Percentage': str((test_score["score"] / test_score["max_score"]) * 100) + "%",
-        }]
+        fieldnames = ['Exp ID', 'Test Config', 'Prompt Template','Model', 'LoRA', 'Test Set', 'Score', 'Total', 'Percentage']
+
+        rows = []
+        for test_score in test_scores:
+            rows.append({
+                'Exp ID': exp_id,
+                'Test Config': os.path.basename(os.path.splitext(filename)[0]), 
+                'Prompt Template': prompt_template,
+                'Model': model_name,
+                'LoRA': lora_name,
+                'Test Set': test_score["test"],
+                'Score': test_score["score"],
+                'Total': test_score["max_score"],
+                'Percentage': str((test_score["score"] / test_score["max_score"]) * 100) + "%",
+            })
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         global write_header
