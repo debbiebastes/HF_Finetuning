@@ -185,6 +185,10 @@ def run_test(config, exp_id, filename):
         fieldnames = ['Exp ID', 'Test Config', 'Prompt Template','Model', 'LoRA', 'Test Set', 'Score', 'Total', 'Percentage']
 
         rows = []
+
+        if use_lora == False: 
+            lora_name = ''
+            
         for test_score in test_scores:
             rows.append({
                 'Exp ID': exp_id,
