@@ -1,7 +1,7 @@
 model:
-  model_name: "hf/flan-t5-small"
-  model_type: "seq2seqlm"  # defaults to "CausalLM"
-  model_class: ""  # if supplied, supersedes model_type
+  name: "hf/flan-t5-small"
+  type: "seq2seqlm"  # defaults to "CausalLM"
+  class: ""  # if supplied, supersedes model_type
   llm_outputs_prompt: false  # Set to true if model completion format includes the prompt (Llama, Mistral, etc)
 
 tokenizer:

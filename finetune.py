@@ -8,8 +8,8 @@ import sys
 from hf_local_config import *
 import os
 
-def run_finetuning(config):
-    output_suffix = config.get('output', {}).get('suffix', '-FT00')
+def run_finetuning(config, filename):
+    output_suffix = config.get('output', {}).get('suffix') or "-" + os.path.basename(os.path.splitext(filename)[0])
     save_path = config.get('output', {}).get('save_path', '')
     dataset_type = config.get('dataset', {}).get('type', '')
     dataset_train = config.get('dataset', {}).get('train', '')
@@ -56,7 +56,9 @@ def run_finetuning(config):
     log_level = config.get('train_args', {}).get('log_level', '')
     bf16_amp = config.get('train_args', {}).get('bf16', False)
     fp16_amp = config.get('train_args', {}).get('fp16', False)
-    
+
+
+
     if model_class == '':
         if model_type.lower() == "causallm" or model_type == "":
             model_class = "AutoModelForCausalLM"
@@ -73,13 +75,7 @@ def run_finetuning(config):
     TheModel = getattr(__import__('transformers', fromlist=[model_class]), model_class)
     TheTokenizer = getattr(__import__('transformers', fromlist=[tokenizer_class]), tokenizer_class)
 
-    if output_suffix == '':
-        output_suffix = "-FT00"
-        print("WARNING: No fine-tuned model suffix supplied. Will default to '-FT00'. This is not recommended.")
-
-    if model_path == '':
-        #Get from environment variable
-        model_path = os.environ.get('HF_LOCAL_MODEL_PATH','')
+    model_path = os.environ.get('HF_LOCAL_MODEL_PATH','')
 
     if save_path == '':
         save_path = finetuned_path
@@ -263,7 +259,7 @@ def main():
             config_path = os.path.join(input_path, config_file)
             with open(config_path, 'r') as file:
                 config = yaml.safe_load(file)
-                run_finetuning(config)
+                run_finetuning(config, filename=config_file)
     else:
         # Input path is a single config file
         with open(input_path, 'r') as config_file:

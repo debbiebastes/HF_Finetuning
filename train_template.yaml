@@ -4,7 +4,7 @@ model:
   class: ''  # If supplied, supersedes model.type
 
 output:
-  suffix: '-JDG-T-101'  # Suffix added to the name of the finetuned model. If empty, this will be '-FT00'
+  suffix: '-JDG-T-101'  # Suffix added to the name of the finetuned model. If empty, this will be the filename of the config file (without the yaml extension)
 
 tokenizer:
   class: ''  # If supplied, uses this instead of AutoTokenizer

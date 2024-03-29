@@ -17,7 +17,7 @@ def create_prompt(product_name, review_text, template_data):
 
 def run_test(config):
     model_name = config.get('model', {}).get('name', '')
-    model_type = config.get('model', {}).get('type', '') or 'CausalLM'
+    model_type = config.get('model', {}).get('type') or 'causallm'
     model_class = config.get('model', {}).get('class', '')
     llm_outputs_prompt = config.get('model', {}).get('llm_outputs_prompt', False)
     tokenizer_class = config.get('tokenizer', {}).get('class', '') or 'AutoTokenizer'
@@ -49,11 +49,14 @@ def run_test(config):
     TheModel = getattr(__import__('transformers', fromlist=[model_class]), model_class)
     TheTokenizer = getattr(__import__('transformers', fromlist=[tokenizer_class]), tokenizer_class)
 
+    model_path = os.environ.get('HF_LOCAL_MODEL_PATH','')
 
     lora = model_path + lora_name
     model_id = model_path + model_name
     max_output_tokens = 20
 
+    print(model_id)
+    print(f"Using model {model_name}")
     tokenizer = TheTokenizer.from_pretrained(
         model_id, 
         local_files_only=True, 
