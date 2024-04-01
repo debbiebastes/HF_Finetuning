@@ -28,13 +28,13 @@ def get_completion(prompt, model):
     response = client.chat.completions.create(
         model=model,
         messages=messages,
-        temperature=0,  # this is the degree of randomness of the model's output
+        temperature=0.5,  # this is the degree of randomness of the model's output
     )
     return response.choices[0].message.content
 
 
-model_name = "ft:gpt-3.5-turbo-0125:personal:review-tags-jdg002:96rGMq5A"
-# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN, ft:gpt-3.5-turbo-0125:personal:review-tags-jdg001:96qDBbvR
+model_name = "ft:gpt-3.5-turbo-0125:personal:review-tags-jdg001:96qDBbvR"
+# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN, ft:gpt-3.5-turbo-0125:personal:review-tags-jdg001:96qDBbvR, ft:gpt-3.5-turbo-0125:personal:review-tags-jdg002:96rGMq5A
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
 test_scores = []
 start_time = time.perf_counter()

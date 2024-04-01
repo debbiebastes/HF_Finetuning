@@ -51,13 +51,13 @@ def get_completion(prompt, model, system_message):
     response = client.chat.completions.create(
         model=model,
         messages=messages,
-        temperature=0,  # this is the degree of randomness of the model's output
+        temperature=0.2,  # this is the degree of randomness of the model's output
     )
     return response.choices[0].message.content
 
 
-model_name = "ft:gpt-3.5-turbo-0125:personal:review-tags-jdg002:96rGMq5A"
-# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN,
+model_name = "gpt-3.5-turbo-0125"
+# gpt-3.5-turbo-0125, gpt-4-0125-preview, ft:gpt-3.5-turbo-0125:personal:humanjudge:92UltF3h, ft:gpt-3.5-turbo-0125:personal::92VevwmY, ft:gpt-3.5-turbo-0125:personal:jdg003:92WiHLQN, ft:gpt-3.5-turbo-0125:personal:review-tags-jdg001:96qDBbvR, ft:gpt-3.5-turbo-0125:personal:review-tags-jdg002:96rGMq5A
 # def get_completion(prompt, model="gpt-4-0125-preview", system_message="You are a helpful assistant"):
 test_scores = []
 start_time = time.perf_counter()
@@ -70,13 +70,14 @@ test_files =[
 ]
 system_message=f"""
 ###INSTRUCTIONS###
-As a product manager responsible for evaluating customer product reviews, your task is to categorize each review based on its content, acknowledging that a review may warrant zero, one, or multiple tags/categories according to company guidelines.
+You're tasked with labeling customer product reviews as a product manager. Each review should be assigned one or more tags/categories from the provided options: design, performance, quality, value, none, or non-review, following company guidelines.
 
-Available tags are the following: design, peformance, quality, value, none and non-review.
+non-review: Reviews indicating the product has not yet been tried or those with minimal content like "I bought this" or "bought this at sale" without any additional information or customer sentiment expressed.
 
-A review may receive more than one of these tags/categories if its content encompasses multiple aspects of the product experience. Alternatively, if a review lacks substantial content or does not clearly fit into any category, it may receive zero tags/categories. For example, a review that simply says "Good!" or "Excellent!" or "Terrible product!" will end up receiving zero tags, because it is not clear which categories will apply due to limited context. These are not classified as "non-review" because they still provided feedback (e.g., that they loved or hated or liked it) despite being not specific enough to be able to determine if it is about value, performance, quality or design.
+Reviews may be tagged with multiple categories if they discuss various aspects of the product experience. If a review lacks substantial content or doesn't fit any category clearly, assign it a "none" tag. For instance, reviews like "Good!" or "Terrible product!" receive a "none" tag due to limited context. These aren't categorized as "non-review" since they still offer feedback, albeit not detailed enough to determine specific categories.
 
-By applying these guidelines flexibly, you'll ensure that each review is appropriately categorized, allowing the company to gain nuanced insights into customer feedback on product quality, performance, value, and design.
+###OUTPUT FORMAT###
+["tag1", "tag2"]
 """
 for test_file in test_files:
     score = 0

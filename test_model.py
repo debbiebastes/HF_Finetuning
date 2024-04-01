@@ -1,3 +1,4 @@
+import gc
 import os
 import csv
 import time
@@ -50,7 +51,7 @@ def run_test(config, exp_id, filename):
     TheModel = getattr(__import__('transformers', fromlist=[model_class]), model_class)
     TheTokenizer = getattr(__import__('transformers', fromlist=[tokenizer_class]), tokenizer_class)
 
-    model_path = os.environ.get('HF_LOCAL_MODEL_PATH','')
+    global model_path
 
     lora = model_path + lora_name
     model_id = model_path + model_name
@@ -79,7 +80,7 @@ def run_test(config, exp_id, filename):
             load_in_4bit=load_in_4bit,
             bnb_4bit_quant_type=bnb_4bit_quant_type,
             bnb_4bit_use_double_quant=bnb_4bit_use_double_quant,
-            bnb_4bit_compute_dtype=bnb_4bit_compute_dtype,   
+            bnb_4bit_compute_dtype=bnb_4bit_compute_dtype,
         )
         quantization_config = nf4_config
     else:
@@ -110,6 +111,7 @@ def run_test(config, exp_id, filename):
         model = PeftModel.from_pretrained(model_base, lora, is_trainable=False)
     else:
         model = model_base
+
 
     test_scores = []
     start_time = time.perf_counter()
@@ -212,8 +214,11 @@ def run_test(config, exp_id, filename):
 
     print("Total inference time (seconds): " + str(total_time))
 
-
-
+    #Remove model from memory to make room for next model
+    model = model_base = None
+    collected = gc.collect()
+    torch.cuda.empty_cache()
+    print("****************************")
 
 
 def main():

@@ -76,7 +76,7 @@ def run_finetuning(config, filename):
     TheModel = getattr(__import__('transformers', fromlist=[model_class]), model_class)
     TheTokenizer = getattr(__import__('transformers', fromlist=[tokenizer_class]), tokenizer_class)
 
-    model_path = os.environ.get('HF_LOCAL_MODEL_PATH','')
+    global model_path
 
     if save_path == '':
         save_path = finetuned_path
