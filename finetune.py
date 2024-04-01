@@ -5,6 +5,7 @@ import torch
 import json
 import yaml
 import sys
+import gc
 from hf_local_config import *
 import os
 import shutil
@@ -256,6 +257,13 @@ def run_finetuning(config, filename):
         
         # Move the folder to the new location
         shutil.move(checkpoint, new_path)
+
+    #Remove model from memory to make room for next model
+    model = None
+    trainer = None
+    gc.collect()
+    torch.cuda.empty_cache()
+    print("****************************")
 
 
 def main():

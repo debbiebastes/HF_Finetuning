@@ -216,7 +216,7 @@ def run_test(config, exp_id, filename):
 
     #Remove model from memory to make room for next model
     model = model_base = None
-    collected = gc.collect()
+    gc.collect()
     torch.cuda.empty_cache()
     print("****************************")
 
