@@ -166,6 +166,7 @@ def run_test(config, exp_id, filename):
                         print("Correct: " + llm_answer)
                         llm_was_wrong = False
                 elif scoring == "set" or scoring == "ordered-set":
+                    if llm_answer=='': llm_answer = "[]"
                     llm_answer_set = json.loads(llm_answer)
                     answer_set = json.loads(answer)
 
@@ -260,6 +261,41 @@ def main():
                 config = yaml.safe_load(file)
                 print(config_path)
                 run_test(config, exp_id, config_file)
+
+                #See if we should test checkpoints
+                test_checkpoints = config.get('test_checkpoints', False)
+                print(f"Test Checkpoints? {test_checkpoints}")
+                if test_checkpoints:
+                    #Check if we are using LoRA
+                    use_lora = config.get('lora', {}).get('use_lora', False)  
+
+                    if use_lora:
+                        #We will loop through all available checkpoints of the model
+                        lora_name = config.get('lora', {}).get('name', '')
+                        checkpoint_basename = lora_name
+                    else:
+                        #No LoRA, our checkpoints are the model name
+                        model_name = config.get('model', {}).get('name', '')
+                        checkpoint_basename = model_name
+    
+                    # Get a list of all files in the checkpoint directory
+                    global model_path
+                    all_files = os.listdir(model_path + os.path.dirname(checkpoint_basename)) #we add dirname here because our models might be in subdirectories within model_path
+
+                    # Filter the files to get only the checkpoints for the given basename
+                    print("checkpoint name: {check}")
+                    checkpoints = [file for file in all_files if file.startswith(os.path.basename(checkpoint_basename) + '-checkpoint-')] #we use basename here to remove any directory info from the supplied model name
+                    print(f"Found {len(checkpoints)} checkpoints for {checkpoint_basename}: {checkpoints}")
+                    checkpoints.sort()
+                    for checkpoint in checkpoints:
+                        #Load the checkpoint
+                        print(f"Testing checkpoint {checkpoint}")
+                        if use_lora:
+                            config['lora']['name'] = os.path.dirname(checkpoint_basename) + os.sep + checkpoint
+                        else:
+                            config['model']['name'] = os.path.dirname(checkpoint_basename) + os.sep + checkpoint
+                        run_test(config, exp_id, config_file)
+
     else:
         #FIXME: Will not accept single config files in the future, only directories!
         # Input path is a single config file

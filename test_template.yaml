@@ -1,3 +1,5 @@
+test_checkpoints: true #Set to true to test all available checkpoints of the model (for loras, this will be checkpoints of the lora, not the base model)
+
 model:
   name: "hf/flan-t5-small"
   type: "seq2seqlm"  # defaults to "CausalLM"
