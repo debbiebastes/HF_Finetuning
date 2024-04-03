@@ -12,6 +12,7 @@ dataset:
   test_files:
     - 'datasets/ReviewTags_v1_test.jsonl'
   prompt_template: 'prompt_templates/review_tags_template.json'
+  scoring: 'set' #How to automatically score LLM answers: "equal", "set", "ordered-set"
 
   # Future, not yet implemented:
   use_hf_datasets: false

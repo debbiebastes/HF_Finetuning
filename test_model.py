@@ -26,6 +26,7 @@ def run_test(config, exp_id, filename):
     device = config.get('tokenizer', {}).get('device') or 'cuda'
     prompt_template = config.get('dataset', {}).get('prompt_template', '')
     test_files = config.get('dataset', {}).get('test_files', [])
+    scoring = config.get('dataset', {}).get('scoring') or 'equal'
     torch_dtype = config.get('from_pretrained', {}).get('torch_dtype', '') or 'auto'
     use_lora = config.get('lora', {}).get('use_lora', False)  
     lora_name = config.get('lora', {}).get('name', '')
@@ -157,10 +158,28 @@ def run_test(config, exp_id, filename):
 
                 # print("LLM Answer:" + llm_answer + "###")
 
-                if llm_answer == answer: 
-                    score = score + 1
-                    print("Correct: " + llm_answer)
-                else:
+
+                llm_was_wrong = True
+                if scoring == "equal":
+                    if llm_answer == answer: 
+                        score = score + 1
+                        print("Correct: " + llm_answer)
+                        llm_was_wrong = False
+                elif scoring == "set" or scoring == "ordered-set":
+                    llm_answer_set = json.loads(llm_answer)
+                    answer_set = json.loads(answer)
+
+                    if scoring == "set":
+                        #Sort the lists, to enable 
+                        llm_answer_set.sort()
+                        answer_set.sort()
+
+                    if llm_answer_set == answer_set:
+                        score = score + 1
+                        print("Correct: " + llm_answer)
+                        llm_was_wrong = False
+
+                if llm_was_wrong:
                     print("Expected vs LLM: " + answer + "->" + llm_answer)
                     pass
 
