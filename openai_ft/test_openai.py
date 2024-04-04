@@ -10,7 +10,7 @@ _ = load_dotenv(find_dotenv())  # read local .env file
 client = OpenAI()
 
 # Prompt template file path
-prompt_template = "prompt_templates/review_tags_template.json"
+prompt_template = "prompt_templates/JDGTags_template.json"
 
 # Load prompt template from JSON file
 with open(prompt_template, 'r') as template:
@@ -28,7 +28,7 @@ def get_completion(prompt, model):
     response = client.chat.completions.create(
         model=model,
         messages=messages,
-        temperature=0.5,  # this is the degree of randomness of the model's output
+        temperature=0.2,  # this is the degree of randomness of the model's output
     )
     return response.choices[0].message.content
 
@@ -43,7 +43,8 @@ test_files =[
     # '../datasets/sentiv5_set2_test.jsonl',
     # '../datasets/sentiv5_set3_test.jsonl',
     # '../datasets/sentiv5_HumanJudge_test.jsonl',
-    'datasets/ReviewTags_v1_test.jsonl',
+    # 'datasets/ReviewTags_v1_test.jsonl',
+    'datasets/Batch2_AmazonReviews_TagsAll.jsonl',
 ]
 
 for test_file in test_files:
@@ -53,7 +54,7 @@ for test_file in test_files:
     with jsonlines.open(test_file, mode='r') as reader:
         print(f"\nTest {test_file} started...", end='', flush=True)
         for row in reader:
-            print(".", end='', flush=True) #Just a crude progress indicator
+            # print(".", end='', flush=True) #Just a crude progress indicator
             product_name = row.get("product_name", "")
             review_text = row.get("review_text", "")
             prompt_string = create_prompt(product_name, review_text)
@@ -64,22 +65,22 @@ for test_file in test_files:
             llm_answer = get_completion(prompt_string, model_name)
             print(llm_answer)
 
-            if llm_answer == answer: 
-                score += 1
-            max_score += 1
+    #         if llm_answer == answer: 
+    #             score += 1
+    #         max_score += 1
 
-    test_scores.append({
-        "test": test_file, 
-        "score": score,
-        "max_score": max_score
-    })
+    # test_scores.append({
+    #     "test": test_file, 
+    #     "score": score,
+    #     "max_score": max_score
+    # })
 
 end_time = time.perf_counter()
 total_time = end_time - start_time
 print("\nRESULTS")
 print("\nModel:" + model_name)
-for test in test_scores:
-    print(f"Test: {test['test']}, Score: {test['score']}/{test['max_score']}")
+# for test in test_scores:
+#     print(f"Test: {test['test']}, Score: {test['score']}/{test['max_score']}")
 print(f"Total Time: {total_time} seconds")
 
 
