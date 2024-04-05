@@ -166,9 +166,17 @@ def run_test(config, exp_id, filename):
                         print("Correct: " + llm_answer)
                         llm_was_wrong = False
                 elif scoring == "set" or scoring == "ordered-set":
-                    if llm_answer==None or llm_answer.strip() == '': llm_answer = "[]"
-                    llm_answer_set = yaml.safe_load(llm_answer)
-                    answer_set = yaml.safe_load(answer)
+                    if llm_answer==None or llm_answer.strip() == '': llm_answer_set = []
+                    else:
+                        try:
+                            llm_answer_set = yaml.safe_load(llm_answer)
+                        except yaml.YAMLError:
+                            llm_answer_set = []
+
+                    try:
+                        answer_set = yaml.safe_load(answer)
+                    except yaml.YAMLError:
+                        answer_set = []
 
                     if scoring == "set":
                         #Sort the lists for scoring without order importance
