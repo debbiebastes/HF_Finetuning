@@ -1,15 +1,17 @@
-import gc
-import os
 import csv
-import time
-from transformers import BitsAndBytesConfig
-from peft import PeftModel, PeftConfig
-import torch
+import gc
 import json
 import jsonlines
-import yaml
-from hf_local_config import *
+import os
+import shutil
 import sys
+import time
+import torch
+import yaml
+
+from hf_local_config import *
+from peft import PeftModel, PeftConfig
+from transformers import BitsAndBytesConfig
 
 write_header = True
 
@@ -210,7 +212,6 @@ def run_test(config, exp_id, filename):
     for test_score in test_scores:
         print("Test" + test_score["test"] + " Score =" + str(test_score["score"]) + "/" + str(test_score["max_score"]))
 
-
     output_csv = output_dir_base + 'exp_logs' + os.sep + exp_id + os.sep + "test_results.csv"
     with open(output_csv, 'a', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['Exp ID', 'Test Config', 'Prompt Template','Model', 'LoRA', 'Test Set', 'Score', 'Total', 'Percentage']
@@ -256,7 +257,7 @@ def main():
         input_path = sys.argv[1]
         exp_id = sys.argv[2]
     else:
-        print("ERROR: Please specify a config file or a directory containing config files.")
+        print("ERROR: Please specify a directory containing config files.")
         exit()
 
 
@@ -266,6 +267,12 @@ def main():
         config_files.sort()
         for config_file in config_files:
             config_path = os.path.join(input_path, config_file)
+
+            #Record config file in experiment directory
+            output_yaml = output_dir_base + 'exp_logs' + os.sep + exp_id + os.sep + os.path.basename(config_file)
+            os.makedirs(os.path.dirname(output_yaml), exist_ok=True)
+            shutil.copy(config_path, output_yaml)
+
             with open(config_path, 'r') as file:
                 config = yaml.safe_load(file)
                 print(config_path)
@@ -304,13 +311,13 @@ def main():
                         else:
                             config['model']['name'] = os.path.dirname(checkpoint_basename) + os.sep + checkpoint
                         run_test(config, exp_id, config_file)
+            
+            #Delete used config file from the config directory
+            os.remove(config_path)
+
 
     else:
-        #FIXME: Will not accept single config files in the future, only directories!
-        # Input path is a single config file
-        with open(input_path, 'r') as config_file:
-            config = yaml.safe_load(config_file)
-            run_test(config)
+        print("ERROR: Please specify a directory containing config files, not an individual config file directly.")
 
 if __name__ == "__main__":
     main()

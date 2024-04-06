@@ -8,7 +8,7 @@ test_config_folder="test_configs" #folder that contains the inference test confi
 
 mkdir -p "${HF_LOCAL_OUTPUT_PATH}exp_logs/${expid}"
 echo "Training using ${ft_config_folder}"
-python3 finetune.py "${ft_config_folder}" > "${HF_LOCAL_OUTPUT_PATH}exp_logs/${expid}/finetune_logs.txt"
+python3 finetune.py "${ft_config_folder}" "${expid}" > "${HF_LOCAL_OUTPUT_PATH}exp_logs/${expid}/finetune_logs.txt"
 
 echo "Testing model using ${test_config_folder}"
 python3 test_model.py "${test_config_folder}" "${expid}" > "${HF_LOCAL_OUTPUT_PATH}exp_logs/${expid}/test_logs.txt"

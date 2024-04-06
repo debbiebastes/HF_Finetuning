@@ -1,14 +1,16 @@
-from transformers import Trainer, TrainingArguments, BitsAndBytesConfig
-from datasets import load_dataset, Dataset
-from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
-import torch
-import json
-import yaml
-import sys
 import gc
-from hf_local_config import *
+import json
 import os
 import shutil
+import sys
+import torch
+import yaml
+
+from datasets import load_dataset, Dataset
+from hf_local_config import *
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
+from transformers import Trainer, TrainingArguments, BitsAndBytesConfig
+
 
 def run_finetuning(config, filename):
     output_suffix = config.get('output', {}).get('suffix') or "-" + os.path.basename(os.path.splitext(filename)[0])
@@ -267,10 +269,12 @@ def run_finetuning(config, filename):
 
 
 def main():
+    #FIXME: Should be argparse in the future!
     if len(sys.argv) > 1:
         input_path = sys.argv[1]
+        exp_id = sys.argv[2]
     else:
-        print("ERROR: Please specify a config file or a directory containing config files.")
+        print("ERROR: Please specify a directory containing config files.")
         exit()
 
     if os.path.isdir(input_path):
@@ -284,14 +288,22 @@ def main():
         print("STARTING FINETUNING JOBS FOR THIS EXPERIMENT...")
         for config_file in config_files:
             config_path = os.path.join(input_path, config_file)
+
+            #Record config file in experiment directory
+            output_yaml = output_dir_base + 'exp_logs' + os.sep + exp_id + os.sep + os.path.basename(config_file)
+            os.makedirs(os.path.dirname(output_yaml), exist_ok=True)
+            shutil.copy(config_path, output_yaml)
+
             with open(config_path, 'r') as file:
                 config = yaml.safe_load(file)
                 run_finetuning(config, filename=config_file)
+
+            #Delete used config file from the config directory
+            os.remove(config_path)
+
+
     else:
-        # Input path is a single config file
-        with open(input_path, 'r') as config_file:
-            config = yaml.safe_load(config_file)
-            run_finetuning(config)
+        print("ERROR: Please specify a directory containing config files, not an individual config file directly.")
 
 if __name__ == "__main__":
     main()
