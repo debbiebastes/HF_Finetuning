@@ -267,6 +267,8 @@ def run_finetuning(config, filename):
     torch.cuda.empty_cache()
     print("****************************")
 
+    #Finally, remove the temporary output dir
+    shutil.rmtree(output_dir_checkpoints + os.sep + model_name + output_suffix)
 
 def main():
     #FIXME: Should be argparse in the future!
