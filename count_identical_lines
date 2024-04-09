@@ -1,0 +1,30 @@
+import jsonlines
+import json
+
+def count_identical_lines(file1, file2):
+    lines_in_file1 = set()
+
+    # Read lines from file1 and store them in a set
+    with open(file1, 'r', encoding='utf-8') as f1:
+        for line in f1:
+            lines_in_file1.add(line.strip())
+
+    # Check lines from file2 against the set of lines from file1
+    lines_found_in_file1 = []
+    with open(file2, 'r', encoding='utf-8') as f2:
+        for line in f2:
+            if line.strip() in lines_in_file1:
+                lines_found_in_file1.append(line.strip())
+
+    return lines_found_in_file1, len(lines_found_in_file1)
+
+file1 = "datasets/ReviewTags_v4_set1_test.jsonl"
+file2 = "datasets/ReviewTags_v4_set3_test.jsonl"
+# file1 = "datasets/ReviewTags_v3_TEMP.jsonl"
+
+lines_found_in_file1, count = count_identical_lines(file1, file2)
+
+print("Number of lines in file2 also found in file1:", count)
+# print("Lines in file2 also found in file1:")
+# for line in lines_found_in_file1:
+#     print(line)
