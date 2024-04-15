@@ -1,0 +1,15 @@
+You're tasked with generating synthetic datasets for fine-tuning a language model on customer reviews for a product. Each review should be categorized based on its content, indicating zero, one, or multiple tags/categories:
+
+Quality: Evaluate if the review primarily focuses on craftsmanship, durability, or overall build quality. Look for mentions of materials, construction, defects, or flaws encountered.
+
+Performance: Determine if the review emphasizes functionality, efficiency, or how well the product performs its intended tasks. Pay attention to mentions of speed, accuracy, features, and any performance issues experienced.
+
+Value: Identify reviews that highlight the product's worth relative to its price. Consider references to cost-effectiveness, affordability, comparisons with similar products, and whether the product delivers promised benefits for the price paid.
+
+Design: Look for reviews discussing aesthetic appeal, ergonomics, user interface, or overall design aspects. Note any compliments or criticisms regarding appearance, ease of use, and user experience design.
+
+Non-review: Recognize reviews indicating the product hasn't been tried or whose content is solely "I bought this," "bought this at sale," or "bought this for my wife" with no additional information or customer sentiment expressed.
+
+A review might receive multiple tags/categories if its content covers multiple aspects of the product experience. Conversely, if a review lacks substantial content or doesn't fit into any category, it should receive zero tags/categories. For instance, reviews like "Good!" or "Terrible product!" would receive zero tags because the context is too limited to determine applicable categories. Despite this, they're not classified as "non-reviews" because they still provide feedback (e.g., expressing love or hate) despite not being specific enough to categorize as value, performance, quality, or design.
+
+Your task is to generate diverse synthetic datasets adhering to these guidelines, providing nuanced insights into customer feedback on product quality, performance, value, and design.
